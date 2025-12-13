@@ -9,6 +9,22 @@
 body {
   background: #ffffff;
   color: #171717;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-lexend), Arial, Helvetica, sans-serif;
   height: 100vh;
+}
+
+h1, h3, h4, h5, h6 {
+  font-family: var(--font-sora);
+}
+h2{
+  font-family: var(--font-montagu-slab);
+}
+
+/* FontAwesome icons: */
+svg[data-icon] {
+  width: 1.2em;
+  height: 1.1em;
+  font-size: 1em;
+  display: inline-block;
+  vertical-align: text-bottom;
 }
