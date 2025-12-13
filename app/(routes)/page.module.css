@@ -1,0 +1,9 @@
+.scrollableContainer {
+  height: 100%;
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.scrollableContainer > * {
+  scroll-snap-align: start;
+}
