@@ -1,18 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Sora, Montagu_Slab, Noto_Sans_Mono, Lexend } from "next/font/google";
 import "@/app/globals.css";
 import styles from "./layout.module.css";
 import Navigation from "@/app/components/navigation/navigation";
 import Footer from "@/app/components/footer/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sora = Sora({
+  variable: "--font-sora",
+  weight: ["600"],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montaguSlab = Montagu_Slab({
+  variable: "--font-montagu-slab",
+  weight: ["600"],
   subsets: ["latin"],
+});
+
+const lexend = Lexend({
+  variable: "--font-lexend",
+  subsets: ["latin"],
+});
+
+const notoSansMono = Noto_Sans_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-noto-sans-mono",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +41,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-      className={`${styles.body} ${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${styles.body}
+        ${sora.variable} ${montaguSlab.variable} ${lexend.variable} ${notoSansMono.variable}
+        antialiased`}
       >
         <div className={styles.navigationContainer}>
           <Navigation />
