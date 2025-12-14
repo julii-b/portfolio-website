@@ -20,6 +20,11 @@ h2{
   font-family: var(--font-montagu-slab);
 }
 
+a {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /* FontAwesome icons: */
 svg[data-icon] {
   width: 1.2em;
