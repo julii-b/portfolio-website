@@ -3,9 +3,10 @@
 import styles from "./header.module.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faICursor, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faICursor, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "motion/react"
 import { use, useEffect, useState } from "react";
+import { Button, ButtonLink } from "@/app/ui/button";
 
 
 export default function Header() {
@@ -98,6 +99,10 @@ export default function Header() {
         In the past year, while learning frameworks like React and Express, I developed a great joy for web development. <br />
         I am inviting you to explore my portfolio.
       </p>
+
+      <ButtonLink href="#projects">
+        <FontAwesomeIcon icon={faAngleRight} />
+      </ButtonLink>
 
     </header>
 
