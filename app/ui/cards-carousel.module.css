@@ -1,43 +1,67 @@
 .carouselWrapper {
   position: relative;
-  width: 100%;
+  width: calc(100% + 4em);
   height: 40%;
+  margin: 0 -2em;
   overflow: hidden;
 }
 
 .cardsCarousel {
   display: flex;
+  padding: 0 2em 8px 2em;
   gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
+/* Hide scrollbar */
+.cardsCarousel::-webkit-scrollbar { 
+  display: none; 
+}
+.cardsCarousel {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
 .cardWrapper {
-  background-color: blue;
   display: flex;
   scroll-snap-align: center;
   flex-direction: row;
   flex-shrink: 0;
-  width: 70%;
+  width: calc(100% - 2.5em);
+}
+
+.leftButtonWrapper {
+  position: absolute;
+  left: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
 }
 
 .leftButton {
+  height: 7em;
+  width: 3em;
+  border-bottom-left-radius: 20em 23em;
+  border-bottom-right-radius: 20em 23em;
+}
+
+.rightButtonWrapper {
   position: absolute;
-  left: 0;
+  right: 1em;
   top: 50%;
   transform: translateY(-50%);
-  cursor: pointer;
-  background-color: gray;
+  z-index: 2;
 }
 
 .rightButton {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  background-color: gray;
+  height: 7em;
+  width: 3em;
+  border-bottom-left-radius: 20em 23em;
+  border-bottom-right-radius: 20em 23em;
 }
 
