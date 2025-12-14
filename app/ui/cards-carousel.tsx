@@ -1,9 +1,13 @@
 'use client';
 
 import Card from '@/app/ui/card';
+import { Button } from '@/app/ui/button';
 import { ReactElement, RefObject, useEffect, useRef, useState } from 'react';
 import { JSX } from 'react';
 import styles from './cards-carousel.module.css';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'motion/react';
 
 export default function CardsCarousel (
   {children}: {children: ReactElement<typeof Card> | ReactElement<typeof Card>[]}
@@ -29,12 +33,14 @@ export default function CardsCarousel (
 
       {/* Scroll left button: */}
       {currentCardIndex > 0 && (
-        <button
-          className={styles.leftButton}
-          onClick={() => { scrollToCard(Math.max(currentCardIndex - 1, 0)) }}
-        >
-          Left
-        </button>
+        <div className={styles.leftButtonWrapper}>
+          <Button
+            className={styles.leftButton}
+            onClick={() => { scrollToCard(Math.max(currentCardIndex - 1, 0)) }}
+          >
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </Button>
+        </div>
       )}
 
       <div
@@ -53,13 +59,18 @@ export default function CardsCarousel (
         {/* Cards: */}
         {cards.map((card, index) => {
           return (
-            <div
+            <motion.div
+            initial={{ opacity: 0.3 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ amount: 0.7 }}
+            transition={{ type: "tween", duration: 0.5 }}
+
             key={index}
             ref={(el) => {cardsRefs.current[index] = el}}
             className={styles.cardWrapper}
             >
               {card}
-            </div>
+            </motion.div>
           );
         })}
         
@@ -67,12 +78,14 @@ export default function CardsCarousel (
 
       {/* Scroll right button: */}
       {currentCardIndex < cards.length - 1 && (
-        <button
-          className={styles.rightButton}
-          onClick={() => { scrollToCard(Math.min(currentCardIndex + 1, cards.length - 1)) }}
-        >
-          Right
-        </button>
+        <div className={styles.rightButtonWrapper}>
+          <Button
+            className={styles.rightButton}
+            onClick={() => { scrollToCard(Math.min(currentCardIndex + 1, cards.length - 1)) }}
+          >
+            <FontAwesomeIcon icon={faAngleRight} />
+          </Button>
+        </div>
       )}
       
     </div>
