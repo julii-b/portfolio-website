@@ -8,6 +8,11 @@
 .navigationContainer {
   max-width: 30%;
 }
+@media (max-width: 600px) {
+  .navigationContainer {
+    display: none;
+  }
+}
 
 .scrollableContainer {
   height: 100%;

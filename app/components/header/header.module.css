@@ -1,18 +1,109 @@
 .header {
+  position: relative;
   height: 100%;
   width: 100%;
+  padding: 0 2em;
   display: flex;
+  gap: 1.7em;
   flex-direction: column;
   justify-content: center;
   align-items: start;
+}
+.header > * {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.6);
 }
 
 .myName {
   font-size: 5em;
   display: block;
+  line-height: 0.9em;
+  box-shadow: none;
+  background-color: transparent;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 1),
+    0 0 30px rgba(255, 255, 255, 1);
+}
+@media (max-width: 600px) {
+  .myName {
+    font-size: 4em;
+  }
+}
+@media (max-width: 600px) {
+  .myName {
+    font-size: 3em;
+  }
+}
+
+.profilePictureContainer {
+  position: absolute;
+  top: 2%;
+  right: 10%;
+  z-index: -1;
+  max-width: 40%;
+  max-height: 70vh;
+}
+@media (max-width: 600px) {
+  .profilePictureContainer {
+    right: 5%
+  }
+}
+.profilePicture {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  border: 5px solid white;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .role {
-  font-size: 2em;
+  display: block;
+  font-size: 1.8em;
+  line-height: 0.9em;
+  height: 1.8em;
+  max-width: 20em;
+  color: dimgray;
+  font-family: var(--font-noto-sans-mono);
+  align-items: center;
+  box-shadow: none;
+  background-color: transparent;
+  text-shadow:
+    0 0 30px rgba(255, 255, 255, 1),
+    0 0 10px rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.2);
+}
+@media (max-width: 600px) {
+  .role {
+    font-size: 1.5em;
+    height: 2.7em;
+  }
+}
+.role > svg {
+  font-size: 0.8em;
+  transform: translateY(-0.3em);
+}
+
+.location{
+  margin-top: -0.8em;
+  font-size: 1.2em;
   color: gray;
+}
+
+.location > svg {
+  margin-right: 0.2em;
+  color: #ff4b4b;
+}
+
+.introduction {
+  font-size: 1.2em;
+  line-height: 1.3em;
+  box-shadow: none;
+  background-color: transparent;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 1),
+    0 0 30px rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.3);
 }
