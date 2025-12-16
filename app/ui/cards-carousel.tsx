@@ -1,6 +1,6 @@
 'use client';
 
-import Card from '@/app/ui/card';
+import Card from '@/app/ui/card/card';
 import { Button } from '@/app/ui/button';
 import { ReactElement, RefObject, useEffect, useRef, useState } from 'react';
 import { JSX } from 'react';
@@ -29,7 +29,13 @@ export default function CardsCarousel (
   }
 
   return (
-    <div className={styles.carouselWrapper}>
+    <motion.div
+    className={styles.carouselWrapper}
+    initial={{ y: 10, opacity: 1 }}
+    whileInView={{ y: 0, opacity: 1 }}
+    viewport={{ amount: 0.7 }}
+    transition={{ type: "tween", duration: 0.5 }}
+    >
 
       {/* Scroll left button: */}
       {currentCardIndex > 0 && (
@@ -60,10 +66,10 @@ export default function CardsCarousel (
         {cards.map((card, index) => {
           return (
             <motion.div
-            initial={{ opacity: 0.3 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0.3, y: 5 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ amount: 0.7 }}
-            transition={{ type: "tween", duration: 0.5 }}
+            transition={{ type: "tween", duration: 0.2 }}
 
             key={index}
             ref={(el) => {cardsRefs.current[index] = el}}
@@ -88,6 +94,6 @@ export default function CardsCarousel (
         </div>
       )}
       
-    </div>
+    </motion.div>
   );
 }

@@ -1,0 +1,23 @@
+.skillBadge {
+  display: inline-block;
+  background-color: #1b1b1b;
+  color: white;
+  font-size: 0.9em;
+  padding: 0.2em 0.8em;
+  border-radius: 1.5em;
+  border: solid 2px #565656;
+}
+
+.skillBadge svg{
+  margin-left: -0.3em;
+  margin-right: 0.5em;
+}
+
+.skillImage {
+  display: inline-block;
+  margin-top: -0.2em;
+  margin-left: -0.3em;
+  margin-right: 0.5em;
+  height: 1.3em;
+  width: auto;
+}
