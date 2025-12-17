@@ -1,4 +1,4 @@
-import CardsCarousel from "@/app/ui/cards-carousel";
+import CardsCarousel from "@/app/ui/cards-carousel/cards-carousel";
 import Card from "@/app/ui/card/card";
 import styles from "./sections.module.css";
 import { faReact } from "@fortawesome/free-brands-svg-icons";
