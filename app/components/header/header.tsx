@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faICursor, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "motion/react"
 import { use, useEffect, useState } from "react";
-import { Button, ButtonLink } from "@/app/ui/button";
+import { Button, ButtonLink } from "@/app/ui/button/button";
 
 
 export default function Header() {

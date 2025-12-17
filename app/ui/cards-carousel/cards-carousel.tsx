@@ -1,7 +1,7 @@
 'use client';
 
 import Card from '@/app/ui/card/card';
-import { Button } from '@/app/ui/button';
+import { Button } from '@/app/ui/button/button';
 import { ReactElement, RefObject, useEffect, useRef, useState } from 'react';
 import { JSX } from 'react';
 import styles from './cards-carousel.module.css';
