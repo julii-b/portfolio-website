@@ -4,18 +4,20 @@
   min-height: 40%;
   /* max-height: 70%; */
   margin: 0 -2em;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .cardsCarousel {
   display: flex;
-  padding: 0 2em 8px 2em;
+  padding: 2px 2em 12px 2em;
+  margin-top: -10px;
   gap: 16px;
+  overflow-y: hidden;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 12px);
   z-index: 1;
 }
 /* Hide scrollbar */

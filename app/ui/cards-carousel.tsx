@@ -31,7 +31,7 @@ export default function CardsCarousel (
   return (
     <motion.div
     className={styles.carouselWrapper}
-    initial={{ y: 10, opacity: 1 }}
+    initial={{ y: 20, opacity: 1 }}
     whileInView={{ y: 0, opacity: 1 }}
     viewport={{ amount: 0.7 }}
     transition={{ type: "tween", duration: 0.5 }}
@@ -69,7 +69,7 @@ export default function CardsCarousel (
             initial={{ opacity: 0.3, y: 5 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ amount: 0.7 }}
-            transition={{ type: "tween", duration: 0.2 }}
+            transition={{ type: "tween", duration: 0.5 }}
 
             key={index}
             ref={(el) => {cardsRefs.current[index] = el}}
