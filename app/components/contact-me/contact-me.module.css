@@ -11,4 +11,79 @@
 .section > h2 {
   align-self: flex-start;
   font-size: 3em;
+  padding-bottom: 0.2em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.2em;
+}
+@media (max-height: 600px) {
+  .form {
+    gap: 0.6em;
+  }
+}
+
+.nameWrapper, .emailWrapper {
+  width: 600px;
+  max-width: 100%;
+}
+
+.messageWrapper {
+  width: 900px;
+  max-width: 100%;
+}
+
+.nameWrapper > label, .emailWrapper > label, .messageWrapper > label {
+  font-size: 1.2em;
+  padding-bottom: 0.4em;
+  padding-left: 0.8em;
+}
+
+.messageWrapper textarea {
+  height: 9em;
+  resize: none;
+}
+@media (max-height: 600px) {
+  .messageWrapper textarea {
+    height: 6em;
+  }
+}
+
+.captchaAndSubmitWrapper {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  flex-direction: column;
+  gap: 1em;
+  align-items: flex-start;
+}
+@media (max-height: 600px) {
+  .captchaAndSubmitWrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.captchaWrapper {
+  width: 300px;
+  max-width: 100%;
+}
+@media (max-width: 500px) {
+  .captchaWrapper {
+    width: 100%;
+  }
+}
+
+.submitButton {
+  width: 300px;
+  max-width: 100%;
+}
+@media (max-width: 500px) {
+  .submitButton {
+    width: 100%;
+  }
 }
