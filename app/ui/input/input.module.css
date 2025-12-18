@@ -1,4 +1,4 @@
-.input {
+.input, .textarea {
   margin: 0;
   padding: 0.6em 1.2em;
   border-radius: 1.6em;
@@ -7,10 +7,21 @@
   border: 3px solid black;
   transition: transform 0.1s ease-in-out;
   text-decoration: none;
+  box-sizing: border-box;
+}
+
+.textarea {
+  resize: vertical;
 }
 
 .input:focus{
   transform: translateY(0.1em);
-  padding: calc(0.6em - 1px) calc(1.2em - 1px);
+  padding: calc(0.6em - 1.5px) calc(1.2em - 1.5px);
+  border-width: 4px;
+}
+
+.textarea:focus{
+  transform: translateY(0.1em);
+  padding: calc(0.6em - 0px) calc(1.2em - 0px);
   border-width: 4px;
 }

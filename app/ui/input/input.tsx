@@ -10,6 +10,6 @@ export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
 export function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (<textarea
     {...props}
-    className={props.className ? props.className + " " + styles.input : styles.input}
+    className={props.className ? props.className + " " + styles.textarea : styles.textarea}
     />);
 }
