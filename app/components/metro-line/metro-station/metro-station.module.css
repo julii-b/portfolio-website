@@ -1,0 +1,15 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: -18px;
+}
+.metroStation {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 12px;
+  border: solid 5px #3f3f3f;
+  z-index: 1;
+  margin: 0;
+}

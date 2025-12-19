@@ -4,6 +4,7 @@ import styles from "./sections.module.css";
 import SkillBadge from "@/app/ui/skill-badge/skill-badge";
 import { faAngular, faLaravel, faPhp, faReact, faVuejs } from "@fortawesome/free-brands-svg-icons";
 import { faAd } from "@fortawesome/free-solid-svg-icons";
+import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
 
 export default function Education() {
@@ -11,6 +12,10 @@ export default function Education() {
     <section className={styles.section} id="education" key="education-section">
 
       <h2>Education</h2>
+
+      <div className={styles.metroStationWrapper}>
+        <MetroStation />
+      </div>
       
       <CardsCarousel>
 

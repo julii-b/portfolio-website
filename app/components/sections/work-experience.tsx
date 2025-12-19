@@ -1,6 +1,7 @@
 import CardsCarousel from "@/app/ui/cards-carousel/cards-carousel";
 import Card from "@/app/ui/card/card";
 import styles from "./sections.module.css";
+import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
 
 export default function WorkExperience() {
@@ -8,6 +9,10 @@ export default function WorkExperience() {
     <section className={styles.section} id="work-experience" key="work-experience-section">
 
       <h2>Work Experience</h2>
+
+      <div className={styles.metroStationWrapper}>
+        <MetroStation />
+      </div>
 
       <CardsCarousel>
 

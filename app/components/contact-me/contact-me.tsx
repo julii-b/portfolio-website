@@ -6,6 +6,7 @@ import Script from "next/dist/client/script";
 import { Button } from "@/app/ui/button/button";
 import { width } from "@fortawesome/free-brands-svg-icons/fa11ty";
 import { Input, TextArea } from "@/app/ui/input/input";
+import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
 
 export default function ContactMe() {
@@ -19,6 +20,10 @@ export default function ContactMe() {
       ></Script>
 
       <h2>Contact Me</h2>
+      
+      <div className={styles.metroStationWrapper}>
+        <MetroStation />
+      </div>
 
       <Form
       action="/"

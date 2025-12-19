@@ -2,13 +2,20 @@ import CardsCarousel from "@/app/ui/cards-carousel/cards-carousel";
 import Card from "@/app/ui/card/card";
 import styles from "./sections.module.css";
 import { faReact } from "@fortawesome/free-brands-svg-icons";
+import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
 
 export default function Projects() {
   return (
     <section className={styles.section} id="projects" key="projects-section">
 
+      
+
       <h2>Projects</h2>
+
+      <div className={styles.metroStationWrapper}>
+        <MetroStation />
+      </div>
 
       <CardsCarousel>
 
