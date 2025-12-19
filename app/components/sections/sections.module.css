@@ -15,3 +15,10 @@
   font-size: 3em;
   padding-bottom: 0.5em;
 }
+
+.metroStationWrapper {
+  margin-left: -4em; /* compensate for padding-left */
+  transform: translateY(-4em); /* move up to be next to title */
+  width: 100%;
+  height: 0;
+}

@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import styles from "./layout.module.css";
 import Navigation from "@/app/components/navigation/navigation";
 import Footer from "@/app/components/footer/footer";
+import Line from "../components/metro-line/line/line";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -38,6 +39,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
+
   return (
     <html lang="en">
       <body
@@ -47,6 +51,13 @@ export default function RootLayout({
       >
         <div className={styles.navigationContainer}>
           <Navigation />
+        </div>
+
+        
+        <div
+        className={styles.lineWrapper}
+        >
+          <Line />
         </div>
 
         {children}
