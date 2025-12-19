@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+.input {
+  height: 3.1em;
+}
+
 .textarea {
   resize: vertical;
 }
@@ -22,6 +26,6 @@
 
 .textarea:focus{
   transform: translateY(0.1em);
-  padding: calc(0.6em - 0px) calc(1.2em - 0px);
+  padding: calc(0.6em - 1.5px) calc(1.2em - 1.5px);
   border-width: 4px;
 }
