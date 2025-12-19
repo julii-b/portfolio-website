@@ -49,10 +49,8 @@ export default function RootLayout({
           <Navigation />
         </div>
 
-        <div className={styles.scrollableContainer}>
-          {children}
-          <Footer />
-        </div>
+        {children}
+        <Footer />
         
       </body>
     </html>
