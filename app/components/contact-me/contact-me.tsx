@@ -1,10 +1,9 @@
-'use client";'
+'use client';
 
 import Form from "next/form";
 import styles from "./contact-me.module.css";
-import Script from "next/dist/client/script";
+import Script from "next/script";
 import { Button } from "@/app/ui/button/button";
-import { width } from "@fortawesome/free-brands-svg-icons/fa11ty";
 import { Input, TextArea } from "@/app/ui/input/input";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 

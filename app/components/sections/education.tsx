@@ -1,9 +1,7 @@
 import CardsCarousel from "@/app/ui/cards-carousel/cards-carousel";
 import Card from "@/app/ui/card/card";
 import styles from "./sections.module.css";
-import SkillBadge from "@/app/ui/skill-badge/skill-badge";
-import { faAngular, faLaravel, faPhp, faReact, faVuejs } from "@fortawesome/free-brands-svg-icons";
-import { faAd } from "@fortawesome/free-solid-svg-icons";
+import { faAngular, faLaravel, faVuejs } from "@fortawesome/free-brands-svg-icons";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
 
