@@ -3,10 +3,10 @@
 import styles from "./header.module.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faICursor, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "motion/react"
-import { use, useEffect, useState } from "react";
-import { Button, ButtonLink } from "@/app/ui/button/button";
+import { useEffect, useState } from "react";
+import { ButtonLink } from "@/app/ui/button/button";
 
 
 export default function Header() {
@@ -43,9 +43,9 @@ export default function Header() {
           waitCounter = 5;
         }
       }
-      // Cleanup function to clear interval on unmount:
-      return () => clearInterval(interval);
     }, 100);
+    // Cleanup function to clear interval on unmount:
+    return () => clearInterval(interval);
   }, []);
 
   // Blinking cursor effect:

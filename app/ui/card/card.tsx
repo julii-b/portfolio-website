@@ -1,14 +1,10 @@
 'use client';
 
-import { JSX, ReactElement, ReactNode, use, useEffect, useRef, useState } from "react";
+import { JSX, ReactNode } from "react";
 import styles from "./card.module.css";
-import { Button } from "../button/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faLocationDot, faCalendar, faAngleUp } from "@fortawesome/free-solid-svg-icons";
-import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { faLocationDot, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import SkillBadge from "../skill-badge/skill-badge";
-import { faReact } from "@fortawesome/free-brands-svg-icons";
-import { motion } from "motion/react";
 
 export default function Card (
   {children, title, subtitle, location, time, skills, backgroundImageUrl}:
