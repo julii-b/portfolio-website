@@ -3,7 +3,9 @@ import Card from "@/app/ui/card/card";
 import styles from "./sections.module.css";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
-
+/**
+ * Languages section component displaying languages in a card carousel.
+ */
 export default function Languages() {
   return (
     <section className={styles.section} id="languages" key="languages-section">

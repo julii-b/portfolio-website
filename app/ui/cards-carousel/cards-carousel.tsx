@@ -9,6 +9,10 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'motion/react';
 
+
+/** * A horizontal carousel component to display multiple Card components with scroll buttons.
+ * @param { ReactElement<typeof Card> | ReactElement<typeof Card>[] } props.children - One or more Card components to be displayed in the carousel.
+ */
 export default function CardsCarousel (
   {children}: {children: ReactElement<typeof Card> | ReactElement<typeof Card>[]}
 ): JSX.Element {

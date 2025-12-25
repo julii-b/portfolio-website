@@ -4,6 +4,9 @@ import styles from "./sections.module.css";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
 
+/**
+ * Work experience section component displaying work experience in a card carousel.
+ */
 export default function WorkExperience() {
   return (
     <section className={styles.section} id="work-experience" key="work-experience-section">

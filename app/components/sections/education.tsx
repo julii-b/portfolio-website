@@ -4,7 +4,9 @@ import styles from "./sections.module.css";
 import { faAngular, faLaravel, faVuejs } from "@fortawesome/free-brands-svg-icons";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
-
+/**
+ * Education section component displaying educational background in a card carousel.
+ */
 export default function Education() {
   return (
     <section className={styles.section} id="education" key="education-section">

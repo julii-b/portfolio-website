@@ -3,6 +3,11 @@
 import { motion } from 'motion/react';
 import styles from './metro-station.module.css'
 
+
+/**
+ * Metro station component to be used as a decorative element with the metro line component.
+ * Wrap this component in a div to control position. e.g. padding-left: -4em if the metro line is 4em on the left side. 
+ */
 export default function MetroStation() {
   return (
     <motion.div
