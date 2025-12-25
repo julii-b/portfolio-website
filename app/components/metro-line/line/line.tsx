@@ -3,6 +3,12 @@
 import { useEffect, useState } from "react";
 import styles from "./line.module.css";
 
+
+/**
+ * Metro line component that changes color based on scroll position.
+ * When number of colors is the same as number of sections, each section has it's own color.
+ * Wrap this component in a div with position: fixed, to have it always visible.
+ */
 export default function Line() {
 
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);

@@ -6,6 +6,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import SkillBadge from "../skill-badge/skill-badge";
 
+
+/**
+ * Card component to display content on the site. Can be used in cards-carousel component.
+ * @param { ReactNode } props.children - The content to be displayed in the cards body.
+ * @param { string } props.title - Optional. Title of the card.
+ * @param { string } props.subtitle - Optional. Subtitle of the card.
+ * @param { string } props.location - Optional. Location to be displayed with a location icon.
+ * @param { string } props.time - Optional. Time to be displayed with a calendar icon.
+ * @param { Array<{ name: string, fontAwesomeIcon?: IconProp, imageUrl?: string }> } props.skills - Optional. An array of skill badge props to display skill badges.
+ * @param { string } props.backgroundImageUrl - Optional. Background image URL for the card.
+ */
 export default function Card (
   {children, title, subtitle, location, time, skills, backgroundImageUrl}:
   {

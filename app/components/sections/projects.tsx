@@ -5,11 +5,12 @@ import { faReact } from "@fortawesome/free-brands-svg-icons";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
 
+/**
+ * Projects section component displaying projects in a card carousel.
+ */
 export default function Projects() {
   return (
     <section className={styles.section} id="projects" key="projects-section">
-
-      
 
       <h2>Projects</h2>
 
