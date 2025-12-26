@@ -1,4 +1,4 @@
-import { type SectionContent, sectionsContent } from "./sections-content";
+import sectionsContent, { type SectionContent } from "./sections-content";
 import CardsCarousel from "@/app/ui/cards-carousel/cards-carousel";
 import Card from "@/app/ui/card/card";
 import styles from "./sections.module.css";
@@ -20,7 +20,7 @@ export function SectionWithCards (sectionId: string) {
       <CardsCarousel>
         {education?.cards.map((card, index) => (
           <Card
-            key={card.id}
+            key={card.id}     
             {...card}
           />
         ))}

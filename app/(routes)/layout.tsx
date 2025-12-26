@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Sora, Montagu_Slab, Noto_Sans_Mono, Lexend } from "next/font/google";
 import "@/app/globals.css";
 import styles from "./layout.module.css";
-import Navigation from "@/app/components/navigation/navigation";
+import NavigationChat from "@/app/components/navigation-chat/navigation-chat";
 import Footer from "@/app/components/footer/footer";
 import Line from "../components/metro-line/line/line";
 
@@ -50,7 +50,7 @@ export default function RootLayout({
         antialiased`}
       >
         <div className={styles.navigationContainer}>
-          <Navigation />
+          <NavigationChat />
         </div>
 
         <div className={styles.lineWrapper}>

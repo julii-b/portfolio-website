@@ -10,7 +10,7 @@ export type SectionContent = {
   cards?: Array<{ id: string } & React.ComponentProps<typeof Card>>;
 }
 
-export const sectionsContent: SectionContent[] = [
+const sectionsContent: SectionContent[] = [
   {
     id: "projects",
     title: "Projects",
@@ -204,8 +204,9 @@ export const sectionsContent: SectionContent[] = [
     ],
   },
   {
-    id: "contact-me",
+    id: "contact-form",
     title: "Contact Me",
     lineColor: "#cfbb00"
   }
 ];
+export default sectionsContent;

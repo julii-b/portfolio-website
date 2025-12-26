@@ -18,8 +18,9 @@ import SkillBadge from "../skill-badge/skill-badge";
  * @param { string } props.backgroundImageUrl - Optional. Background image URL for the card.
  */
 export default function Card (
-  {children, title, subtitle, location, time, skills, backgroundImageUrl}:
+  {id, children, title, subtitle, location, time, skills, backgroundImageUrl}:
   {
+    id?: string,
     children: ReactNode,
     title?: string,
     subtitle?: string,
@@ -33,6 +34,7 @@ export default function Card (
   return (
     <div
     className={`${styles.cardWrapper}`}
+    id={id}
     >
 
       <div

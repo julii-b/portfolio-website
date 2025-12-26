@@ -14,10 +14,12 @@
     "@fortawesome/free-regular-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
+    "@google/genai": "^1.34.0",
     "motion": "^12.23.26",
     "next": "^16.0.10",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "use-debounce": "^10.0.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
