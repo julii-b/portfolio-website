@@ -13,6 +13,7 @@ export default function NavigationChat() {
   const [response, setResponse] = useState<ChatResponse | undefined>();
 
   const debouncedOnChange = useDebouncedCallback(async (userPrompt: string) => {
+    setResponse({answer: "loading..."});
     console.log("User prompt:", userPrompt);
     const response = await generateChatResponse(userPrompt);
     setResponse(response);
