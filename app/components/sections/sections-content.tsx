@@ -33,7 +33,7 @@ const sectionsContent: SectionContent[] = [
         ),
       },
       {
-        id: "simple-polls",
+        id: "project-simple-polls",
         title: "SimplePolls",
         time: "2025",
         skills: [
@@ -91,7 +91,7 @@ const sectionsContent: SectionContent[] = [
         ),
       },
       {
-        id: "guess-the-flag",
+        id: "project-guess-the-flag",
         title: "GuessTheFlag",
         time: "2025",
         skills: [
@@ -130,7 +130,7 @@ const sectionsContent: SectionContent[] = [
     lineColor: "#96009b",
     cards: [
       {
-        id: "bachelor-computer-science",
+        id: "education-bachelor-computer-science",
         title: "B.Sc. Computer Science",
         subtitle: "FH Aachen University of Applied Sciences",
         location: "Aachen, Germany",
@@ -168,7 +168,7 @@ const sectionsContent: SectionContent[] = [
         ),
       },
       {
-        id: "bachelor-mcd",
+        id: "education-bachelor-mcd",
         title: "Multimedia Communication and Documentation Bachelor's program",
         subtitle: "TH Aschaffenburg University of Applied Sciences",
         location: "Aschaffenburg, Germany",
@@ -202,7 +202,7 @@ const sectionsContent: SectionContent[] = [
     lineColor: "#003597",
     cards: [
       {
-        id: "idsb",
+        id: "work-idsb",
         title: "IT Support & Administration with Application Development",
         subtitle: "International German School of Brussels (iDSB)",
         location: "Wezembeek-Oppem, Belgium",
@@ -224,7 +224,7 @@ const sectionsContent: SectionContent[] = [
         ),
       },
       {
-        id: "outlier",
+        id: "work-outlier",
         title: "Coding and Problem-Solving Specialist for AI Training",
         subtitle: "Outlier",
         location: "Remote",
@@ -240,7 +240,7 @@ const sectionsContent: SectionContent[] = [
         ),
       },
       {
-        id: "vacuubrand",
+        id: "work-vacuubrand",
         title: "Working Student - Web Design",
         subtitle: "VacuuBrand",
         location: "Wertheim, Germany",
@@ -264,7 +264,7 @@ const sectionsContent: SectionContent[] = [
     lineColor: "#007222",
     cards: [
       {
-        id: "german",
+        id: "language-german",
         title: "German",
         subtitle: "Native Speaker",
         children: (
@@ -272,7 +272,7 @@ const sectionsContent: SectionContent[] = [
         ),
       },
       {
-        id: "english",
+        id: "language-english",
         title: "English",
         subtitle: "C1 Level (Advanced)",
         children: (
@@ -280,7 +280,7 @@ const sectionsContent: SectionContent[] = [
         ),
       },
       {
-        id: "french",
+        id: "language-french",
         title: "French",
         subtitle: "B1 Level (Intermediate)",
         children: (
