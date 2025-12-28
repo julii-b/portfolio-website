@@ -1,6 +1,6 @@
 'use server';
-import { Chat, GoogleGenAI } from "@google/genai";
-import sectionContent from "../sections/sections-content";
+import buildSystemPrompt from "./buildSystemPrompt";
+import { ApiError, GoogleGenAI } from "@google/genai";
 import { env } from "process";
 
 export interface ChatResponse {
@@ -11,102 +11,76 @@ export interface ChatResponse {
   answer: string;
 }
 
-async function buildSystemPrompt(): Promise<string> {
-  // import renderToStaticMarkup here to avoid including it in the client bundle:
-  const { renderToStaticMarkup } = await import("react-dom/server");
-
-  let systemPrompt = "";
-  // Introduce the task:
-  systemPrompt += `You are an AI assistant integrated into a personal portfolio website of Julius Busch. Don't pretend to be Julius.
-Your purpose is to help users navigate the website and answer questions about Julius's background, skills, and experiences.
-Users can be recruiters, potential employers, or anyone interested in learning more about Julius, therefore provide concise and relevant information, while providing a friendly user experience and highlight Julius' strengths.
-You have access to the following sections of the website:
-`;
-  // List all sections and their content:
-  for (const section of sectionContent) {
-    // "- Title:\n" for sections with cards and "- Title\n" for sections without cards:
-    systemPrompt += `- ${section.title}`;
-    if (section.cards !== undefined) systemPrompt += `:`;
-    systemPrompt += `\n`;
-    for (const card of section.cards || []) {
-      // "  - Title:\n" for cards:
-      systemPrompt += `  - ${card.title}:\n`;
-      // List all card properties:
-      if (card.subtitle) systemPrompt += `    Subtitle: ${card.subtitle}\n`;
-      if (card.location) systemPrompt += `    Location: ${card.location}\n`;
-      if (card.time) systemPrompt += `    Time: ${card.time}\n`;
-      if (card.skills) systemPrompt += `    Skills: ${card.skills.map(skill => skill.name).join(", ")}\n`;  
-      if (card.children) systemPrompt += `    Content: ${renderToStaticMarkup(card.children)}\n`;
-    }
-    systemPrompt += `\n`;
-  }
-  // Additional information, instructions, and start of function definition:
-  systemPrompt += `
-Additional information about Julius:
-- Is a software developer with a passion for building web applications.
-- Born in 2000 in Bavaria, Germany.
-- Lives in Brussels, Belgium.
-- Email address: user@example.com
-You have access to functions. You decide to invoke any of the function(s).
-You MUST put your answer in the format of
-{"function_name": function name, "parameters": dictionary of argument name and its value, "answer": 1 to 5 sentences answering the user's question and telling the user that you are scrolling to the requested section}
-If you don't call a function, you MUST respond in the format of
-{"answer": your answer to the user's question in 1 to 5 sentences}
-You MUST NOT respond in any other format
-You SHOULD NOT include any other text in the response
-You are NOT allowed to make up any information. If you don't know the answer, you MUST respond that you don't know, or scroll to a relevant section.
-[
-  {
-    "name": "scroll_to_section",
-    "description": "Scrolls to a specific section of the page. Use this function when the user requests information about a specific section, or the user's query is vaguely related to a specific section.",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "section_name": {
-          "type": (`;
-  // build array of all section and card IDs:
-  let types: string[] = [];
-  for (const section of sectionContent) {
-    types.push(`"${section.id}"`);
-    for (const card of section.cards || []) {
-      types.push(`"${card.id}"`);
-    }
-  }
-  // join IDs with " | ":
-  systemPrompt += types.join(" | ");
-  // finish the prompt:
-  systemPrompt += `)
-        }
-      },
-      "required": [
-        "section_name"
-      ]
-    }
-  }
-]
-User:
-`;
-
-  return systemPrompt;
+export interface ChatHistoryEntry {
+  type: "user" | "model";
+  message: string;
 }
 
-export async function generateChatResponse(prompt: string): Promise<ChatResponse> {
+const startTokenUser = "<start_of_turn>user\n";
+const endTokenUser = "<end_of_turn>\n";
+const startTokenModel = "<start_of_turn>model\n";
+const endTokenModel = "<end_of_turn>\n";
+
+
+/**
+ * Generates the next respponse of the chat model based on the chat history.
+ * @param chatHistory The history of chat messages.
+ * @returns The generated chat response.
+ */
+export async function generateChatResponse(chatHistory: ChatHistoryEntry[]): Promise<ChatResponse> {
+  return generateChatResponseRecursive(chatHistory, 0);
+}
+
+async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], recursionCounter: number = 0): Promise<ChatResponse> {
 
   const ai = new GoogleGenAI({apiKey: env.GEMMA_API_KEY});
 
-  const response = await ai.models.generateContent({
-    model: "gemma-3-27b-it",
-    contents: await buildSystemPrompt() + prompt,
-  });
+  // Build the the prompt from the system prompt, the chat history, and the start/end tokens:
+  const prompt = startTokenUser + await buildSystemPrompt() + endTokenUser + chatHistory.map(entry => {
+    if (entry.type === "user") {
+      return startTokenUser + entry.message + endTokenUser;
+    } else {
+      return startTokenModel + entry.message + endTokenModel;
+    }
+  }).join("") + startTokenModel;
 
-  let result: ChatResponse | undefined;
+  // Try to generate the response:
+  try {
+    const response = await ai.models.generateContent({
+      // model: "gemma-3-12b-it",
+      model: "gemma-3-27b-it",
+      contents: prompt,
+    });
+  
+    // Parse the response text as JSON:
+    if (response.text !== undefined) {
+      return JSON.parse(response.text) as ChatResponse;
+    } else {
+      throw new Error("No response text");
+    }
 
-  if (response.text !== undefined) {
-    result = JSON.parse(response.text) as ChatResponse;
-    console.log(result);
-    return result;
-  } else {
-    return {"answer": "I'm sorry, there seems to be an issue with connecting to the AI service at the moment :("};
+  } catch (e) { // Catch errors that occur during the API call and parsing of the response:
+    
+    if (recursionCounter < 2) { // Retry up to 2 times
+      console.error("Error occurred while generating chat response. Retrying.");
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return generateChatResponseRecursive(chatHistory, recursionCounter + 1);
+
+    } else {
+      // Try parsing the error as ApiError to check for rate limiting:
+      try { 
+        let error: ApiError = e as ApiError;
+        const errorMessage = JSON.parse(error.message);
+        if (errorMessage.error.code === 429 && errorMessage.error.details[2].retryDelay !== undefined) {
+          const retryDelay = errorMessage.error.details[2].retryDelay;
+          return {"answer": `I'm currently experiencing a high volume of requests. Please try again in ${retryDelay.replace("s", "")} seconds. :)`};
+        }
+      } catch (e) {}
+
+      // If all retries fail, and error is not due to rate limiting, return a generic error message:
+      return {"answer": "I'm sorry, there seems to be an issue with generating the response. :("};
+      
+    }
   }
 
 }
