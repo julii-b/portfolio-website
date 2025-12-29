@@ -46,9 +46,17 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
 
   // Try to generate the response:
   try {
+
+    // use 27b model on try 1 & 2, 12b on try 3 & 4, 4b on try 5 & 6
+    let model = "gemma-3-27b-it";
+    switch (recursionCounter) {
+      case 2:
+      case 3: model = "gemma-3-12b-it"; break;
+      case 4:
+      case 5: model = "gemma-3-4b-it"; break;
+    };
     const response = await ai.models.generateContent({
-      // model: "gemma-3-12b-it",
-      model: "gemma-3-27b-it",
+      model: model,
       contents: prompt,
     });
   
@@ -60,8 +68,8 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
     }
 
   } catch (e) { // Catch errors that occur during the API call and parsing of the response:
-    
-    if (recursionCounter < 2) { // Retry up to 2 times
+    console.error(e);
+    if (recursionCounter < 5) { // Retry up to 6 times (2 times per model)
       console.error("Error occurred while generating chat response. Retrying.");
       await new Promise(resolve => setTimeout(resolve, 1000));
       return generateChatResponseRecursive(chatHistory, recursionCounter + 1);

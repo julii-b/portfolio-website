@@ -17,7 +17,7 @@ const sectionsContent: SectionContent[] = [
     lineColor: "#b60000",
     cards: [
       {
-        id: "portfolio-website",
+        id: "project-portfolio-website",
         title: "Portfolio Website",
         time: "2026",
         skills: [
