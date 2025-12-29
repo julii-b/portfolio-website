@@ -11,47 +11,104 @@ import { Button } from "@/app/ui/button/button";
 
 export default function NavigationChat() {
 
-  const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
-
-  const initialMessage: ChatResponse = { answer: "Hello there! I'm here to help you learn more about Julius. I can provide information about his projects, education, work experience, skills, and languages. Feel free to ask me anything, or I can direct you to a specific section of the website." };
+  const initialMessage: ChatResponse = { answer: "Hello! :) I'm here to help you learn more about Julius. I can provide information about his projects, education, work experience, skills, and languages. Feel free to ask me anything, or I can direct you to a specific section of the website." };
   useEffect(() => {
     setChatHistory([{type: "model", message: initialMessage.answer}]);
   }, []);
+
+  const [state, setState] = useState<("loading"| "idle")>("idle");
+  const [userInput, setUserInput] = useState<string>("");
+  const [modelAnswer, setModelAnswer] = useState<string>(initialMessage.answer);
+  const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
+
   
-  const [responseMessage, setResponseMessage] = useState<ChatResponse>(initialMessage);
 
   async function handleChatInput(userPrompt: string) {
-    setResponseMessage({answer: "loading..."});
+    setState("loading");
 
     const newHistory: ChatHistoryEntry[] = [...chatHistory, {type: "user", message: userPrompt}];
-
     setChatHistory(newHistory);
-    console.log("Current chat history:", newHistory);
+
     const response = await generateChatResponse(newHistory);
     setChatHistory(prev => [...prev, {type: "model", message: response.answer}]);
-    setResponseMessage(response);
+    setModelAnswer(response.answer);
     if (response.function_name === "scroll_to_section" && response.parameters?.section_name) {
       const section = response.parameters.section_name;
       redirect(`/#${section}`);
     }
   }
 
-  const debouncedOnChange = useDebouncedCallback(handleChatInput, 2000);
-
   return (
     <nav className={styles.nav}>
-      {responseMessage && <p>{responseMessage.answer}</p> }
+      <div className={styles.chatOutput}>
+      {modelAnswer && <p>{modelAnswer}</p> }
+      </div>
 
-      <Link href="/#projects">Projects</Link>
-      <Link href="/#education">Education</Link>
-      <Link href="/#work-experience">Work Experience</Link>
-      <Link href="/#languages">Languages</Link>
-      <Link href="/#contact-form">Contact Me</Link>
+      <div className={styles.suggestions}>
 
+        <p>Suggestions:</p>
 
-      <Input onChange={async (e) => {
-        debouncedOnChange(e.target.value);
-      }} />
+        <Button onClick={() => {
+          const answer = "Julius presents three projects on his website: a personal portfolio website (the one you are seeing right now), SimplePolls, and GuessTheFlag. The portfolio website is built with Next.js, SimplePolls is a full-stack application with a React frontend and an Express backend, while GuessTheFlag is a fun way to test your flag knowledge built with React. I am now scrolling to the Projects section for you.";
+          setChatHistory(prev => [...prev,
+            {type: "user", message: "Show me his projects!"},
+            {type: "model", message: answer }
+          ]);
+          setModelAnswer(answer);
+          redirect("/#projects");
+        }}>
+          Show me his projects!
+        </Button>
+
+        <Button onClick={() => {
+          const answer = "Julius holds a B.Sc. in Computer Science from FH Aachen University of Applied Sciences, graduating with a grade of 1.3, which corresponds to the top 5% of graduates.”. His bachelor's thesis focused on a prototype implementation of Retrieval-Augmented Generation and an evaluation of major LLMs. I'll take you to the Education section now."
+          setChatHistory(prev => [...prev,
+            {type: "user", message: "SWhat is his educational background?"},
+            {type: "model", message: answer }
+          ]);
+          setModelAnswer(answer);
+          redirect("/#education");
+        }}>
+          What is his educational background?
+        </Button>
+
+        <Button onClick={() => {
+          const answer = "Julius currently works at the International German School of Brussels (iDSB) in IT support and administration, and he also develops internal apps and small tools to improve processes. I'll take you to the Work Experience section now."
+          setChatHistory(prev => [...prev,
+            {type: "user", message: "Where does he currently work?"},
+            {type: "model", message: answer }
+          ]);
+          setModelAnswer(answer);
+          redirect("/#work-experience");
+        }}>
+          Where does he currently work?
+        </Button>
+
+        <Button onClick={() => {
+          const answer = "Julius is fluent in German and English, and is currently learning French, where he already reached a B1 level (intermediate). I am now scrolling to the Languages section for more details!" ;
+          setChatHistory(prev => [...prev,
+            {type: "user", message: "Which languages does he speak?"},
+            {type: "model", message: answer }
+          ]);
+          setModelAnswer(answer);
+          redirect("/#languages");
+        }}>
+          Which languages does he speak?
+        </Button>
+
+      </div>
+
+      <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleChatInput(userInput);
+        setUserInput("");
+      }}
+      className={styles.form}
+      >
+        <Input value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+        <Button type="submit">Send</Button>
+      </form>
     </nav>
   );
 }
