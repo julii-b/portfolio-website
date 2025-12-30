@@ -32,8 +32,8 @@ You have access to the following sections of the website:
       if (card.subtitle) systemPrompt += `    Subtitle: ${card.subtitle}\n`;
       if (card.location) systemPrompt += `    Location: ${card.location}\n`;
       if (card.time) systemPrompt += `    Time: ${card.time}\n`;
-      if (card.skills) systemPrompt += `    Skills: ${card.skills.map(skill => skill.name).join(", ")}\n`;  
-      if (card.children) systemPrompt += `    Content: ${removeHtmlTags(renderToStaticMarkup(card.children))}\n`;
+      if (card.skills) systemPrompt += `    Skills: ${card.skills.map(skill => skill.name).join(", ")}\n`;
+      if (card.contentSummary) systemPrompt += `    Content-Summary: ${card.contentSummary}\n`;
     }
     systemPrompt += `\n`;
   }
@@ -85,7 +85,7 @@ You are NOT allowed to make up any information. If you don't know the answer, yo
     }
   }
 ]`;
-  //console.log(systemPrompt);
+  console.log(systemPrompt);
 
   return systemPrompt;
 }

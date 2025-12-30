@@ -7,7 +7,24 @@ export type SectionContent = {
   id: string;
   title: string;
   lineColor?: string;
-  cards?: Array<{ id: string } & React.ComponentProps<typeof Card>>;
+  cards?: Array<{ id: string, contentSummary: string } & React.ComponentProps<typeof Card>>;
+}
+
+
+// from https://leanrada.com/notes/get-duolingo-streak/
+async function getDuolingoStreak(username: string): Promise<number> {
+  const res = await fetch(
+    `https://www.duolingo.com/2017-06-30/users?username=${username}&fields=streak,streakData%7BcurrentStreak,previousStreak%7D%7D`
+  );
+  const data = await res.json();
+  const userData = data.users[0];
+  // I didn't know which of these fields matter, so I just get the max of them.
+  const streak = Math.max(
+    userData?.streak ?? 0,
+    userData?.streakData?.currentStreak?.length ?? 0,
+    userData?.streakData?.previousStreak?.length ?? 0
+  );
+  return streak;
 }
 
 const sectionsContent: SectionContent[] = [
@@ -31,6 +48,7 @@ const sectionsContent: SectionContent[] = [
             <p>Once the project is finished, I will have to complete this description.</p>
           </>
         ),
+        contentSummary: ""
       },
       {
         id: "project-simple-polls",
@@ -89,6 +107,7 @@ const sectionsContent: SectionContent[] = [
             </p>
           </>
         ),
+        contentSummary: "Full-stack poll application. Frontend: React with React Router, internationalized with i18next. Backend: Express REST API with Prisma and PostgreSQL, documented with OpenAPI(Swagger UI), implemented rate limiting and authentication, tested with Supertest and Vitest. Code on GitHub."
       },
       {
         id: "project-guess-the-flag",
@@ -121,6 +140,7 @@ const sectionsContent: SectionContent[] = [
             </p>
           </>
         ),
+        contentSummary: "React-based quiz game to guess country flags. Uses REST Countries API for country names in 26 languages and Flags API & CDN for flag images. Code on GitHub."
       },
     ],
   },
@@ -166,6 +186,7 @@ const sectionsContent: SectionContent[] = [
             </ul>
           </>
         ),
+        contentSummary: "B.Sc. in Computer Science, graduated with distinction (top 5%). Skills: OOP (Java, C++, Python), model-based systems engineering, data analysis, web development (PHP, JavaScript/TypeScript, SQL, HTML, Laravel, Vue.js, Angular), AI (traditional algorithms, LLMs). Thesis on Retrieval Augmented Generation and LLM evaluation."
       },
       {
         id: "education-bachelor-mcd",
@@ -193,6 +214,7 @@ const sectionsContent: SectionContent[] = [
             </ul>
           </>
       ),
+        contentSummary: "Focus on user-oriented design, multimedia tools (Adobe Creative Suite), documentation creation, and web technologies (HTML, CSS, JavaScript). Ended studies early to pursue Computer Science degree."
       }
     ],
   },
@@ -222,6 +244,7 @@ const sectionsContent: SectionContent[] = [
             </ul>
           </>
         ),
+        contentSummary: "Responsibilities include user support, account management, device setup, hardware troubleshooting, and development of internal Power Apps for document and process digitalization and small tools and scripts."
       },
       {
         id: "work-outlier",
@@ -238,6 +261,7 @@ const sectionsContent: SectionContent[] = [
             </ul>
           </>
         ),
+        contentSummary: "Designed complex coding problems which AIs struggled with, created detailed solutions to these problems, therefore contributing to AI training."
       },
       {
         id: "work-vacuubrand",
@@ -255,6 +279,7 @@ const sectionsContent: SectionContent[] = [
         children: (
           <p>Designing a landing page for a new product</p>
         ),
+        contentSummary: "Designed a landing page for a new product."
       }
     ],
   },
@@ -268,24 +293,61 @@ const sectionsContent: SectionContent[] = [
         title: "German",
         subtitle: "Native Speaker",
         children: (
-          <></>
+          <>
+            <p>
+              I was born and grew up in a small town in southern Germany.
+              <br />
+              German is my native language and the main teaching language I used throughout my education.
+            </p>
+            <p>
+              It is also one of the two main languages I use at work.
+            </p>
+          </>
         ),
+        contentSummary: "Main teaching language throughout education, and one of the two main languages used at work."
       },
       {
         id: "language-english",
         title: "English",
         subtitle: "C1 Level (Advanced)",
         children: (
-          <></>
+          <>
+            <p>
+              I started learning English in primary school.
+              In high school, English was one of the subjects I chose for advanced courses.
+            </p>
+            <p>
+              During my university studies, I had several courses taught in English and participated in group projects with international students where English was the common language.
+              <br />
+              My thesis was also written in English.
+            </p>
+            <p>
+              Currently, English is one of the two main languages I use at work to communicate with colleagues.
+            </p>
+          </>
         ),
+        contentSummary: "Learned from primary school, advanced courses in high school, university courses and thesis in English, currently one of two main languages used at work."
       },
       {
         id: "language-french",
         title: "French",
         subtitle: "B1 Level (Intermediate)",
         children: (
-          <></>
+          <>
+            <p>
+              Ever since I knew that I would eventually move to Brussels because my partner already lived here, I started learning French.
+            </p>
+            <p>
+              I started learning with Duolingo, where I currently proudly have a streak of {await getDuolingoStreak("julius.bu")} days - <a href="https://www.duolingo.com/profile/julius.bu" target="_blank" rel="noopener noreferrer">follow me on Duolingo</a> if you want to :).
+              <br />
+              Since moving to Brussels, I'm also taking classes in French.
+            </p>
+            <p>
+              I am making progress every day and am proud of every successful everyday conversation I have in French.
+            </p>
+          </>
         ),
+        contentSummary: "Started learning French with Duolingo before moving to Brussels, taking French classes since moving, making progress in everyday conversations."
       }
     ],
   },
