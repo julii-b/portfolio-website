@@ -61,7 +61,7 @@ export default function NavigationChat() {
         </Button>
 
         <Button onClick={() => {
-          const answer = "Julius holds a B.Sc. in Computer Science from FH Aachen University of Applied Sciences, graduating with a grade of 1.3, which corresponds to the top 5% of graduates.”. His bachelor's thesis focused on a prototype implementation of Retrieval-Augmented Generation and an evaluation of major LLMs. I'll take you to the Education section now."
+          const answer = "Julius holds a B.Sc. in Computer Science from FH Aachen University of Applied Sciences, graduating with distinction (top 5%) between 2020 and 2024. He also started a Multimedia Communication and Documentation Bachelor's program at TH Aschaffenburg University of Applied Sciences, but switched to Computer Science. His bachelor's thesis focused on a prototype implementation of Retrieval-Augmented Generation and the evaluation of major LLMs. I'll take you to the Education section now."
           setChatHistory(prev => [...prev,
             {type: "user", message: "SWhat is his educational background?"},
             {type: "model", message: answer }
@@ -85,7 +85,7 @@ export default function NavigationChat() {
         </Button>
 
         <Button onClick={() => {
-          const answer = "Julius is fluent in German and English, and is currently learning French, where he already reached a B1 level (intermediate). I am now scrolling to the Languages section for more details!" ;
+          const answer = "Julius is fluent in German and English and is currently at an intermediate level in French (B1). He is actively improving his French through classes and daily conversations since moving to Brussels, and uses both German and English at work.. I am now scrolling to the Languages section for more details!";
           setChatHistory(prev => [...prev,
             {type: "user", message: "Which languages does he speak?"},
             {type: "model", message: answer }
