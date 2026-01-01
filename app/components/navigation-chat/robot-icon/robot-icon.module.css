@@ -1,0 +1,42 @@
+.robotIcon {
+  width: 4em;
+  height: 4em;
+  position: relative;
+}
+
+@keyframes hoverAnimation {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-0.3em); }
+  100% { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .robotIcon {
+    animation: hoverAnimation 5s ease-in-out infinite;
+  }
+}
+
+.facialExpression {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .loadingGear {
+    animation: spinAnimation 5s linear infinite;
+  }
+}
+@keyframes spinAnimation {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loadingQuestionMark {
+    animation: bounceAnimation 0.5s ease-in-out infinite;
+  }
+}
+@keyframes bounceAnimation {
+  0%   { transform: rotate(-5deg); }
+  50%  { transform: rotate(5deg); }
+  100% { transform: rotate(-5deg); }
+}
