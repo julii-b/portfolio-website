@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 import { redirect } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 import { Button } from "@/app/ui/button/button";
+import RobotIcon from "./robot-icon/robot-icon";
+import { faAngleRight, faCaretRight, faPaperPlane, faRightLong } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function NavigationChat() {
 
@@ -30,6 +33,7 @@ export default function NavigationChat() {
     setChatHistory(newHistory);
 
     const response = await generateChatResponse(newHistory);
+    setState("idle");
     setChatHistory(prev => [...prev, {type: "model", message: response.answer}]);
     setModelAnswer(response.answer);
     if (response.function_name === "scroll_to_section" && response.parameters?.section_name) {
@@ -39,76 +43,100 @@ export default function NavigationChat() {
   }
 
   return (
-    <nav className={styles.nav}>
-      <div className={styles.chatOutput}>
-      {modelAnswer && <p>{modelAnswer}</p> }
-      </div>
+    <div className={styles.scrollableContainer}>
+      <nav className={styles.nav}>
+      
+        <div className={styles.speechBubble}>
+          <div className={styles.chatOutput}>{modelAnswer}</div>
+        </div>
 
-      <div className={styles.suggestions}>
+        <div className={styles.robotIconContainer}>
+          <RobotIcon state={state} />
+        </div>
 
-        <p>Suggestions:</p>
+        <div className={styles.suggestions}>
 
-        <Button onClick={() => {
-          const answer = "Julius presents three projects on his website: a personal portfolio website (the one you are seeing right now), SimplePolls, and GuessTheFlag. The portfolio website is built with Next.js, SimplePolls is a full-stack application with a React frontend and an Express backend, while GuessTheFlag is a fun way to test your flag knowledge built with React. I am now scrolling to the Projects section for you.";
-          setChatHistory(prev => [...prev,
-            {type: "user", message: "Show me his projects!"},
-            {type: "model", message: answer }
-          ]);
-          setModelAnswer(answer);
-          redirect("/#projects");
-        }}>
-          Show me his projects!
-        </Button>
+          <p>Suggestions:</p>
 
-        <Button onClick={() => {
-          const answer = "Julius holds a B.Sc. in Computer Science from FH Aachen University of Applied Sciences, graduating with distinction (top 5%) between 2020 and 2024. He also started a Multimedia Communication and Documentation Bachelor's program at TH Aschaffenburg University of Applied Sciences, but switched to Computer Science. His bachelor's thesis focused on a prototype implementation of Retrieval-Augmented Generation and the evaluation of major LLMs. I'll take you to the Education section now."
-          setChatHistory(prev => [...prev,
-            {type: "user", message: "SWhat is his educational background?"},
-            {type: "model", message: answer }
-          ]);
-          setModelAnswer(answer);
-          redirect("/#education");
-        }}>
-          What is his educational background?
-        </Button>
+          <Button onClick={async () => {
+            setState("loading");
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const answer = "Julius presents three projects on his website: a personal portfolio website (the one you are seeing right now), SimplePolls, and GuessTheFlag. The portfolio website is built with Next.js, SimplePolls is a full-stack application with a React frontend and an Express backend, while GuessTheFlag is a fun way to test your flag knowledge built with React. I am now scrolling to the Projects section for you.";
+            setChatHistory(prev => [...prev,
+              {type: "user", message: "Show me his projects!"},
+              {type: "model", message: answer }
+            ]);
+            setModelAnswer(answer);
+            setState("idle");
+            redirect("/#projects");
+          }}>
+            Show me his projects!
+          </Button>
 
-        <Button onClick={() => {
-          const answer = "Julius currently works at the International German School of Brussels (iDSB) in IT support and administration, and he also develops internal apps and small tools to improve processes. I'll take you to the Work Experience section now."
-          setChatHistory(prev => [...prev,
-            {type: "user", message: "Where does he currently work?"},
-            {type: "model", message: answer }
-          ]);
-          setModelAnswer(answer);
-          redirect("/#work-experience");
-        }}>
-          Where does he currently work?
-        </Button>
+          <Button onClick={async () => {
+            setState("loading");
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const answer = "Julius holds a B.Sc. in Computer Science from FH Aachen University of Applied Sciences, graduating with distinction (top 5%) between 2020 and 2024. He also started a Multimedia Communication and Documentation Bachelor's program at TH Aschaffenburg University of Applied Sciences, but switched to Computer Science. His bachelor's thesis focused on a prototype implementation of Retrieval-Augmented Generation and the evaluation of major LLMs. I'll take you to the Education section now."
+            setChatHistory(prev => [...prev,
+              {type: "user", message: "What is his educational background?"},
+              {type: "model", message: answer }
+            ]);
+            setModelAnswer(answer);
+            setState("idle");
+            redirect("/#education");
+          }}>
+            What is his educational background?
+          </Button>
 
-        <Button onClick={() => {
-          const answer = "Julius is fluent in German and English and is currently at an intermediate level in French (B1). He is actively improving his French through classes and daily conversations since moving to Brussels, and uses both German and English at work.. I am now scrolling to the Languages section for more details!";
-          setChatHistory(prev => [...prev,
-            {type: "user", message: "Which languages does he speak?"},
-            {type: "model", message: answer }
-          ]);
-          setModelAnswer(answer);
-          redirect("/#languages");
-        }}>
-          Which languages does he speak?
-        </Button>
+          <Button onClick={async () => {
+            setState("loading");
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const answer = "Julius currently works at the International German School of Brussels (iDSB) in IT support and administration, and he also develops internal apps and small tools to improve processes. I'll take you to the Work Experience section now."
+            setChatHistory(prev => [...prev,
+              {type: "user", message: "Where does he currently work?"},
+              {type: "model", message: answer }
+            ]);
+            setModelAnswer(answer);
+            setState("idle");
+            redirect("/#work-experience");
+          }}>
+            Where does he currently work?
+          </Button>
 
-      </div>
+          <Button onClick={async () => {
+            setState("loading");
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const answer = "Julius is fluent in German and English and is currently at an intermediate level in French (B1). He is actively improving his French through classes and daily conversations since moving to Brussels, and uses both German and English at work. I am now scrolling to the Languages section for more details!";
+            setChatHistory(prev => [...prev,
+              {type: "user", message: "Which languages does he speak?"},
+              {type: "model", message: answer }
+            ]);
+            setModelAnswer(answer);
+            setState("idle");
+            redirect("/#languages");
+          }}>
+            Which languages does he speak?
+          </Button>
 
-      <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleChatInput(userInput);
-        setUserInput("");
-      }}
-      className={styles.form}
-      >
-        <Input value={userInput} onChange={(e) => setUserInput(e.target.value)} />
-        <Button type="submit">Send</Button>
-      </form>
-    </nav>
+        </div>
+
+        <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleChatInput(userInput);
+          setUserInput("");
+        }}
+        className={styles.form}
+        >
+          <Input
+          placeholder="Type your own question..."
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)} />
+          <Button type="submit">
+            <FontAwesomeIcon icon={faAngleRight} />
+          </Button>
+        </form>
+      </nav>
+    </div>
   );
 }

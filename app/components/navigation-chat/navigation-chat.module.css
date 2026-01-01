@@ -1,25 +1,58 @@
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  align-items: center;
-  justify-content: center;
+.scrollableContainer {
   height: 100dvh;
-  padding: 0.5em;
+  overflow-y: auto;
 }
 
-.chatOutput {
+.nav {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 0.8em;
+  align-items: center;
+  justify-content: end;
+  padding: 2em;
+}
+
+.speechBubble {
+  overflow: visible;
   width: 100%;
+  position: relative;
   border: 2px solid black;
   padding: 0.5em;
   border-radius: 0.5em;
+}
+
+.speechBubble::after { /* speech bubble tail */
+  content: "";
+  position: absolute;
+  left: 2.5em;
+  bottom: -9px;
+  width: 15px;
+  height: 15px;
+  background: #ffffff;
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #000;
+  transform: rotate(-45deg);
+}
+
+.chatOutput {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+.robotIconContainer {
+  width: 100%;
+  padding: 0 0.5em;
 }
 
 .suggestions {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 0.8em;
+  gap: 0.7em;
   margin: 0.5em 0;
 }
 .suggestions p {
@@ -31,7 +64,7 @@
   font-size: 0.9em;
 }
 .suggestions Button > * {
-  padding: 0.3em;
+  padding: 0.2em;
 }
 
 .form {

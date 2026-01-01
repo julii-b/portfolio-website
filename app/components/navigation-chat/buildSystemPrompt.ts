@@ -85,7 +85,7 @@ You are NOT allowed to make up any information. If you don't know the answer, yo
     }
   }
 ]`;
-  console.log(systemPrompt);
+  //console.log(systemPrompt);
 
   return systemPrompt;
 }
