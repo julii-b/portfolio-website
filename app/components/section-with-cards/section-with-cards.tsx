@@ -1,11 +1,16 @@
 import sectionsContent, { type SectionContent } from "@/app/content/sections-content";
 import CardsCarousel from "@/app/ui/cards-carousel/cards-carousel";
 import Card from "@/app/ui/card/card";
-import styles from "./sections.module.css";
+import styles from "./section-with-cards.module.css";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
-import ContactMeComponent from "@/app/components/sections/contact-me/contact-me";
 
-export function SectionWithCards (sectionId: string) {
+/**
+ * Renders a section with cards based on the section ID.
+ * The cards content is fetched from sectionsContent in @/app/content/sections-content.
+ * @param sectionId The ID of the section to render.
+ * @returns The rendered section.
+ */
+export default function SectionWithCards (sectionId: string) {
 
   const education: SectionContent | undefined = sectionsContent.find(section => section.id === sectionId);
   if (education && education.cards) return (
@@ -27,24 +32,4 @@ export function SectionWithCards (sectionId: string) {
       </CardsCarousel>
     </section>
   );
-}
-
-export function Education() {
-  return SectionWithCards("education");
-}
-
-export function Projects() {
-  return SectionWithCards("projects");
-}
-
-export function WorkExperience() {
-  return SectionWithCards("work-experience");
-}
-
-export function Languages() {
-  return SectionWithCards("languages");
-}
-
-export function ContactMe() {
-  return <ContactMeComponent />;
 }

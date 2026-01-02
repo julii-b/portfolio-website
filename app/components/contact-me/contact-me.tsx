@@ -7,7 +7,10 @@ import { Button } from "@/app/ui/button/button";
 import { Input, TextArea } from "@/app/ui/input/input";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 
-
+/**
+ * Contact Me section component - to be implemented.
+ * @returns The rendered Contact Me section.
+ */
 export default function ContactMe() {
   return (
     <section className={styles.section} id="contact-form" key="contact-form">
