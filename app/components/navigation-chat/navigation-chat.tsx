@@ -2,7 +2,8 @@
 
 import styles from "./navigation-chat.module.css";
 import Link from "next/link";
-import { generateChatResponse, type ChatResponse, type ChatHistoryEntry } from "./chat";
+import generateChatResponse from "@/app/lib/text-generation/generateChatResponse";
+import { ChatHistoryEntry, ChatResponse } from "@/app/lib/text-generation/types";
 import { Input } from "@/app/ui/input/input";
 import { useEffect, useState } from "react";
 import { redirect } from 'next/navigation';

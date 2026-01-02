@@ -1,30 +1,13 @@
 import Card from "@/app/ui/card/card";
 import { faAngular, faLaravel, faVuejs } from "@fortawesome/free-brands-svg-icons";
 import { faReact } from "@fortawesome/free-brands-svg-icons/faReact";
-import { color } from "motion";
+import getDuolingoStreak from "@/app/lib/duolingo";
 
 export type SectionContent = {
   id: string;
   title: string;
   lineColor?: string;
   cards?: Array<{ id: string, contentSummary: string } & React.ComponentProps<typeof Card>>;
-}
-
-
-// from https://leanrada.com/notes/get-duolingo-streak/
-async function getDuolingoStreak(username: string): Promise<number> {
-  const res = await fetch(
-    `https://www.duolingo.com/2017-06-30/users?username=${username}&fields=streak,streakData%7BcurrentStreak,previousStreak%7D%7D`
-  );
-  const data = await res.json();
-  const userData = data.users[0];
-  // I didn't know which of these fields matter, so I just get the max of them.
-  const streak = Math.max(
-    userData?.streak ?? 0,
-    userData?.streakData?.currentStreak?.length ?? 0,
-    userData?.streakData?.previousStreak?.length ?? 0
-  );
-  return streak;
 }
 
 const sectionsContent: SectionContent[] = [
@@ -338,7 +321,16 @@ const sectionsContent: SectionContent[] = [
               Ever since I knew that I would eventually move to Brussels because my partner already lived here, I started learning French.
             </p>
             <p>
-              I started learning with Duolingo, where I currently proudly have a streak of {await getDuolingoStreak("julius.bu")} days - <a href="https://www.duolingo.com/profile/julius.bu" target="_blank" rel="noopener noreferrer">follow me on Duolingo</a> if you want to :).
+              I started learning with Duolingo
+              {await (async () => {
+                try {
+                  const streak = await getDuolingoStreak("julius.bu");
+                  return `, where I currently proudly have a streak of ${streak} days`
+                } catch (error) {
+                  return "";
+                }
+              })()}
+              - <a href="https://www.duolingo.com/profile/julius.bu" target="_blank" rel="noopener noreferrer">follow me on Duolingo</a> if you want to :).
               <br />
               Since moving to Brussels, I'm also taking classes in French.
             </p>
