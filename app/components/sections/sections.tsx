@@ -1,4 +1,4 @@
-import sectionsContent, { type SectionContent } from "../../../content/sections-content";
+import sectionsContent, { type SectionContent } from "@/app/content/sections-content";
 import CardsCarousel from "@/app/ui/cards-carousel/cards-carousel";
 import Card from "@/app/ui/card/card";
 import styles from "./sections.module.css";

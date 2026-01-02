@@ -1,5 +1,5 @@
 'use server';
-import sectionContent from "../../../content/sections-content";
+import sectionContent from "../../content/sections-content";
 
 
 /**
