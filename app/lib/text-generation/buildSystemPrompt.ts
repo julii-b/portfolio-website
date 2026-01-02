@@ -1,10 +1,13 @@
 'use server';
-import sectionContent from "../sections/sections-content";
+import sectionContent from "../../../content/sections-content";
 
-function removeHtmlTags(input: string): string {
-  return input.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-}
 
+/**
+ * Builds the system prompt for the model.
+ * Prompt includes instructions, website sections content as context, and function definition.
+ * Prompt doesn't include start/end tokens.
+ * @returns The system prompt as a string.
+ */
 async function buildSystemPrompt(): Promise<string> {
   // import renderToStaticMarkup here to avoid including it in the client bundle:
   const { renderToStaticMarkup } = await import("react-dom/server");

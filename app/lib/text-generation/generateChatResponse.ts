@@ -1,21 +1,10 @@
 'use server';
-import { z } from "zod";
+import { ChatHistoryEntry, ChatResponse } from "@/app/lib/text-generation/types";
 import buildSystemPrompt from "./buildSystemPrompt";
 import { ApiError, GoogleGenAI } from "@google/genai";
 import { env } from "process";
 
-export interface ChatResponse {
-  function_name?: string;
-  parameters?: {
-    section_name: string;
-  };
-  answer: string;
-}
 
-export interface ChatHistoryEntry {
-  type: "user" | "model";
-  message: string;
-}
 
 const startTokenUser = "<start_of_turn>user\n";
 const endTokenUser = "<end_of_turn>\n";
@@ -28,9 +17,10 @@ const endTokenModel = "<end_of_turn>\n";
  * @param chatHistory The history of chat messages.
  * @returns The generated chat response.
  */
-export async function generateChatResponse(chatHistory: ChatHistoryEntry[]): Promise<ChatResponse> {
+async function generateChatResponse(chatHistory: ChatHistoryEntry[]): Promise<ChatResponse> {
   return generateChatResponseRecursive(chatHistory, 0);
 }
+export default generateChatResponse;
 
 async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], recursionCounter: number = 0): Promise<ChatResponse> {
 
