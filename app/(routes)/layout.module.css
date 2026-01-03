@@ -9,7 +9,7 @@
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  padding-left: calc(min(30%, 25em) + 22px); /* compensate for navigation + 10px whitespace + 12px line */
+  padding-left: calc(min(30%, 25em) + 12px); /* compensate for navigation + 12px line */
 }
 @media (max-width: 600px) {
   .body {
@@ -38,10 +38,10 @@
   height: 100vh;
   position: fixed;
   top: 0;
-  left: calc(min(30%, 25em) + 10px); /* compensate for padding-left */
+  left: min(30%, 25em); /* compensate for padding-left */
 }
 @media (max-width: 600px) {
   .lineWrapper {
-    left: 10px;
+    left: 10px; /* minimal whitespace when nav is hidden */
   }
 }
