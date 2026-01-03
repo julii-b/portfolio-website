@@ -1,7 +1,7 @@
 'use server';
 import { ChatHistoryEntry, ChatResponse } from "@/app/lib/text-generation/types";
 import buildSystemPrompt from "./buildSystemPrompt";
-import { ApiError, Chat, GoogleGenAI } from "@google/genai";
+import { ApiError, GoogleGenAI } from "@google/genai";
 import { env } from "process";
 
 

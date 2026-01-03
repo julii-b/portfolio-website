@@ -3,7 +3,6 @@
 import { Button } from "@/app/ui/button/button";
 import { redirect } from 'next/navigation';
 import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
-import { Chat } from "@google/genai";
 
 
 /**
