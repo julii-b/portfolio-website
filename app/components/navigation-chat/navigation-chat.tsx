@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { redirect } from 'next/navigation';
 import { Button } from "@/app/ui/button/button";
 import RobotIcon from "./robot-icon/robot-icon";
-import { faAngleRight, faCaretRight, faPaperPlane, faRightLong } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SuggestionButton from "./suggestion-button/suggestion-button";
 
@@ -132,7 +132,7 @@ export default function NavigationChat() {
           onChange={(e) => setUserInput(e.target.value)} />
 
           <Button type="submit">
-            <FontAwesomeIcon icon={faAngleRight} />
+            <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
           </Button>
           
         </form>
