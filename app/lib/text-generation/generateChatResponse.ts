@@ -63,7 +63,7 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
     // Parse the response text as JSON:
     if (response.text !== undefined) {
       console.log(response.text);
-      return JSON.parse(response.text) as ChatResponse;
+      return JSON.parse(response.text.replace(endTokenModel, '')) as ChatResponse;
     } else {
       throw new Error("No response text");
     }
