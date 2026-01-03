@@ -1,7 +1,7 @@
 'use server';
 import { ChatHistoryEntry, ChatResponse } from "@/app/lib/text-generation/types";
 import buildSystemPrompt from "./buildSystemPrompt";
-import { ApiError, GoogleGenAI } from "@google/genai";
+import { ApiError, Chat, GoogleGenAI } from "@google/genai";
 import { env } from "process";
 
 
@@ -26,14 +26,23 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
 
   const ai = new GoogleGenAI({apiKey: env.GEMMA_API_KEY});
 
+  // Limit chat history to last 9 entries to avoid exceeding token limit:
+  if (chatHistory.length > 9) {
+    chatHistory = chatHistory.slice(-9);
+  }
+  //Always append an initial greeting message at the beginning of the chat history, to set the tone:
+  const initialMessage: ChatResponse = { answer: "Hello! :) I'm here to help you learn more about Julius. I can provide information about his projects, education, work experience, skills, and languages. Feel free to ask me anything, or I can direct you to a specific section of the website." };
+  chatHistory = [{type: "model", message: initialMessage}, ...chatHistory];
+
   // Build the the prompt from the system prompt, the chat history, and the start/end tokens:
   const prompt = startTokenUser + await buildSystemPrompt() + endTokenUser + chatHistory.map(entry => {
     if (entry.type === "user") {
       return startTokenUser + entry.message + endTokenUser;
-    } else {
-      return startTokenModel + entry.message + endTokenModel;
+    } else if (entry.type === "model") {
+      return startTokenModel + JSON.stringify(entry.message) + endTokenModel;
     }
   }).join("") + startTokenModel;
+  //console.log(prompt);
 
   // Try to generate the response:
   try {
@@ -53,6 +62,7 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
   
     // Parse the response text as JSON:
     if (response.text !== undefined) {
+      console.log(response.text);
       return JSON.parse(response.text) as ChatResponse;
     } else {
       throw new Error("No response text");

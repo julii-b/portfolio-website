@@ -11,9 +11,10 @@ export interface ChatResponse {
 
 /**
  * An entry in the chat history, either from the user or the model.
+ * Should contain ChatResponse for model entries, and string for user entries.
  * Can be used as an array to represent the full chat history.
  */
 export interface ChatHistoryEntry {
   type: "user" | "model";
-  message: string;
+  message: ChatResponse | string;
 }

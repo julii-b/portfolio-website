@@ -9,8 +9,6 @@ import sectionContent from "../../content/sections-content";
  * @returns The system prompt as a string.
  */
 async function buildSystemPrompt(): Promise<string> {
-  // import renderToStaticMarkup here to avoid including it in the client bundle:
-  const { renderToStaticMarkup } = await import("react-dom/server");
 
   const date = new Date().toISOString().split("T")[0];
 

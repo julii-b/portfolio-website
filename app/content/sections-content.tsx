@@ -133,7 +133,7 @@ const sectionsContent: SectionContent[] = [
     lineColor: "#96009b",
     cards: [
       {
-        id: "education-bachelor-computer-science",
+        id: "education-computer-science",
         title: "B.Sc. Computer Science",
         subtitle: "FH Aachen University of Applied Sciences",
         location: "Aachen, Germany",
@@ -172,7 +172,7 @@ const sectionsContent: SectionContent[] = [
         contentSummary: "B.Sc. in Computer Science, graduated with distinction (top 5%). Skills: OOP (Java, C++, Python), model-based systems engineering, data analysis, web development (PHP, JavaScript/TypeScript, SQL, HTML, Laravel, Vue.js, Angular), AI (traditional algorithms, LLMs). Thesis on Retrieval Augmented Generation and LLM evaluation."
       },
       {
-        id: "education-bachelor-mcd",
+        id: "education-mcd",
         title: "Multimedia Communication and Documentation Bachelor's program",
         subtitle: "TH Aschaffenburg University of Applied Sciences",
         location: "Aschaffenburg, Germany",
