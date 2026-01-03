@@ -71,7 +71,7 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
   } catch (e) { // Catch errors that occur during the API call and parsing of the response:
     console.error(e);
     if (recursionCounter < 5) { // Retry up to 6 times (2 times per model)
-      console.error("Error occurred while generating chat response. Retrying.");
+      console.error("Error occurred while generating chat response. Retrying.", e);
       await new Promise(resolve => setTimeout(resolve, 1000));
       return generateChatResponseRecursive(chatHistory, recursionCounter + 1);
 
@@ -84,7 +84,9 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
           const retryDelay = errorMessage.error.details[2].retryDelay;
           return {"answer": `I'm currently experiencing a high volume of requests. Please try again in ${retryDelay.replace("s", "")} seconds. :)`};
         }
-      } catch (e) {}
+      } catch (e) {
+        console.error("Error is not an ApiError or could not parse rate limit info: ", e);
+      }
 
       // If all retries fail, and error is not due to rate limiting, return a generic error message:
       return {"answer": "I'm sorry, there seems to be an issue with generating the response. :("};
