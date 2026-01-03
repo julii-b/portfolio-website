@@ -18,17 +18,14 @@ import SuggestionButton from "./suggestion-button/suggestion-button";
  */
 export default function NavigationChat() {
 
-  const initialMessage: ChatResponse = { answer: "Hello! :) I'm here to help you learn more about Julius. I can provide information about his projects, education, work experience, skills, and languages. Feel free to ask me anything, or I can direct you to a specific section of the website." };
-  useEffect(() => {
-    setChatHistory([{type: "model", message: initialMessage.answer}]);
-  }, []);
+  const initialModelAnswer = "Hello! :) I'm here to help you learn more about Julius. I can provide information about his projects, education, work experience, skills, and languages. Feel free to ask me anything, or I can direct you to a specific section of the website.";
 
   // State to manage the state of the text generation:
   const [state, setState] = useState<("loading"| "idle")>("idle");
   // State for managed user input:
   const [userInput, setUserInput] = useState<string>("");
   // State for most recent model answer, which will be rendered:
-  const [modelAnswer, setModelAnswer] = useState<string>(initialMessage.answer);
+  const [modelAnswer, setModelAnswer] = useState<string>(initialModelAnswer);
   // State for chat history:
   const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
 
@@ -40,15 +37,16 @@ export default function NavigationChat() {
     setChatHistory(newHistory);
     // Generate the model's response, add it to the chat history, and update the model answer state:
     const response = await generateChatResponse(newHistory);
-    setChatHistory(prev => [...prev, {type: "model", message: response.answer}]);
+    setChatHistory(prev => [...prev, {type: "model", message: response}]);
     setModelAnswer(response.answer);
+    // Set state back to idle:
+    setState("idle");
     // Scroll to section if the model response includes a scroll_to_section function call:
     if (response.function_name === "scroll_to_section" && response.parameters?.section_name) {
       const section = response.parameters.section_name;
       redirect(`/#${section}`);
     }
 
-    setState("idle");
   }
 
   return (
@@ -77,7 +75,7 @@ export default function NavigationChat() {
             SimplePolls is a full-stack application with a React frontend and an Express backend,
             while GuessTheFlag is a fun way to test your flag knowledge built with React.
             I am now scrolling to the Projects section for you."
-            destinationSectionId="projects"
+            destinationSectionId="project-portfolio-website"
           />
 
           <SuggestionButton
@@ -91,7 +89,7 @@ export default function NavigationChat() {
             but switched to Computer Science.
             His bachelor's thesis focused on a prototype implementation of Retrieval-Augmented Generation and the evaluation of major LLMs.
             I'll take you to the Education section now."
-            destinationSectionId="education"
+            destinationSectionId="education-computer-science"
           />
 
           <SuggestionButton
@@ -102,7 +100,7 @@ export default function NavigationChat() {
             pregeneratedAnswer="Julius currently works at the International German School of Brussels (iDSB) in IT support and administration,
             and he also develops internal apps and small tools to improve processes.
             I'll take you to the Work Experience section now."
-            destinationSectionId="work-experience"
+            destinationSectionId="work-idsb"
           />
 
           <SuggestionButton
@@ -113,7 +111,7 @@ export default function NavigationChat() {
             pregeneratedAnswer="Julius is fluent in German and English and is currently at an intermediate level in French (B1).
             He is actively improving his French through classes and daily conversations since moving to Brussels, and uses both German and English at work.
             I am now scrolling to the Languages section for more details!"
-            destinationSectionId="languages"
+            destinationSectionId="language-german"
           />
 
         </div>

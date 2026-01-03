@@ -3,6 +3,7 @@
 import { Button } from "@/app/ui/button/button";
 import { redirect } from 'next/navigation';
 import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
+import { Chat } from "@google/genai";
 
 
 /**
@@ -35,9 +36,15 @@ export default function SuggestionButton (
       // simulate a delay of 1 second
       await new Promise(resolve => setTimeout(resolve, 1000));
       // update chat history and model answer states:
+
       setChatHistory(prev => [...prev,
-        {type: "user", message: suggestionText},
-        {type: "model", message: pregeneratedAnswer }
+        {
+          type: "user", message: suggestionText
+        },
+        {
+          ...(destinationSectionId && {function_name: "scroll_to_section", parameters: {section_name: destinationSectionId}}),
+          type: "model", message: pregeneratedAnswer
+        }
       ]);
       setModelAnswer(pregeneratedAnswer);
       // set loading state back to "idle"
