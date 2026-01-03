@@ -2,9 +2,9 @@
 
 import styles from "./navigation-chat.module.css";
 import generateChatResponse from "@/app/lib/text-generation/generateChatResponse";
-import { ChatHistoryEntry, ChatResponse } from "@/app/lib/text-generation/types";
+import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
 import { Input } from "@/app/ui/input/input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { redirect } from 'next/navigation';
 import { Button } from "@/app/ui/button/button";
 import RobotIcon from "./robot-icon/robot-icon";
