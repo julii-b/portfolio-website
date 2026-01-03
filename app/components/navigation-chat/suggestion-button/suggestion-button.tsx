@@ -3,6 +3,7 @@
 import { Button } from "@/app/ui/button/button";
 import { redirect } from 'next/navigation';
 import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
+import useRedirect from "@/app/hooks/use-redirect";
 
 
 /**
@@ -27,6 +28,8 @@ export default function SuggestionButton (
     destinationSectionId?: string,
   }
 ) {
+  const redirect = useRedirect();
+
   return (
     <Button
     onClick={async () => {
@@ -50,7 +53,7 @@ export default function SuggestionButton (
       setLoadingState("idle");
       // redirect to the destination section if provided
       if (destinationSectionId) {
-        redirect(`/#${destinationSectionId}`);
+        redirect.scrollTo(destinationSectionId);
       }
     }}
     >

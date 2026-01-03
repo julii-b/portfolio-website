@@ -5,12 +5,12 @@ import generateChatResponse from "@/app/lib/text-generation/generateChatResponse
 import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
 import { Input } from "@/app/ui/input/input";
 import { useState } from "react";
-import { redirect } from 'next/navigation';
 import { Button } from "@/app/ui/button/button";
 import RobotIcon from "./robot-icon/robot-icon";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SuggestionButton from "./suggestion-button/suggestion-button";
+import useRedirect from "@/app/hooks/use-redirect";
 
 /**
  * Renders the chat interface which allows users to interact with the AI and navigate the website.
@@ -20,6 +20,7 @@ export default function NavigationChat() {
 
   const initialModelAnswer = "Hello! :) I'm here to help you learn more about Julius. I can provide information about his projects, education, work experience, skills, and languages. Feel free to ask me anything, or I can direct you to a specific section of the website.";
 
+  const redirect = useRedirect();
   // State to manage the state of the text generation:
   const [state, setState] = useState<("loading"| "idle")>("idle");
   // State for managed user input:
@@ -44,7 +45,7 @@ export default function NavigationChat() {
     // Scroll to section if the model response includes a scroll_to_section function call:
     if (response.function_name === "scroll_to_section" && response.parameters?.section_name) {
       const section = response.parameters.section_name;
-      redirect(`/#${section}`);
+      redirect.scrollTo(section);
     }
 
   }
