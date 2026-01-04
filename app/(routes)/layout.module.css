@@ -26,11 +26,7 @@
   top: 0;
   left: 0;
   width: min(30%, 25em);
-}
-@media (max-width: 600px) {
-  .navigationContainer {
-    display: none;
-  }
+  z-index: 5;
 }
 
 .lineWrapper {

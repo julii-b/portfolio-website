@@ -1,6 +1,40 @@
+.openChatButton {
+  display: none !important;
+}
+@media (max-width: 600px) {
+  .openChatButton {
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+    z-index: 5;
+    border-radius: 50%;
+    width: 3.5em;
+    height: 3.5em;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .scrollableContainer {
   height: 100dvh;
   overflow-y: auto;
+}
+@media (max-width: 600px) {
+  .scrollableContainer {
+    position: fixed;
+    bottom: 2em;
+    left: 1vw;
+    width: 98vw;
+    height: auto;
+    max-height: 90dvh;
+    border: 3px solid #424242;
+    border-radius: 3em;
+    background-color: rgb(255, 255, 255);
+  }
+  .scrollableContainer.notVisibleOnMobile {
+    display: none;
+  }
 }
 
 .nav {
@@ -20,6 +54,7 @@
   border: 2px solid black;
   padding: 0.5em;
   border-radius: 0.5em;
+  background-color: #ffffff;
 }
 
 .speechBubble::after { /* speech bubble tail */
