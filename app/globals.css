@@ -64,7 +64,7 @@ svg[data-icon] {
 }
 
 /* Shimmer animation for loading placeholders */
-.animate {
+.animateLoadingElement {
   animation: shimmer 3s;
   animation-iteration-count: infinite;
   background: linear-gradient(to right, #e6e6e6 5%, #cccccc 25%, #e6e6e6 35%);

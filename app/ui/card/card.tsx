@@ -38,8 +38,8 @@ export default function Card (
     >
       <Suspense fallback={(
         <div className={`${styles.card}`}>
-          <div className={`${styles.title} animate`}> </div>
-          <div className={`${styles.childrenWrapper} animate`}> </div>
+          <div className={`${styles.title} animateLoadingElement`}> </div>
+          <div className={`${styles.childrenWrapper} animateLoadingElement`}> </div>
         </div>
       )} >
 
