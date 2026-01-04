@@ -49,8 +49,9 @@
 .leftButton {
   height: 7em;
   width: 3em;
-  /*border-bottom-left-radius: 20em 23em;
-  border-bottom-right-radius: 20em 23em;*/
+  border-radius: 2.5em;
+  border-bottom-left-radius: 2.5em 2.8em;
+  border-bottom-right-radius: 2.5em 2.8em;
 }
 
 .rightButtonWrapper {
@@ -65,7 +66,7 @@
   height: 7em;
   width: 3em;
   border-radius: 2.5em;
-  border-bottom-left-radius: 2.5em 2.7em;
-  border-bottom-right-radius: 2.5em 2.7em;
+  border-bottom-left-radius: 2.5em 2.8em;
+  border-bottom-right-radius: 2.5em 2.8em;
 }
 
