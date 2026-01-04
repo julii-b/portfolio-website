@@ -1,6 +1,6 @@
 'use client';
 
-import { JSX, ReactNode } from "react";
+import { JSX, ReactNode, Suspense } from "react";
 import styles from "./card.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faCalendar } from "@fortawesome/free-solid-svg-icons";
@@ -29,58 +29,64 @@ export default function Card (
     skills?: React.ComponentProps<typeof SkillBadge>[],
     backgroundImageUrl?: string,
   }
-): JSX.Element {
+) {
 
   return (
     <div
     className={`${styles.cardWrapper}`}
     id={id}
     >
-
-      <div
-      className={styles.card}
-      style={backgroundImageUrl ?
-        {
-          background: `url("${backgroundImageUrl}") rgba(255, 255, 255, 0.85)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-        } : {}
-      }>
-
-        <div className={styles.cardHeader}>
-          <h3 className={styles.title}>{title}</h3>
-          {subtitle &&
-            <h4 className={styles.subtitle}>{subtitle}</h4>
-          }
-          {location &&
-            <p className={styles.location}>
-              <FontAwesomeIcon icon={faLocationDot} />
-              {location}
-              </p>
-          }
-          {time &&
-            <p className={styles.time}>
-              <FontAwesomeIcon icon={faCalendar} />
-              {time}
-            </p>
-          }
-          {skills && (
-            <div className={styles.skills}>
-              {skills.map((props, index) => (
-                <span key={index} className={styles.skill}>
-                  <SkillBadge {...props} />
-                </span>
-              ))}
-            </div>
-          )}
+      <Suspense fallback={(
+        <div className={`${styles.card}`}>
+          <div className={`${styles.title} animate`}> </div>
+          <div className={`${styles.childrenWrapper} animate`}> </div>
         </div>
+      )} >
 
         <div
-        className={`${styles.childrenWrapper}`}
-        >
-          {children}
+        className={styles.card}
+        style={backgroundImageUrl ?
+          {
+            background: `url("${backgroundImageUrl}") rgba(255, 255, 255, 0.85)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+          } : {}
+        }>
+          <div className={styles.cardHeader}>
+            <h3 className={styles.title}>{title}</h3>
+            {subtitle &&
+              <h4 className={styles.subtitle}>{subtitle}</h4>
+            }
+            {location &&
+              <p className={styles.location}>
+                <FontAwesomeIcon icon={faLocationDot} />
+                {location}
+                </p>
+            }
+            {time &&
+              <p className={styles.time}>
+                <FontAwesomeIcon icon={faCalendar} />
+                {time}
+              </p>
+            }
+            {skills && (
+              <div className={styles.skills}>
+                {skills.map((props, index) => (
+                  <span key={index} className={styles.skill}>
+                    <SkillBadge {...props} />
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div
+          className={`${styles.childrenWrapper}`}
+          >
+            {children}
+          </div>
         </div>
-      </div>
+      </Suspense>
     </div>
   );
 }
