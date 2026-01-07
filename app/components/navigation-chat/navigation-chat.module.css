@@ -97,8 +97,6 @@
 .suggestions Button {
   flex-grow: 1;
   font-size: 0.9em;
-}
-.suggestions Button > * {
   padding: 0.2em;
 }
 

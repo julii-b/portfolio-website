@@ -4,14 +4,18 @@ import styles from "./navigation-chat.module.css";
 import generateChatResponse from "@/app/lib/text-generation/generateChatResponse";
 import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
 import { Input } from "@/app/ui/input/input";
-import { useState } from "react";
+import { useState, useActionState, useEffect } from "react";
 import { Button } from "@/app/ui/button/button";
 import RobotIcon from "./robot-icon/robot-icon";
 import { faBars, faChevronDown, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SuggestionButton from "./suggestion-button/suggestion-button";
+import SuggestionButton from "./suggestions/suggestion-button";
 import useRedirect from "@/app/hooks/use-redirect";
 import { motion } from "motion/react";
+import Form from "next/form";
+import action from "./action";
+import { form, object } from "motion/react-client";
+import Suggestions from "./suggestions/suggestions";
 
 /**
  * Renders the chat interface which allows users to interact with the AI and navigate the website.
@@ -25,36 +29,43 @@ export default function NavigationChat() {
   // State to manage the nav visibility: on mobile:
   const [isNavVisible, setIsNavVisible] = useState<boolean>(false);
   // State to manage the state of the text generation:
-  const [state, setState] = useState<("loading"| "idle")>("idle");
+  const [loadingState, setLoadingState] = useState<("loading"| "idle")>("idle");
   // State for managed user input:
   const [userInput, setUserInput] = useState<string>("");
   // State for most recent model answer, which will be rendered:
   const [modelAnswer, setModelAnswer] = useState<string>(initialModelAnswer);
-  // State for chat history:
+
+  // State for chat history in component:
   const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
+  // Initialize formState with chat history. formAction will update formState:
+  const [formState, formAction] = useActionState(action, { chatHistory });
 
-  async function handleChatInput(userPrompt: string) {
-    setState("loading");
+  // Handle updates to formState:
+  useEffect(() => {
+    setLoadingState("idle");
 
-    // Add user's input to the chat history:
-    const newHistory: ChatHistoryEntry[] = [...chatHistory, {type: "user", message: userPrompt}];
-    setChatHistory(newHistory);
-    // Generate the model's response, add it to the chat history, and update the model answer state:
-    const response = await generateChatResponse(newHistory);
-    setChatHistory(prev => [...prev, {type: "model", message: response}]);
-    setModelAnswer(response.answer);
-    // Set state back to idle:
-    setState("idle");
-    // Scroll to section if the model response includes a scroll_to_section function call:
-    if (response.function_name === "scroll_to_section" && response.parameters?.section_name) {
-      const section = response.parameters.section_name;
-      redirect.scrollTo(section);
+    // Update chatHistory state:
+    if (formState.chatHistory && formState.chatHistory.length > 0) {
+      setChatHistory(formState.chatHistory);
+
+      // Update model answer state (which is rendered in speech bubble) and handle scrolling:
+      const lastMessage = formState.chatHistory[formState.chatHistory.length - 1];
+      if (typeof lastMessage.message === "object" && lastMessage.message.answer) { // Check if last message is from model (has .answer)
+        // Update model answer state:
+        setModelAnswer(lastMessage.message.answer);
+        // Scroll to section if the model response includes a scroll_to_section function call:
+        if (lastMessage.message.function_name === "scroll_to_section" && lastMessage.message.parameters?.section_name) {
+          const section = lastMessage.message.parameters.section_name;
+          redirect.scrollTo(section);
+        }
+      }
     }
+  }, [formState]);
 
-  }
 
   return (
     <>
+      {/** Button to open/close nav on mobile: */}
       <Button
       className={styles.openChatButton}
       onClick={() => {
@@ -67,6 +78,8 @@ export default function NavigationChat() {
           <FontAwesomeIcon icon={faBars} />
         )}
       </Button>
+
+      {/** Navigation chat container: */}
       <motion.div
       className={
         `${!isNavVisible && styles.notVisibleOnMobile} ${styles.scrollableContainer}`
@@ -84,80 +97,41 @@ export default function NavigationChat() {
             <div className={styles.chatOutput}>{modelAnswer}</div>
           </div>
           <div className={styles.robotIconContainer}>
-            <RobotIcon state={state} />
+            <RobotIcon state={loadingState} />
           </div>
 
+          {/** Suggestion buttons: */}
           <div className={styles.suggestions}>
-
-            <p>Suggestions:</p>
-
-            <SuggestionButton
-              setLoadingState={setState}
-              setChatHistory={setChatHistory}
-              setModelAnswer={setModelAnswer}
-              suggestionText="Show me his projects!"
-              pregeneratedAnswer="Julius presents three projects on his website: a personal portfolio website (the one you are seeing right now),
-              SimplePolls, and GuessTheFlag. The portfolio website is built with Next.js,
-              SimplePolls is a full-stack application with a React frontend and an Express backend,
-              while GuessTheFlag is a fun way to test your flag knowledge built with React.
-              I am now scrolling to the Projects section for you."
-              destinationSectionId="project-portfolio-website"
+            <Suggestions
+            setLoadingState={setLoadingState}
+            setChatHistory={setChatHistory}
+            setModelAnswer={setModelAnswer}
             />
-
-            <SuggestionButton
-              setLoadingState={setState}
-              setChatHistory={setChatHistory}
-              setModelAnswer={setModelAnswer}
-              suggestionText="What is his educational background?"
-              pregeneratedAnswer="Julius holds a B.Sc. in Computer Science from FH Aachen University of Applied Sciences,
-              graduating with distinction (top 5%) between 2020 and 2024.
-              He also started a Multimedia Communication and Documentation Bachelor's program at TH Aschaffenburg University of Applied Sciences,
-              but switched to Computer Science.
-              His bachelor's thesis focused on a prototype implementation of Retrieval-Augmented Generation and the evaluation of major LLMs.
-              I'll take you to the Education section now."
-              destinationSectionId="education-computer-science"
-            />
-
-            <SuggestionButton
-              setLoadingState={setState}
-              setChatHistory={setChatHistory}
-              setModelAnswer={setModelAnswer}
-              suggestionText="Where does he currently work?"
-              pregeneratedAnswer="Julius currently works at the International German School of Brussels (iDSB) in IT support and administration,
-              and he also develops internal apps and small tools to improve processes.
-              I'll take you to the Work Experience section now."
-              destinationSectionId="work-idsb"
-            />
-
-            <SuggestionButton
-              setLoadingState={setState}
-              setChatHistory={setChatHistory}
-              setModelAnswer={setModelAnswer}
-              suggestionText="Which languages does he speak?"
-              pregeneratedAnswer="Julius is fluent in German and English and is currently at an intermediate level in French (B1).
-              He is actively improving his French through classes and daily conversations since moving to Brussels, and uses both German and English at work.
-              I am now scrolling to the Languages section for more details!"
-              destinationSectionId="language-german"
-            />
-
           </div>
 
 
           {/** Chat input form: */}
           <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleChatInput(userInput);
+          action={formAction}
+          onSubmit={() => {
             setUserInput("");
+            setLoadingState("loading");
           }}
           className={styles.form}
           >
             <Input
             placeholder="Type your own question..."
+            id="userInput"
+            name="userInput"
             value={userInput}
-            onChange={(e) => setUserInput(e.target.value)} />
+            onChange={(e) => setUserInput(e.target.value)}
+            disabled={loadingState === "loading"}
+            />
 
-            <Button type="submit">
+            <Button
+            type="submit"
+            disabled={loadingState === "loading"}
+            >
               <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
             </Button>
             
