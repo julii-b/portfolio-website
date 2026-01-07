@@ -12,11 +12,9 @@ export function Button(
   return (
     <button
     {...props}
-    className={`${styles.container} ${props.className || ""}`}
+    className={`${styles.button} ${props.className || ""}`}
     >
-      <span className={styles.span}>
-        {children}
-      </span>
+      {children}
     </button>
   );
 }
@@ -31,11 +29,9 @@ export function ButtonLink(
   return (
     <Link
     {...props}
-    className={`${styles.container} ${props.className || ""}`}
+    className={`${styles.button} ${props.className || ""}`}
     >
-      <span className={styles.span}>
-        {children}
-      </span>
+      {children}
     </Link>
   );
 }
