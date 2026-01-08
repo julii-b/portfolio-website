@@ -21,7 +21,7 @@
   flex-direction: column;
   width: 100%;
   gap: 1.2em;
-  padding: 0 0 3px 0; /* to prevent overflow when submit button is :hover */
+  padding: 0 2px 3px 2px; /* to prevent overflow when submit button is :hover and input is :focus-visible */
   overflow-y: auto;
 }
 @media (max-height: 600px) {
