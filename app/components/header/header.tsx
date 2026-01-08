@@ -6,10 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "motion/react"
 import { useEffect, useState } from "react";
-import { ButtonLink } from "@/app/ui/button/button";
+import { Button } from "@/app/ui/button/button";
+import useRedirect from "@/app/hooks/use-redirect";
 
 
 export default function Header() {
+
+  const redirect = useRedirect();
 
   // Job titles to cycle through, placeholders for now:
   const jobTitles = [
@@ -76,8 +79,8 @@ export default function Header() {
         <Image
         src="/profile_picture_3x4.png"
         alt="picture of Julius Busch"
-        width={3000}
-        height={4000}
+        width={1024}
+        height={1365}
         className={styles.profilePicture}
         />
       </motion.div>
@@ -87,22 +90,30 @@ export default function Header() {
         Brussels, Belgium
       </p>
 
-      <p className={styles.role}>
-        {jobTitle}
-        {blinkingCursor && "❚" }
-      </p>
+      <div className={styles.role}>
+        <p>
+          {jobTitle}
+          {blinkingCursor && "❚" }
+        </p>
+      </div>
 
       <p className={styles.introduction}>
-        I studied Computer Science at the FH Aachen University of Applied Sciences in Germany.
-        There I gained experience in various programming languages and technologies, writing my thesis about Large Language Models.
-        After graduating I moved to Belgium and started working at the International German School of Brussels.
-        In the past year, while learning frameworks like React and Express, I developed a great joy for web development. <br />
-        I am inviting you to explore my portfolio.
+        <span>
+          I studied Computer Science at the FH Aachen University of Applied Sciences in Germany.
+          There I gained experience in various programming languages and technologies, writing my thesis about Large Language Models.
+          After graduating I moved to Belgium and started working at the International German School of Brussels.
+          In the past year, while learning frameworks like React and Express, I developed a great joy for web development. <br />
+          I am inviting you to explore my portfolio.
+        </span>
       </p>
 
-      <ButtonLink href="#projects">
+      <Button
+      onClick={ ()=> {
+        redirect.scrollTo("projects")
+      }}
+      >
         <FontAwesomeIcon icon={faAngleRight} />
-      </ButtonLink>
+      </Button>
 
     </header>
 

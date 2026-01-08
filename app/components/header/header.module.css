@@ -4,36 +4,34 @@
   min-height: 100dvh;
   max-height: 100dvh;
   width: 100%;
-  padding: 0 2em;
+  padding: 2em;
   display: flex;
   gap: 1.7em;
   flex-direction: column;
   justify-content: center;
   align-items: start;
 }
-.header > * {
-  background-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.6);
-}
 
 .myName {
+  display: inline-block;
+  width: min-content;
+  max-width: 4em;
   font-size: 5em;
-  display: block;
+  padding: 0 .1em 0 0;
   line-height: 0.9em;
-  box-shadow: none;
-  background-color: transparent;
-  text-shadow:
-    0 0 20px rgba(255, 255, 255, 1),
-    0 0 30px rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: .2em;
 }
 @media (max-width: 600px) {
   .myName {
     font-size: 4em;
   }
 }
-@media (max-width: 500px) {
+@media (max-height: 600px) {
   .myName {
-    font-size: 3em;
+    width: max-content;
+    max-width: 100%;
+    font-size: 2em;
   }
 }
 
@@ -46,8 +44,8 @@
   right: 10%;
   z-index: -1;
   aspect-ratio: 3/4;
-  max-width: 40%;
-  max-height: 70vh;
+  max-width: 50%;
+  max-height: 75vh;
   padding: 0 1px 1px 1px;
   border-radius: calc(3em + 1px);
   border-bottom: solid 2px #bababa;
@@ -63,29 +61,28 @@
   max-height: 70vh;
   border-radius: 3em;
   border: solid 4px #585757;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .role {
   display: block;
   font-size: 1.8em;
   line-height: 0.9em;
-  height: 1.8em;
+  height: 3em;
   max-width: 20em;
-  color: dimgray;
+  color: rgb(43, 43, 43);
   font-family: var(--font-noto-sans-mono);
   align-items: center;
-  text-shadow:
-    0 0 30px rgba(255, 255, 255, 1),
-    0 0 10px rgba(255, 255, 255, 1);
-  background-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.2);
 }
 @media (max-width: 600px) {
   .role {
     font-size: 1.5em;
-    height: 2.7em;
+    height: 3em;
   }
+}
+.role > p{
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: .2em;
+  padding: .2em .1em .2em 0;
 }
 .role > svg {
   font-size: 0.8em;
@@ -93,9 +90,13 @@
 }
 
 .location{
+  width: max-content;
+  padding: 0 .2em 0 0;
   margin-top: -0.8em;
   font-size: 1.2em;
   color: gray;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: .2em;
 }
 
 .location > svg {
@@ -106,12 +107,15 @@
 .introduction {
   font-size: 1.2em;
   line-height: 1.3em;
-  box-shadow: none;
-  background-color: transparent;
-  text-shadow:
-    0 0 20px rgba(255, 255, 255, 1),
-    0 0 30px rgba(255, 255, 255, 1);
-  background-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.3);
+  overflow-x: hidden;
   overflow-y: auto;
+}
+.introduction > span {
+  overflow: hidden;
+  display: inline;
+  padding-right: .2em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: .2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
