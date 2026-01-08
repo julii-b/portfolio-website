@@ -16,6 +16,7 @@ import Form from "next/form";
 import action from "./action";
 import { form, object } from "motion/react-client";
 import Suggestions from "./suggestions/suggestions";
+import { error } from "console";
 
 /**
  * Renders the chat interface which allows users to interact with the AI and navigate the website.
@@ -34,6 +35,8 @@ export default function NavigationChat() {
   const [userInput, setUserInput] = useState<string>("");
   // State for most recent model answer, which will be rendered:
   const [modelAnswer, setModelAnswer] = useState<string>(initialModelAnswer);
+  // State for error messages:
+  const [errorMessages, setErrorMessages] = useState<string>("");
 
   // State for chat history in component:
   const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
@@ -60,6 +63,20 @@ export default function NavigationChat() {
         }
       }
     }
+
+    // Update error messages state:
+    let errors: string[] = [];
+    if (formState.errorMessage) {
+      errors.push(formState.errorMessage);
+    }
+    if (formState.fieldErrors?.userInput) {
+      errors.push(...formState.fieldErrors.userInput);
+    }
+    if (formState.fieldErrors?.chatHistory) {
+      errors.push(...formState.fieldErrors.chatHistory);
+    }
+    setErrorMessages(errors.join(", "));
+
   }, [formState]);
 
 
@@ -94,7 +111,13 @@ export default function NavigationChat() {
 
           {/** Chat output in speech bubble with robot avatar: */}
           <div className={styles.speechBubble}>
-            <div className={styles.chatOutput}>{modelAnswer}</div>
+            <div className={styles.chatOutput}>
+              {errorMessages ? (
+                <>{errorMessages}</>
+              ): (
+                <>{modelAnswer}</>
+              )}
+            </div>
           </div>
           <div className={styles.robotIconContainer}>
             <RobotIcon state={loadingState} />
