@@ -147,7 +147,7 @@ export default function NavigationChat() {
             id="userInput"
             name="userInput"
             value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            onChange={(e) =>{ if (e.target.value.length < 1000) setUserInput(e.target.value)}}
             disabled={loadingState === "loading"}
             />
 
