@@ -4,19 +4,19 @@ import styles from "./navigation-chat.module.css";
 import generateChatResponse from "@/app/lib/text-generation/generateChatResponse";
 import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
 import { Input } from "@/app/ui/input/input";
-import { useState, useActionState, useEffect } from "react";
+import { useState, useActionState, useEffect, Suspense } from "react";
 import { Button } from "@/app/ui/button/button";
 import RobotIcon from "./robot-icon/robot-icon";
 import { faBars, faChevronDown, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SuggestionButton from "./suggestions/suggestion-button";
-import useRedirect from "@/app/hooks/use-redirect";
+
 import { motion } from "motion/react";
 import Form from "next/form";
 import action from "./action";
 import { form, object } from "motion/react-client";
 import Suggestions from "./suggestions/suggestions";
 import { error } from "console";
+import { ChatForm, ChatFormSkeleton } from "./chatForm";
 
 /**
  * Renders the chat interface which allows users to interact with the AI and navigate the website.
@@ -26,58 +26,21 @@ export default function NavigationChat() {
 
   const initialModelAnswer = "Hello! :) I'm here to help you learn more about Julius. I can provide information about his projects, education, work experience, skills, and languages. Feel free to ask me anything, or I can direct you to a specific section of the website.";
 
-  const redirect = useRedirect();
   // State to manage the nav visibility: on mobile:
   const [isNavVisible, setIsNavVisible] = useState<boolean>(false);
   // State to manage the state of the text generation:
   const [loadingState, setLoadingState] = useState<("loading"| "idle")>("idle");
-  // State for managed user input:
-  const [userInput, setUserInput] = useState<string>("");
+  
   // State for most recent model answer, which will be rendered:
   const [modelAnswer, setModelAnswer] = useState<string>(initialModelAnswer);
-  // State for error messages:
-  const [errorMessages, setErrorMessages] = useState<string>("");
+  
 
   // State for chat history in component:
   const [chatHistory, setChatHistory] = useState<ChatHistoryEntry[]>([]);
-  // Initialize formState with chat history. formAction will update formState:
-  const [formState, formAction] = useActionState(action, { chatHistory });
-
-  // Handle updates to formState:
-  useEffect(() => {
-    setLoadingState("idle");
-
-    // Update chatHistory state:
-    if (formState.chatHistory && formState.chatHistory.length > 0) {
-      setChatHistory(formState.chatHistory);
-
-      // Update model answer state (which is rendered in speech bubble) and handle scrolling:
-      const lastMessage = formState.chatHistory[formState.chatHistory.length - 1];
-      if (typeof lastMessage.message === "object" && lastMessage.message.answer) { // Check if last message is from model (has .answer)
-        // Update model answer state:
-        setModelAnswer(lastMessage.message.answer);
-        // Scroll to section if the model response includes a scroll_to_section function call:
-        if (lastMessage.message.function_name === "scroll_to_section" && lastMessage.message.parameters?.section_name) {
-          const section = lastMessage.message.parameters.section_name;
-          redirect.scrollTo(section);
-        }
-      }
-    }
-
-    // Update error messages state:
-    let errors: string[] = [];
-    if (formState.errorMessage) {
-      errors.push(formState.errorMessage);
-    }
-    if (formState.fieldErrors?.userInput) {
-      errors.push(...formState.fieldErrors.userInput);
-    }
-    if (formState.fieldErrors?.chatHistory) {
-      errors.push(...formState.fieldErrors.chatHistory);
-    }
-    setErrorMessages(errors.join(", "));
-
-  }, [formState]);
+  
+  // State for error messages:
+  const [errorMessages, setErrorMessages] = useState<string>("");
+  
 
 
   return (
@@ -140,31 +103,16 @@ export default function NavigationChat() {
 
 
           {/** Chat input form: */}
-          <form
-          action={formAction}
-          onSubmit={() => {
-            setUserInput("");
-            setLoadingState("loading");
-          }}
-          className={styles.form}
-          >
-            <Input
-            placeholder="Type your own question..."
-            id="userInput"
-            name="userInput"
-            value={userInput}
-            onChange={(e) =>{ if (e.target.value.length < 1000) setUserInput(e.target.value)}}
-            disabled={loadingState === "loading"}
-            />
-
-            <Button
-            type="submit"
-            disabled={loadingState === "loading"}
-            >
-              <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
-            </Button>
-            
-          </form>
+          <Suspense fallback={<ChatFormSkeleton />}>
+          <ChatForm
+          loadingState={loadingState}
+          setLoadingState={setLoadingState}
+          chatHistory={chatHistory}
+          setChatHistory={setChatHistory}
+          setModelAnswer={setModelAnswer}
+          setErrorMessages={setErrorMessages}
+          />
+          </Suspense>
         </nav>
       </motion.div>
     </>

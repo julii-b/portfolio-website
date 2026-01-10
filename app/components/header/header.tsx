@@ -3,16 +3,13 @@
 import styles from "./header.module.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "motion/react"
-import { useEffect, useState } from "react";
-import { Button } from "@/app/ui/button/button";
-import useRedirect from "@/app/hooks/use-redirect";
+import { Suspense, useEffect, useState } from "react";
+import { ContinueButton, ContinueButtonFallback } from "./continueButton";
 
 
 export default function Header() {
-
-  const redirect = useRedirect();
 
   // Job titles to cycle through, placeholders for now:
   const jobTitles = [
@@ -107,13 +104,9 @@ export default function Header() {
         </span>
       </p>
 
-      <Button
-      onClick={ ()=> {
-        redirect.scrollTo("projects")
-      }}
-      >
-        <FontAwesomeIcon icon={faAngleRight} />
-      </Button>
+      <Suspense fallback={<ContinueButtonFallback />}>
+        <ContinueButton />
+      </Suspense>
 
     </header>
 
