@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 1.2em;
+  gap: 0.3em;
   padding: 0 2px 3px 2px; /* to prevent overflow when submit button is :hover and input is :focus-visible */
   overflow-y: auto;
 }
@@ -49,6 +49,7 @@
 .messageWrapper textarea {
   height: 9em;
   resize: none;
+  margin-bottom: -0.4em;
 }
 @media (max-height: 600px) {
   .messageWrapper textarea {
@@ -95,6 +96,21 @@
   .submitButton {
     width: 100%;
   }
+}
+
+.mainErrorMessage {
+  color: red;
+  font-size: 1em;
+  line-height: 1.2;
+  min-height: 1.5em;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.9em;
+  line-height: 1.2;
+  padding-left: 0.8em;
+  min-height: 1.5em;
 }
 
 .metroStationWrapper {
