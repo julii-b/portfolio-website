@@ -26,7 +26,12 @@
   top: 0;
   left: 0;
   width: min(30%, 25em);
-  z-index: 5;
+  z-index: 0;
+}
+@media (max-width: 600px) {
+  .navigationContainer {
+    z-index: 5; /* above other content when nav is shown on mobile */
+  }
 }
 
 .lineWrapper {

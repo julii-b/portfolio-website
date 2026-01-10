@@ -84,7 +84,9 @@ export default function NavigationChat() {
     <>
       {/** Button to open/close nav on mobile: */}
       <Button
-      className={styles.openChatButton}
+      className={
+        `${isNavVisible ? styles.closeChatButton : styles.openChatButton}`
+      }
       onClick={() => {
         setIsNavVisible(!isNavVisible);
       }}
@@ -110,17 +112,21 @@ export default function NavigationChat() {
         <nav className={styles.nav}>
 
           {/** Chat output in speech bubble with robot avatar: */}
-          <div className={styles.speechBubble}>
-            <div className={styles.chatOutput}>
-              {errorMessages ? (
-                <>{errorMessages}</>
-              ): (
-                <>{modelAnswer}</>
-              )}
+          <div className={styles.speechBubbleAndIconContainer}>
+            <div className={styles.spacerTop}></div>
+            <div className={styles.speechBubble}>
+              <div className={styles.chatOutput}>
+                {errorMessages ? (
+                  <>{errorMessages}</>
+                ): (
+                  <>{modelAnswer}</>
+                )}
+              </div>
             </div>
-          </div>
-          <div className={styles.robotIconContainer}>
-            <RobotIcon state={loadingState} />
+            <div className={styles.robotIconContainer}>
+              <RobotIcon state={loadingState} />
+            </div>
+            <div className={styles.spacerBottom}></div>
           </div>
 
           {/** Suggestion buttons: */}

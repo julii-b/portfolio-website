@@ -1,8 +1,8 @@
-.openChatButton {
+.openChatButton, .closeChatButton {
   display: none !important;
 }
 @media (max-width: 600px) {
-  .openChatButton {
+  .openChatButton, .closeChatButton {
     position: fixed;
     bottom: 1em;
     left: 1em;
@@ -14,11 +14,15 @@
     align-items: center;
     justify-content: center;
   }
+  .openChatButton {
+    background-image: linear-gradient(to bottom, #ffffff, #cddbe3);
+  }
 }
 
 .scrollableContainer {
   height: 100dvh;
   overflow-y: auto;
+  background-image: linear-gradient(to bottom, #ffffff, #cddbe3);
 }
 @media (max-width: 600px) {
   .scrollableContainer {
@@ -30,7 +34,6 @@
     max-height: 90dvh;
     border: 3px solid #424242;
     border-radius: 3em;
-    background-color: rgb(255, 255, 255);
   }
   .scrollableContainer.notVisibleOnMobile {
     display: none;
@@ -45,6 +48,26 @@
   align-items: center;
   justify-content: end;
   padding: 2em;
+}
+
+.speechBubbleAndIconContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.spacerTop {
+  height: 0;
+  flex-grow: 2.5;
+}
+
+.spacerBottom {
+  height: 0;
+  flex-grow: 1;
 }
 
 .speechBubble {
