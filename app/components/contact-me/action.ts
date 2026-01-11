@@ -1,6 +1,8 @@
 'use server';
 import { sendEmail } from "@/app/lib/email";
 import { z } from "zod";
+import { verifyTurnstile } from "nextjs-turnstile";
+import { env } from "process";
 
 
 // Define the schema for the form data using zod:
@@ -8,6 +10,7 @@ const contactFormSchema = z.object({
   name: z.string().min(1, "Name is required").max(100, "Name can't be longer than 100 characters"),
   email: z.email("Invalid email address"),
   message: z.string().min(1, "Message is required").max(10000, "Message can't be longer than 10,000 characters"),
+  cfTurnstileResponse: z.string().min(1, "Completion of the CAPTCHA is required"),
 });
 
 // Define the type for the returned formState:
@@ -30,6 +33,7 @@ export default async function action (
     name: formData.get("name"),
     email: formData.get("email"),
     message: formData.get("message"),
+    cfTurnstileResponse: formData.get("cf-turnstile-response"),
   });
 
   // return state with field errors if parsing is unsuccessful:
@@ -40,8 +44,23 @@ export default async function action (
       fieldErrors: error.fieldErrors,
     };
   }
-  console.log("Parsed form data:", parsed.data);
-  const { name, email, message } = parsed.data;
+  //console.log("Parsed form data:", parsed.data);
+  const { name, email, message, cfTurnstileResponse } = parsed.data;
+
+  // Verify Turnstile CAPTCHA:
+  let secretKey = "";
+  if (env.NEXT_PUBLIC_ENV === "dev") { // Skip verification in dev environment
+    secretKey = "1x0000000000000000000000000000000AA";
+  } else {
+    secretKey = env.TURNSTILE_SECRET_KEY!;
+  }
+  const turnstileValid = await verifyTurnstile(cfTurnstileResponse, { secretKey });
+
+  if (!turnstileValid) {
+    return {
+      errorMessage: "CAPTCHA verification failed. Please try again.",
+    };
+  }
 
   // Send message to myself:
   try {
