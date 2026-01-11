@@ -16,9 +16,9 @@
   background-color: #fafafa;
   border: solid 4px #585757;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-size: cover;
+  /*background-size: cover;
   background-position: center center;
-  background-blend-mode: overlay;
+  background-blend-mode: overlay;*/
   overflow-y: auto;
 }
 @media (max-height: 600px) {

@@ -47,7 +47,7 @@ export default function Card (
         className={styles.card}
         style={backgroundImageUrl ?
           {
-            background: `url("${backgroundImageUrl}") rgba(255, 255, 255, 0.85)`,
+            background: `linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url(${encodeURI(backgroundImageUrl)})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
           } : {}

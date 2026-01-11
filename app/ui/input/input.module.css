@@ -2,6 +2,7 @@
   margin: 0 0px;
   padding: 0.6em 1.2em;
   border-radius: 1.6em;
+  font-size: max(1em, 16px); /* iOS Safari requires a minimal font size of 16px to prevent automatic zoom */
   height: auto;
   width: 100%;
   border: 3px solid black;
