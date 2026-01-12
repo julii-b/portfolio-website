@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { env } from "process";
-import { sanitizeEmailHeader, sanitizeStringForHtml } from "./sanitize-operations";
+import { sanitizeEmailHeader, sanitizeStringForHtml } from "../sanitize-operations";
 
 
 export class MailError extends Error {
