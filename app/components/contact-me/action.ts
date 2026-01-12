@@ -1,8 +1,9 @@
 'use server';
-import { sendEmail } from "@/app/lib/email";
+import { sendEmail } from "@/app/lib/email/send-email";
 import { z } from "zod";
 import { verifyTurnstile } from "nextjs-turnstile";
 import { env } from "process";
+import { notificationMessageReceived, notificationMessageSent } from "@/app/lib/email/format-email";
 
 
 // Define the schema for the form data using zod:
@@ -69,8 +70,9 @@ export default async function action (
       fromName: `Contact Form: ${name}`,
       to: "mail@julius-busch.com",
       replyTo: email,
-      subject: `Contact Form Submission on julius-busch.com: ${name} - ${email}`,
-      plainMessage: message,
+      subject: `New contact form message from ${name} - ${email}`,
+      plainMessage: notificationMessageReceived(name, email, message).plainMessage,
+      htmlMessage: notificationMessageReceived(name, email, message).htmlMessage,
     });
 
   } catch (error) {
@@ -85,7 +87,8 @@ export default async function action (
       from: "noreply@julius-busch.com",
       to: email,
       subject: "Thank you for contacting me",
-      plainMessage: `Dear ${name},\n\nThank you for reaching out to me via my website. I will get back to you as soon as possible.\n\nBest regards,\nJulius Busch`,
+      plainMessage: notificationMessageSent(message).plainMessage,
+      htmlMessage: notificationMessageSent(message).htmlMessage,
     });
   } catch (error) {
     console.error("Error sending confirmation email:", error);
