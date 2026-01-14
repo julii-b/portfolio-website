@@ -68,7 +68,7 @@ export default async function action (
     await sendEmail({
       from: "contact-form@julius-busch.com",
       fromName: `Contact Form: ${name}`,
-      to: "mail@julius-busch.com",
+      to: env.CONTACT_EMAIL!,
       replyTo: email,
       subject: `New contact form message from ${name} - ${email}`,
       plainMessage: notificationMessageReceived(name, email, message).plainMessage,
