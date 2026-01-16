@@ -1,0 +1,32 @@
+.main {
+  padding: 2em;
+}
+
+.buttonAndTitle {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  margin: 0.5em 0;
+}
+.buttonAndTitle > .backButton {
+  display: block;
+  margin-top: -0.1em;
+}
+.buttonAndTitle > h1 {
+  display: block;
+}
+
+
+
+.main > h2 {
+  margin: 1.5em 0 0.5em 0;
+}
+.main > h3 {
+  margin: 1.2em 0 0.4em 0;
+}
+.main > h4 {
+  margin: 1em 0 0.3em 0;
+}
+.main > p {
+  margin: 0.9em 0;
+}
