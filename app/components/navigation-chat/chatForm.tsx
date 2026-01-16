@@ -7,6 +7,7 @@ import useRedirect from "@/app/hooks/use-redirect";
 import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
 import { useActionState, useEffect, useState } from "react";
 import action from "./action";
+import Link from "next/link";
 
 export function ChatForm(
   {
@@ -74,48 +75,62 @@ export function ChatForm(
 
   
   return (
-  <form
-  action={formAction}
-  onSubmit={() => {
-    setUserInput("");
-    setLoadingState("loading");
-  }}
-  className={styles.form}
-  >
-    <Input
-    placeholder="Type your own question..."
-    id="userInput"
-    name="userInput"
-    value={userInput}
-    onChange={(e) =>{ if (e.target.value.length < 1000) setUserInput(e.target.value)}}
-    disabled={loadingState === "loading"}
-    />
+    <>
+      <form
+      action={formAction}
+      onSubmit={() => {
+        setUserInput("");
+        setLoadingState("loading");
+      }}
+      className={styles.form}
+      >
+        <Input
+        placeholder="Type your own question..."
+        id="userInput"
+        name="userInput"
+        value={userInput}
+        onChange={(e) =>{ if (e.target.value.length < 1000) setUserInput(e.target.value)}}
+        disabled={loadingState === "loading"}
+        />
 
-    <Button
-    type="submit"
-    disabled={loadingState === "loading"}
-    >
-      <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
-    </Button>
-    
-  </form>
+        <Button
+        type="submit"
+        disabled={loadingState === "loading"}
+        >
+          <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
+        </Button>
+        
+      </form>
+
+      <span className={styles.disclaimer}>
+        Messages are processed using the Gemini API.
+        Please avoid entering personal or sensitive data. <Link href="/privacy-policy">Privacy&nbsp;Policy</Link>
+      </span>
+    </>
   );
 }
 
 export function ChatFormSkeleton () {
   return (
-    <form className={styles.form}>
-      <Input
-      placeholder="Type your own question..."
-      disabled
-      />
+    <>
+      <form className={styles.form}>
+        <Input
+        placeholder="Type your own question..."
+        disabled
+        />
 
-      <Button
-      disabled
-      >
-        <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
-      </Button>
-      
-    </form>
+        <Button
+        disabled
+        >
+          <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
+        </Button>
+        
+      </form>
+
+      <span className={styles.disclaimer}>
+        Messages are processed using the Gemini API.
+        Please avoid entering personal or sensitive data. <Link href="/privacy-policy">Privacy&nbsp;Policy</Link>
+      </span>
+    </>
   );
 }

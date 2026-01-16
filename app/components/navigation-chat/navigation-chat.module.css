@@ -27,7 +27,7 @@
 @media (max-width: 600px) {
   .scrollableContainer {
     position: fixed;
-    bottom: 2em;
+    bottom: 2.2em;
     left: 1vw;
     width: 98vw;
     height: auto;
@@ -47,7 +47,12 @@
   gap: 0.8em;
   align-items: center;
   justify-content: end;
-  padding: 2em;
+  padding: 2em 2em 1.3em 2em;
+}
+@media (max-width: 600px) {
+  .nav {
+    padding: 2.5em 2em 2em 2em;
+  }
 }
 
 .speechBubbleAndIconContainer {
@@ -137,4 +142,15 @@
 .form Button .icon {
   /* Transform icon to make it horizontal: */
   transform: rotate(45deg) scale(1.05) translate(-0.1em, 0.1em);
+}
+
+.disclaimer {
+  font-size: 0.8em;
+  color: #555555;
+  margin-top: -0.5em;
+  line-height: 1.4;
+  text-align: center;
+}
+.disclaimer a {
+  color: #4b5e85;
 }
