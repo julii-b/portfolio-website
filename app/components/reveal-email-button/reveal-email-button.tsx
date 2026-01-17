@@ -5,11 +5,8 @@ import { Button } from "@/app/ui/button/button";
 import Form from "next/form";
 import { Turnstile } from "nextjs-turnstile";
 import { useState } from "react";
-import { FormState } from "./action";
-import { useFormState } from "react-dom";
 import { useActionState } from "react";
 import action from "./action";
-import { form } from "motion/react-client";
 
 /**
  * Button together with a Cloudflare Turnstile CAPTCHA.

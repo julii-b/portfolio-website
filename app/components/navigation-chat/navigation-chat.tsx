@@ -1,21 +1,14 @@
 'use client';
 
 import styles from "./navigation-chat.module.css";
-import generateChatResponse from "@/app/lib/text-generation/generateChatResponse";
 import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
-import { Input } from "@/app/ui/input/input";
-import { useState, useActionState, useEffect, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { Button } from "@/app/ui/button/button";
 import RobotIcon from "./robot-icon/robot-icon";
 import { faBars, faChevronDown, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { motion } from "motion/react";
-import Form from "next/form";
-import action from "./action";
-import { form, object } from "motion/react-client";
 import Suggestions from "./suggestions/suggestions";
-import { error } from "console";
 import { ChatForm, ChatFormSkeleton } from "./chatForm";
 import SpeechBubble from "./speech-bubble/speech-bubble";
 
