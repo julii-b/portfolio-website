@@ -35,6 +35,8 @@ export default function SuggestionButton (
     onClick={async () => {
       // set loading state to "loading" before the simulated delay
       setLoadingState("loading");
+      // go to home page to ensure scrolling is possible
+      redirect.setPathname("/");
       // simulate a delay of 1 second
       await new Promise(resolve => setTimeout(resolve, 1000));
       // update chat history and model answer states:

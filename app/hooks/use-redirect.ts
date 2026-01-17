@@ -11,6 +11,10 @@ export default function useRedirect() {
   const pathname = usePathname()
   const searchParams = useSearchParams();
 
+  const setPathname = (path: string) => {
+    router.push(path);
+  };
+
   const setHash = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -41,5 +45,5 @@ export default function useRedirect() {
     router.replace(`${pathname}?${params.toString()}${hash}`);
   };
 
-  return { setHash, scrollTo, setSearchParam, removeSearchParam };
+  return { setPathname, setHash, scrollTo, setSearchParam, removeSearchParam };
 }

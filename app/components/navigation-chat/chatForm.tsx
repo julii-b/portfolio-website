@@ -81,6 +81,8 @@ export function ChatForm(
       onSubmit={() => {
         setUserInput("");
         setLoadingState("loading");
+        // go to home page to ensure scrolling is possible when answer is generated
+        redirect.setPathname("/");
       }}
       className={styles.form}
       >
