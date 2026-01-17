@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./line.module.css";
+import sectionsContent from "@/app/content/sections-content";
 
 
 /**
@@ -11,17 +13,20 @@ import styles from "./line.module.css";
  */
 export default function Line() {
 
+  const pathname = usePathname();
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
   // colors for each section of the portfolio website, one color is for 1/(number of colors) of the scrollable height:
-  const lineColors = [
+  let lineColors = [
     "#b60000", // Color for header
-    "#b60000", // Color for projects
-    "#96009bff", // Color for education
-    "#003597ff", // Color for work experience
-    "#007222ff", // Color for languages
-    "#cfbb00ff", // Color for contact me
-  ]
+  ];
+  if (pathname === "/") { // Only on home page: add section colors
+    for (const sectionContent of sectionsContent) {
+      if (sectionContent.lineColor) {
+        lineColors.push(sectionContent.lineColor);
+      }
+    }
+  }
 
   // Event handler for scroll events on the body element:
   const handleBodyScroll = (e: Event): void => {
