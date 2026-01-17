@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# added by aaPanel
+/.well-known/acme-challenge
+
+#redi data
+/redis/data
