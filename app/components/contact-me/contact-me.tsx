@@ -8,7 +8,7 @@ import { Input, TextArea } from "@/app/ui/input/input";
 import { Turnstile } from "nextjs-turnstile";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 import action from "./action";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,7 +18,7 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
  * @returns The rendered Contact Me section.
  */
 export default function ContactMe() {
-
+  
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   // Initialize formState with chat history. formAction will update formState:
   const [formState, formAction] = useActionState(action, {});
@@ -33,8 +33,13 @@ export default function ContactMe() {
     captchaSiteKey = "1x00000000000000000000AA"; // always pass in dev
   } else {
     captchaSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!;
-    
   }
+
+  const [isLoading, setIsLoading] = useState(false);
+  // reset loading state when formState changes:
+  useEffect(() => {
+    setIsLoading(false);
+  }, [formState]);
 
   return (
     <section className={styles.section} id="contact-form" key="contact-form">
@@ -57,6 +62,7 @@ export default function ContactMe() {
         
         <Form
         action={formAction}
+        onSubmit={() => setIsLoading(true)}
         className={styles.form}
         >
           <div className={styles.mainErrorMessage}>
@@ -111,6 +117,7 @@ export default function ContactMe() {
             type="submit"
             className={styles.submitButton}
             disabled={!turnstileToken}
+            loading={isLoading}
             >
               Send
             </Button>

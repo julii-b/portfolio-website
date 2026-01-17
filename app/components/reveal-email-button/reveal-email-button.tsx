@@ -4,7 +4,7 @@ import styles from "./reveal-email-button.module.css";
 import { Button } from "@/app/ui/button/button";
 import Form from "next/form";
 import { Turnstile } from "nextjs-turnstile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useActionState } from "react";
 import action from "./action";
 
@@ -28,13 +28,22 @@ export default function RevealEmailButton() {
     captchaSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!;
     
   }
-  const [infoVisible, setInfoVisible] = useState(false);
+
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => { // reset loading state when formState changes
+    setIsLoading(false);
+  }, [formState]);
 
   return (<>
 
     {/* Form with Turnstile CAPTCHA, submit button, and error message */}
-    <Form action={formAction} className={formState.informationToShow ? styles.hidden : styles.wrapper }>
+    <Form
+    action={formAction}
+    onSubmit={() => setIsLoading(true)}
+    className={formState.informationToShow ? styles.hidden : styles.wrapper }
+    >
       
       <Turnstile
       siteKey={captchaSiteKey}
@@ -47,9 +56,13 @@ export default function RevealEmailButton() {
       onExpire={() => setTurnstileToken(null)}
       />
       
-      <Button type="submit" className={styles.button} disabled={!turnstileToken}>
+      <Button
+      type="submit"
+      className={styles.button}
+      loading={isLoading}
+      disabled={!turnstileToken}
+      >
         Show email address
-      
       </Button>
 
       {formState.errorMessage && (
