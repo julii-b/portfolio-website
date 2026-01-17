@@ -1,0 +1,65 @@
+.speechBubble {
+  overflow: visible;
+  width: 100%;
+  position: relative;
+  border: 2px solid black;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  background-color: #ffffff;
+}
+
+.speechBubble::after { /* speech bubble tail */
+  content: "";
+  position: absolute;
+  left: 2.5em;
+  bottom: -9px;
+  width: 15px;
+  height: 15px;
+  background: #ffffff;
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #000;
+  transform: rotate(-45deg);
+}
+
+.chatOutput {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+.loadingAnimationWrapper {
+  display: flex;
+  gap: 0.4em;
+  justify-content: center;
+  align-items: center;
+  height: 4em;
+}
+
+.loadingDot1, .loadingDot2, .loadingDot3 {
+  width: 0.6em;
+  height: 0.6em;
+  background-color: black;
+  border-radius: 50%;
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+.loadingDot1 {
+  animation-delay: -0.4s;
+}
+.loadingDot2 {
+  animation-delay: -0.2s;
+}
+.loadingDot3 {
+  animation-delay: 0s;
+}
+
+@keyframes bounce {
+  0% { transform: scale(0); }
+  10% { transform: scale(0); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1); }
+  90% { transform: scale(0); }
+  100% { transform: scale(0); }
+}

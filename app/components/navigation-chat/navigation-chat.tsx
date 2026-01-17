@@ -17,6 +17,7 @@ import { form, object } from "motion/react-client";
 import Suggestions from "./suggestions/suggestions";
 import { error } from "console";
 import { ChatForm, ChatFormSkeleton } from "./chatForm";
+import SpeechBubble from "./speech-bubble/speech-bubble";
 
 /**
  * Renders the chat interface which allows users to interact with the AI and navigate the website.
@@ -77,15 +78,11 @@ export default function NavigationChat() {
           {/** Chat output in speech bubble with robot avatar: */}
           <div className={styles.speechBubbleAndIconContainer}>
             <div className={styles.spacerTop}></div>
-            <div className={styles.speechBubble}>
-              <div className={styles.chatOutput}>
-                {errorMessages ? (
-                  <>{errorMessages}</>
-                ): (
-                  <>{modelAnswer}</>
-                )}
-              </div>
-            </div>
+            <SpeechBubble
+              errorMessages={errorMessages}
+              modelAnswer={modelAnswer}
+              loadingState={loadingState}
+            />
             <div className={styles.robotIconContainer}>
               <RobotIcon state={loadingState} />
             </div>
