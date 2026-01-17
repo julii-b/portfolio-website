@@ -75,37 +75,6 @@
   flex-grow: 1;
 }
 
-.speechBubble {
-  overflow: visible;
-  width: 100%;
-  position: relative;
-  border: 2px solid black;
-  padding: 0.5em;
-  border-radius: 0.5em;
-  background-color: #ffffff;
-}
-
-.speechBubble::after { /* speech bubble tail */
-  content: "";
-  position: absolute;
-  left: 2.5em;
-  bottom: -9px;
-  width: 15px;
-  height: 15px;
-  background: #ffffff;
-  border-left: 2px solid #000;
-  border-bottom: 2px solid #000;
-  transform: rotate(-45deg);
-}
-
-.chatOutput {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  height: 100%;
-  overflow: auto;
-}
-
 .robotIconContainer {
   width: 100%;
   padding: 0 0.5em;
