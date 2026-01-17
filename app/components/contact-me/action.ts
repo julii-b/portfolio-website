@@ -4,7 +4,7 @@ import { z } from "zod";
 import { verifyTurnstile } from "nextjs-turnstile";
 import { env } from "process";
 import { notificationMessageReceived, notificationMessageSent } from "@/app/lib/email/format-email";
-import createRateLimiter from "@/app/lib/rate-limiter";
+import useRateLimiter from "@/app/hooks/use-rate-limiter";
 import { getClientIpInServerAction } from "@/app/lib/get-client-ip";
 import { RateLimiterRes } from "rate-limiter-flexible";
 
@@ -68,8 +68,8 @@ export default async function action (
   }
 
   // Rate limiting:
-  const rateLimiterIndividual = createRateLimiter("cf", 60*60*24, 10); // 10 messages per day per user
-  const rateLimiterGlobal = createRateLimiter("cf-g", 60*60*24, 30); // 30 messages per day for all users
+  const rateLimiterIndividual = useRateLimiter("cf", 60*60*24, 10); // 10 messages per day per user
+  const rateLimiterGlobal = useRateLimiter("cf-g", 60*60*24, 30); // 30 messages per day for all users
   const clientIp = await getClientIpInServerAction();
   try {
     await rateLimiterIndividual.consume(clientIp);
