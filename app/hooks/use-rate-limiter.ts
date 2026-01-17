@@ -1,5 +1,5 @@
 import { RateLimiterRedis } from "rate-limiter-flexible";
-import redisClient from "./redis-client";
+import redisClient from "../lib/redis-client";
 
 /**
  * Create a rate limiter.
@@ -10,7 +10,7 @@ import redisClient from "./redis-client";
  * @param maxRequests - The maximum number of requests allowed within the interval
  * @returns The rate limiter instance
  */
-export default function createRateLimiter(namespace: string, intervalInS: number, maxRequests: number) {
+export default function useRateLimiter(namespace: string, intervalInS: number, maxRequests: number) {
   const limiter = new RateLimiterRedis({
     storeClient: redisClient,
     useRedisPackage: true,
