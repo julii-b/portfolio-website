@@ -6,6 +6,11 @@
   background-color: black;
   color: white;
 }
+@media (max-width: 600px) {
+  .footer {
+    justify-content: right;
+  }
+}
 
 .footer a {
   color: white;
