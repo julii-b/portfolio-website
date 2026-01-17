@@ -4,6 +4,9 @@ import { z } from "zod";
 import { verifyTurnstile } from "nextjs-turnstile";
 import { env } from "process";
 import { notificationMessageReceived, notificationMessageSent } from "@/app/lib/email/format-email";
+import createRateLimiter from "@/app/lib/rate-limiter";
+import { getClientIpInServerAction } from "@/app/lib/get-client-ip";
+import { RateLimiterRes } from "rate-limiter-flexible";
 
 
 // Define the schema for the form data using zod:
@@ -29,6 +32,7 @@ export default async function action (
   prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  
   // Parse the form data using Zod:
   const parsed = contactFormSchema.safeParse({
     name: formData.get("name"),
@@ -61,6 +65,24 @@ export default async function action (
     return {
       errorMessage: "CAPTCHA verification failed. Please try again.",
     };
+  }
+
+  // Rate limiting:
+  const rateLimiterIndividual = createRateLimiter("cf", 60*60*24, 10); // 10 messages per day per user
+  const rateLimiterGlobal = createRateLimiter("cf-g", 60*60*24, 30); // 30 messages per day for all users
+  const clientIp = await getClientIpInServerAction();
+  try {
+    await rateLimiterIndividual.consume(clientIp);
+    await rateLimiterGlobal.consume(clientIp);
+
+  } catch (error) {
+    if (error instanceof RateLimiterRes) {
+      const secondsBeforeNext = Math.floor(error.msBeforeNext / 1000);
+      const minutesBeforeNext = Math.floor(secondsBeforeNext / 60);
+      const hoursBeforeNext = Math.floor(minutesBeforeNext / 60);
+      return {errorMessage: `The maximum number of allowed messages has been reached. Please try again in ${hoursBeforeNext} hours ${minutesBeforeNext % 60} minutes ${secondsBeforeNext % 60 % 60} seconds.`};
+    };
+    return {errorMessage: "An unexpected error occurred. Please try again later."};
   }
 
   // Send message to myself:
