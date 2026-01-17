@@ -1,9 +1,8 @@
 'use server';
-import { sendEmail } from "@/app/lib/email/send-email";
+
 import { z } from "zod";
 import { verifyTurnstile } from "nextjs-turnstile";
 import { env } from "process";
-import { notificationMessageReceived, notificationMessageSent } from "@/app/lib/email/format-email";
 
 
 // Define the schema for the form data using zod:

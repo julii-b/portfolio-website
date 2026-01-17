@@ -1,6 +1,6 @@
 'use client';
 
-import { JSX, ReactNode, Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 import styles from "./card.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faCalendar } from "@fortawesome/free-solid-svg-icons";
