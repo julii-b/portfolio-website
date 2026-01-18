@@ -1,4 +1,5 @@
 .section {
+  position: relative;
   height: 100dvh;
   max-height: 100dvh;
   min-height: 100dvh;
@@ -7,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2em 2em;
+  padding: 2em 2em 3.5em 2em;
 }
 
 .section > h2 {
@@ -21,4 +22,14 @@
   transform: translateY(-4em); /* move up to be next to title */
   width: 100%;
   height: 0;
+}
+
+.scrollButtonWrapper {
+  position: absolute;
+  bottom: 1.5em;
+  width: 4em;
+  margin: 0 auto;
+}
+.scrollButton {
+  width: 100%;
 }

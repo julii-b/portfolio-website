@@ -7,10 +7,10 @@ export default function Home() {
     <>
       <Header />
 
-      {SectionWithCards("projects")}
-      {SectionWithCards("education")}
-      {SectionWithCards("work-experience")}
-      {SectionWithCards("languages")}
+      <SectionWithCards sectionId="projects" showScrollButton />
+      <SectionWithCards sectionId="education" showScrollButton />
+      <SectionWithCards sectionId="work-experience" showScrollButton />
+      <SectionWithCards sectionId="languages" showScrollButton />
       <ContactMe />
     </>
   );
