@@ -1,6 +1,9 @@
 'use server';
+import useRateLimiter from "@/app/hooks/use-rate-limiter";
+import { getClientIpInServerAction } from "@/app/lib/get-client-ip";
 import generateChatResponse from "@/app/lib/text-generation/generateChatResponse";
 import { ChatHistoryEntry, ChatHistoryEntrySchema, ChatResponse } from "@/app/lib/text-generation/types";
+import { RateLimiterRes } from "rate-limiter-flexible";
 import { z } from "zod";
 
 // Define the schema for the form data using zod:
@@ -39,13 +42,26 @@ export default async function action (
   }
   const { userInput } = parsed.data;
 
+  // Rate limiting:
+  const rateLimiter = useRateLimiter("ch-b", 60, 10); // 10 messages per minute per user
+  const clientIp = await getClientIpInServerAction();
+  try {
+    await rateLimiter.consume(clientIp);
+  } catch (error) {
+    if (error instanceof RateLimiterRes) {
+      const secondsBeforeNext = Math.floor(error.msBeforeNext / 1000);
+      return {errorMessage: `I'm currently experiencing a high volume of requests. Please try again in ${secondsBeforeNext} seconds. :)`};
+    };
+    return {errorMessage: "An unexpected error occurred. Please try again later. :)"};
+  }
+
   try {
     // Generate the chat response, updated and return chat history:
     let newChatHistory: ChatHistoryEntry[] = prevState.chatHistory || [];
     newChatHistory = [...newChatHistory, {type: "user", message: userInput}];
     const chatResponse: ChatResponse = await generateChatResponse(newChatHistory);
     newChatHistory = [...newChatHistory, {type: "model", message: chatResponse}];
-    console.log("Updated chat history:", newChatHistory);
+    // console.log("Updated chat history:", newChatHistory);
     return { chatHistory: newChatHistory };
     
   } catch (error) {
