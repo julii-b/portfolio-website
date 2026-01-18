@@ -40,20 +40,22 @@ export default function NavigationChat() {
   return (
     <>
       {/** Button to open/close nav on mobile: */}
-      <Button
-      className={
-        `${isNavVisible ? styles.closeChatButton : styles.openChatButton}`
-      }
-      onClick={() => {
-        setIsNavVisible(!isNavVisible);
-      }}
-      >
-        {isNavVisible ? (
-          <FontAwesomeIcon icon={faChevronDown} />
-        ) : (
-          <FontAwesomeIcon icon={faBars} />
-        )}
-      </Button>
+      <div className={styles.chatButtonContiner}>
+        <Button
+        className={
+          `${isNavVisible ? styles.closeChatButton : styles.openChatButton}`
+        }
+        onClick={() => {
+          setIsNavVisible(!isNavVisible);
+        }}
+        >
+          {isNavVisible ? (
+            <FontAwesomeIcon icon={faChevronDown} />
+          ) : (
+            <FontAwesomeIcon icon={faBars} />
+          )}
+        </Button>
+      </div>
 
       {/** Navigation chat container: */}
       <motion.div

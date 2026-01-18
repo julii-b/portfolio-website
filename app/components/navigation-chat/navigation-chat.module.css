@@ -1,12 +1,14 @@
+.chatButtonContiner {
+  position: fixed;
+  bottom: 1em;
+  left: 1em;
+  z-index: 5;
+}
 .openChatButton, .closeChatButton {
   display: none !important;
 }
 @media (max-width: 600px) {
   .openChatButton, .closeChatButton {
-    position: fixed;
-    bottom: 1em;
-    left: 1em;
-    z-index: 5;
     border-radius: 50%;
     width: 3.5em;
     height: 3.5em;
