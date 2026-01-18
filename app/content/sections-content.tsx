@@ -1,7 +1,7 @@
 import Card from "@/app/ui/card/card";
 import { faAngular, faLaravel, faVuejs } from "@fortawesome/free-brands-svg-icons";
 import { faReact } from "@fortawesome/free-brands-svg-icons/faReact";
-import getDuolingoStreak from "@/app/lib/duolingo";
+import DuolingoSentence from "./duolingo-sentence";
 
 export type SectionContent = {
   id: string;
@@ -321,16 +321,7 @@ const sectionsContent: SectionContent[] = [
               Ever since I knew that I would eventually move to Brussels because my partner already lived here, I started learning French.
             </p>
             <p>
-              I started learning with Duolingo
-              {await (async () => {
-                try {
-                  const streak = await getDuolingoStreak("julius.bu");
-                  return `, where I currently proudly have a streak of ${streak} days`
-                } catch (error) {
-                  return "";
-                }
-              })()}
-              - <a href="https://www.duolingo.com/profile/julius.bu" target="_blank" rel="noopener noreferrer">follow me on Duolingo</a> if you want to :).
+              <DuolingoSentence />- <a href="https://www.duolingo.com/profile/julius.bu" target="_blank" rel="noopener noreferrer">follow me on Duolingo</a> if you want to :).
               <br />
               Since moving to Brussels, I'm also taking classes in French.
             </p>

@@ -1,3 +1,5 @@
+'use server';
+
 /**
  * Get a Duolingo user's current streak.
  * Function from from https://leanrada.com/notes/get-duolingo-streak/
