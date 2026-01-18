@@ -80,7 +80,7 @@ export default async function action (
       const secondsBeforeNext = Math.floor(error.msBeforeNext / 1000);
       const minutesBeforeNext = Math.floor(secondsBeforeNext / 60);
       const hoursBeforeNext = Math.floor(minutesBeforeNext / 60);
-      return {errorMessage: `The maximum number of allowed messages has been reached. Please try again in ${hoursBeforeNext} hours ${minutesBeforeNext % 60} minutes ${secondsBeforeNext % 60 % 60} seconds.`};
+      return {errorMessage: `The maximum number of allowed messages has been reached. Please try again in ${hoursBeforeNext} hours ${minutesBeforeNext % 60} minutes ${ secondsBeforeNext % 60 } seconds.`};
     };
     return {errorMessage: "An unexpected error occurred. Please try again later."};
   }
