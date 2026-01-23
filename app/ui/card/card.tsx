@@ -45,13 +45,18 @@ export default function Card (
 
         <div
         className={styles.card}
-        style={backgroundImageUrl ?
-          {
-            background: `linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url(${encodeURI(backgroundImageUrl)})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center',
-          } : {}
-        }>
+        >
+          <div className={styles.cardBackground}
+          style={backgroundImageUrl ?
+            {
+              background: `linear-gradient(rgba(225, 225, 235, 0.75) 0%, rgba(255, 255, 255, 0.90) 30%, rgba(255, 255, 255, 0.95) 100%), url(${encodeURI(backgroundImageUrl)})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+            } : {
+              background: `linear-gradient(rgba(235, 235, 240, 1), rgba(255, 255, 255, 1))`,
+            }
+          } ></div>
+
           <div className={styles.cardHeader}>
             <h3 className={styles.title}>{title}</h3>
             {subtitle &&
