@@ -3,14 +3,16 @@
   background-color: #1b1b1b;
   color: white;
   font-size: 0.9em;
-  padding: 0.2em 0.8em;
+  padding: 0.2em 0.8em 0.25em 0.8em;
   border-radius: 1.5em;
   border: solid 2px #565656;
 }
 
 .skillBadge svg{
   margin-left: -0.3em;
-  margin-right: 0.5em;
+  margin-right: 0.4em;
+  margin-bottom: 0.15em;
+  height: 0.95em;
 }
 
 .skillImage {

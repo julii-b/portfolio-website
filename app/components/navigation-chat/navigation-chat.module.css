@@ -17,14 +17,14 @@
     justify-content: center;
   }
   .openChatButton {
-    background-image: linear-gradient(to bottom, #ffffff, #cddbe3);
+    background-image: linear-gradient(to bottom, #ffffff 0%, #cddbe3 70%, #acc7e3 100%);
   }
 }
 
 .scrollableContainer {
   height: 100dvh;
   overflow-y: auto;
-  background-image: linear-gradient(to bottom, #ffffff, #cddbe3);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #cddbe3 100%);
 }
 @media (max-width: 600px) {
   .scrollableContainer {
