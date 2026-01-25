@@ -2,9 +2,14 @@
   position: relative;
   width: calc(100% + 4em);
   min-height: 40%;
-  /* max-height: 70%; */
+  max-height: 80%;
   margin: 0 -2em;
   overflow: visible;
+}
+@media (max-width: 600px), (max-height: 600px) {
+  .carouselWrapper {
+    max-height: 100%;
+  }
 }
 
 .cardsCarousel {

@@ -49,46 +49,47 @@ export default function Card (
           <div className={styles.cardBackground}
           style={backgroundImageUrl ?
             {
-              background: `linear-gradient(rgba(225, 225, 235, 0.75) 0%, rgba(255, 255, 255, 0.90) 30%, rgba(255, 255, 255, 0.95) 100%), url(${encodeURI(backgroundImageUrl)})`,
+              background: `linear-gradient(rgba(225, 225, 235, 0.65) 0%, rgba(255, 255, 255, 0.85) 30%, rgba(255, 255, 255, 0.95) 100%), url(${encodeURI(backgroundImageUrl)})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
             } : {
               background: `linear-gradient(rgba(235, 235, 240, 1), rgba(255, 255, 255, 1))`,
             }
           } ></div>
-
-          <div className={styles.cardHeader}>
-            <h3 className={styles.title}>{title}</h3>
-            {subtitle &&
-              <h4 className={styles.subtitle}>{subtitle}</h4>
-            }
-            {location &&
-              <p className={styles.location}>
-                <FontAwesomeIcon icon={faLocationDot} />
-                {location}
+          <div className={styles.cardContent}>
+            <div className={styles.cardHeader}>
+              <h3 className={styles.title}>{title}</h3>
+              {subtitle &&
+                <h4 className={styles.subtitle}>{subtitle}</h4>
+              }
+              {location &&
+                <p className={styles.location}>
+                  <FontAwesomeIcon icon={faLocationDot} />
+                  {location}
+                  </p>
+              }
+              {time &&
+                <p className={styles.time}>
+                  <FontAwesomeIcon icon={faCalendar} />
+                  {time}
                 </p>
-            }
-            {time &&
-              <p className={styles.time}>
-                <FontAwesomeIcon icon={faCalendar} />
-                {time}
-              </p>
-            }
-            {skills && (
-              <div className={styles.skills}>
-                {skills.map((props, index) => (
-                  <span key={index} className={styles.skill}>
-                    <SkillBadge {...props} />
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
+              }
+              {skills && (
+                <div className={styles.skills}>
+                  {skills.map((props, index) => (
+                    <span key={index} className={styles.skill}>
+                      <SkillBadge {...props} />
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
 
-          <div
-          className={`${styles.childrenWrapper}`}
-          >
-            {children}
+            <div
+            className={`${styles.childrenWrapper}`}
+            >
+              {children}
+            </div>
           </div>
         </div>
       </Suspense>
