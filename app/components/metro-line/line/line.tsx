@@ -13,38 +13,44 @@ import sectionsContent from "@/app/content/sections-content";
  */
 export default function Line() {
 
+  const defaultColor = "#b60000"; // default line color (header and non-home-page)
+
   const pathname = usePathname();
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  const [lineColors, setLineColors] = useState([defaultColor]);
 
-  // colors for each section of the portfolio website, one color is for 1/(number of colors) of the scrollable height:
-  let lineColors = [
-    "#b60000", // Color for header
-  ];
-  if (pathname === "/") { // Only on home page: add section colors
-    for (const sectionContent of sectionsContent) {
-      if (sectionContent.lineColor) {
-        lineColors.push(sectionContent.lineColor);
+  
+  useEffect(() => {
+    // colors for each section of the portfolio website, one color is for 1/(number of colors) of the scrollable height:
+    let newLineColors: string[] = [
+      defaultColor, // Color for header
+    ];
+    if (pathname === "/") { // Only on home page: add section colors
+      for (const sectionContent of sectionsContent) {
+        const color = sectionContent.lineColor;
+        if (color) {
+          newLineColors.push(color);
+        }
       }
     }
-  }
-
-  // Event handler for scroll events on the body element:
-  const handleBodyScroll = (e: Event): void => {
-    const el = e.currentTarget as HTMLElement | null;
-    if (!el) return;
-    // calculate current section index based on scroll position:
-    // (scroll position from the top) / ((total height) - (unscrollable visible height))
-    const progress: number = el.scrollTop / (el.scrollHeight - el.clientHeight);
-    // map progress (0..1) to section index (0..lineColors.length-1)
-    const i: number = Math.round(progress * (lineColors.length - 1));
-    setCurrentSectionIndex(i);
-  }
-
-  // Attach scroll event listener to body:
-  useEffect(() => {
+    setLineColors(newLineColors);
+    
+    // Event handler for scroll events on the body element:
+    const handleBodyScroll = (e: Event): void => {
+      const el = e.currentTarget as HTMLElement | null;
+      if (!el) return;
+      // calculate current section index based on scroll position:
+      // (scroll position from the top) / ((total height) - (unscrollable visible height))
+      const progress: number = el.scrollTop / (el.scrollHeight - el.clientHeight);
+      // map progress (0..1) to section index (0..lineColors.length-1)
+      const i: number = Math.round(progress * (newLineColors.length - 1));
+      setCurrentSectionIndex(i);
+    }
+    
+    // Attach scroll event listener to body:
     document.body.addEventListener('scroll', handleBodyScroll);
     return () => { document.body.removeEventListener('scroll', handleBodyScroll); };
-  }, []);
+  }, [pathname]);
 
   return (
     <div
