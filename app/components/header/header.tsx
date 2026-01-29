@@ -14,7 +14,7 @@ export default function Header() {
   // Job titles to cycle through, placeholders for now:
   const jobTitles = [
     "Software Developer",
-    "Junior Full-Stack Developer at Acme Corporation?",
+    "Software Developer",
   ];
   // Typing effect for job titles:
   let [jobTitle, setJobTitle] = useState<string>(""); // State for job title being displayed
@@ -96,11 +96,11 @@ export default function Header() {
 
       <p className={styles.introduction}>
         <span>
-          I studied Computer Science at the FH Aachen University of Applied Sciences in Germany.
-          There I gained experience in various programming languages and technologies, writing my thesis about Large Language Models.
-          After graduating I moved to Belgium and started working at the International German School of Brussels.
-          In the past year, while learning frameworks like React and Express, I developed a great joy for web development. <br />
-          I am inviting you to explore my portfolio.
+          I studied Computer Science at the FH Aachen University of Applied Sciences in Germany and wrote
+          my thesis about Large Language Models.<br />
+          After graduating, I moved to Belgium and started working in IT at the International German School of Brussels.<br />
+          Over time and alongside my work, I continued to deepen my knowledge in web development.<br />
+          I invite you to explore my portfolio.
         </span>
       </p>
 
