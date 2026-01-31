@@ -131,6 +131,39 @@ export default function PrivacyPolicy() {
       <h4>Retention period</h4>
       <p>IP addresses are retained only temporarily for rate limiting and security purposes and are deleted once they are no longer necessary. They are not purposely stored long-term.</p>
 
+      <h3>e. Server and security logs</h3>
+
+      <h4>Purpose</h4>
+      <p>
+        To operate the website, ensure security, and diagnose technical errors.
+      </p>
+
+      <h4>Categories of personal data</h4>
+      <ul>
+        <li>IP address</li>
+        <li>Date and time of the request</li>
+        <li>Requested URL</li>
+        <li>HTTP status code</li>
+        <li>Technical client information (e.g. browser type and user agent)</li>
+      </ul>
+
+      <h4>Legal basis</h4>
+      <p>
+        Article 6(1)(f) GDPR (legitimate interest in ensuring the security and proper operation of the website).
+      </p>
+
+      <h4>Recipients (including third-country transfer)</h4>
+      <p>
+        Server logs are stored on the hosting server used to operate this website and are accessible only to me as the site operator.
+        They are not shared with third parties.
+      </p>
+
+      <h4>Retention period</h4>
+      <p>
+        Server access and error logs are retained for a limited period as part of standard server operation and log rotation
+        and are automatically rotated and deleted.
+      </p>
+
       <h2>3. Cookies</h2>
 
       <p>This website does not use tracking or marketing cookies.<br />
