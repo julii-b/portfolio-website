@@ -4,7 +4,7 @@ import "@/app/globals.css";
 import styles from "./layout.module.css";
 import NavigationChat from "@/app/components/navigation-chat/navigation-chat";
 import Footer from "@/app/components/footer/footer";
-import Line from "../components/metro-line/line/line";
+import Line from "@/app/components/metro-line/line/line";
 import Script from "next/script";
 
 

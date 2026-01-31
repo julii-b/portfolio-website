@@ -18,7 +18,7 @@
 }
 
 .body > * {
-  scroll-snap-align: start;
+  scroll-snap-align: end;
 }
 
 .navigationContainer {
