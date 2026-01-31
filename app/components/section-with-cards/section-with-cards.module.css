@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2em 2em 3.5em 2em;
+  padding: 2em 2em 2.5em 2em;
 }
 
 .section > h2 {
@@ -24,12 +24,47 @@
   height: 0;
 }
 
-.scrollButtonWrapper {
+.scrollUpButtonWrapper {
   position: absolute;
-  bottom: 1.5em;
+  top: 0;
+  margin: 0;
+  padding: 0;
   width: 4em;
   margin: 0 auto;
 }
-.scrollButton {
+.scrollUpButton {
   width: 100%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-width: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0 0 0.5em 0;
+}
+.scrollUpButton:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.scrollDownButtonWrapper {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  width: 4em;
+  margin: 0 auto;
+}
+
+.scrollDownButton {
+  width: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-width: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0.5em 0 0 0;
+}
+.scrollDownButton:hover {
+  transform: none !important;
+  box-shadow: none !important;
 }

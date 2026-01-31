@@ -10,7 +10,8 @@ import MetroStation from "@/app/components/metro-line/metro-station/metro-statio
 import action from "./action";
 import { useActionState, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faAngleUp, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "motion/react";
 
 
 /**
@@ -43,6 +44,28 @@ export default function ContactMe() {
 
   return (
     <section className={styles.section} id="contact-form" key="contact-form">
+
+      <motion.div
+      className={styles.scrollUpButtonWrapper}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ amount: 0.9 }}
+      transition={{ type: "tween", duration: 0.5 }}
+      >
+        <Button
+        className={styles.scrollUpButton}
+        aria-label="Scroll to previous section"
+        onClick={ ()=> {
+          // Scroll to previous section:
+          const thisSection = document.getElementById('contact-form');
+          const previous = thisSection?.previousElementSibling as HTMLElement | null;
+          previous?.scrollIntoView({ behavior: 'smooth' });
+        } }
+        >
+          <FontAwesomeIcon icon={faAngleUp} />
+        </Button>
+      </motion.div>
+          
 
       <h2>Contact Me</h2>
       

@@ -7,7 +7,7 @@ import styles from "./section-with-cards.module.css";
 import MetroStation from "@/app/components/metro-line/metro-station/metro-station";
 import { Suspense } from "react";
 import { Button } from "@/app/ui/button/button";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
 
@@ -18,7 +18,7 @@ import { motion } from "motion/react";
  * @param props.showScrollButton Whether to show a scroll button at the bottom of the section.
  * @returns The rendered section.
  */
-export default function SectionWithCards ({sectionId, showScrollButton}: {sectionId: string, showScrollButton?: boolean}) {
+export default function SectionWithCards ({sectionId, showScrollUpButton, showScrollDownButton}: {sectionId: string, showScrollUpButton?: boolean, showScrollDownButton?: boolean}) {
 
   const sectionContent: SectionContent | undefined = sectionsContent.find(section => section.id === sectionId);
   if (sectionContent && sectionContent.cards) return (
@@ -28,6 +28,30 @@ export default function SectionWithCards ({sectionId, showScrollButton}: {sectio
     </section>
     }>
       <section className={styles.section} id={sectionId} key={sectionId}>
+
+        {showScrollUpButton && (
+          <motion.div
+          className={styles.scrollUpButtonWrapper}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ amount: 0.9 }}
+          transition={{ type: "tween", duration: 0.5 }}
+          >
+            <Button
+            className={styles.scrollUpButton}
+            aria-label="Scroll to previous section"
+            onClick={ ()=> {
+              // Scroll to previous section:
+              const thisSection = document.getElementById(sectionId);
+              const previous = thisSection?.previousElementSibling as HTMLElement | null;
+              previous?.scrollIntoView({ behavior: 'smooth' });
+            } }
+            >
+              <FontAwesomeIcon icon={faAngleUp} />
+            </Button>
+          </motion.div>
+        )}
+
 
         <h2 className={styles.title}>{sectionContent?.title}</h2>
 
@@ -44,16 +68,16 @@ export default function SectionWithCards ({sectionId, showScrollButton}: {sectio
           ))}
         </CardsCarousel>
 
-        {showScrollButton && (
+        {showScrollDownButton && (
           <motion.div
-          className={styles.scrollButtonWrapper}
-          initial={{ y: 10, opacity: 1 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ amount: 0.1 }}
+          className={styles.scrollDownButtonWrapper}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ amount: 0.9 }}
           transition={{ type: "tween", duration: 0.5 }}
           >
             <Button
-            className={styles.scrollButton}
+            className={styles.scrollDownButton}
             aria-label="Scroll to next section"
             onClick={ ()=> {
               // Scroll to next section:
