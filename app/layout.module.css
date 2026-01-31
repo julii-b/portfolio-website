@@ -16,6 +16,11 @@
     padding-left: 22px; /* 10px whitespace + 12px line */
   }
 }
+@supports (border-width: env(safe-area-inset-bottom)) { /* safe area for mobile nav bar */
+  .body {
+    border-bottom: env(safe-area-inset-bottom) solid rgb(219, 219, 219);
+  }
+}
 
 .body > * {
   scroll-snap-align: end;
