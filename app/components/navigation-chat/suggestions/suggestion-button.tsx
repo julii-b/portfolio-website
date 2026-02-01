@@ -1,0 +1,67 @@
+'use client';
+
+import { Button } from "@/app/ui/button/button";
+import { redirect } from 'next/navigation';
+import { ChatHistoryEntry } from "@/app/lib/text-generation/types";
+import useRedirect from "@/app/hooks/use-redirect";
+
+
+/**
+ * Renders a suggestion button for the navigation chat.
+ * After a simulated delay, the chat history state and model answer state are updated.
+ * @param props.setLoadingState - State setter for parent's loading state.
+ * @param props.setChatHistory - State setter for chat history.
+ * @param props.setModelAnswer - State setter for model answer, which the parent will render.
+ * @param props.suggestionText - Text to display on the button and add to the chat history.
+ * @param props.pregeneratedAnswer - Pre-generated answer to set as the model answer and add to the chat history.
+ * @param props.destinationSectionId - ID of the section to scroll to.
+ * @returns The rendered Suggestion Button.
+ */
+export default function SuggestionButton (
+  {setLoadingState, setChatHistory, setModelAnswer, suggestionText, pregeneratedAnswer, destinationSectionId }
+  : {
+    setLoadingState: React.Dispatch<React.SetStateAction<"loading"| "idle">>,
+    setChatHistory: React.Dispatch<React.SetStateAction<ChatHistoryEntry[]>>,
+    setModelAnswer: React.Dispatch<React.SetStateAction<string>>,
+    suggestionText: string,
+    pregeneratedAnswer: string,
+    destinationSectionId?: string,
+  }
+) {
+  const redirect = useRedirect();
+
+  return (
+    <Button
+    onClick={async () => {
+      // set loading state to "loading" before the simulated delay
+      setLoadingState("loading");
+      // go to home page to ensure scrolling is possible
+      redirect.setPathname("/");
+      // simulate a delay of 1 second
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // update chat history and model answer states:
+
+      setChatHistory(prev => [...prev,
+        {
+          type: "user", message: suggestionText
+        },
+        {
+          type: "model", message: {
+          answer: pregeneratedAnswer,
+          ...(destinationSectionId && {function_name: "scroll_to_section", parameters: {section_name: destinationSectionId}}),
+        }
+        }
+      ]);
+      setModelAnswer(pregeneratedAnswer);
+      // set loading state back to "idle"
+      setLoadingState("idle");
+      // redirect to the destination section if provided
+      if (destinationSectionId) {
+        redirect.scrollTo(destinationSectionId);
+      }
+    }}
+    >
+      { suggestionText }
+    </Button>
+  );
+}

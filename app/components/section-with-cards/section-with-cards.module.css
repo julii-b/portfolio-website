@@ -1,0 +1,70 @@
+.section {
+  position: relative;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em 2em 2.5em 2em;
+}
+
+.section > h2 {
+  align-self: flex-start;
+  font-size: 3em;
+  padding-bottom: 0.5em;
+}
+
+.metroStationWrapper {
+  margin-left: -4em; /* compensate for padding-left */
+  transform: translateY(-4em); /* move up to be next to title */
+  width: 100%;
+  height: 0;
+}
+
+.scrollUpButtonWrapper {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 4em;
+  margin: 0 auto;
+}
+.scrollUpButton {
+  width: 100%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-width: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0 0 0.5em 0;
+}
+.scrollUpButton:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.scrollDownButtonWrapper {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  width: 4em;
+  margin: 0 auto;
+}
+
+.scrollDownButton {
+  width: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-width: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0.5em 0 0 0;
+}
+.scrollDownButton:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}

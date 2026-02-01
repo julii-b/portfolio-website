@@ -1,0 +1,98 @@
+'use client';
+
+import { ReactNode, Suspense } from "react";
+import styles from "./card.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot, faCalendar } from "@fortawesome/free-solid-svg-icons";
+import SkillBadge from "../skill-badge/skill-badge";
+
+
+/**
+ * Card component to display content on the site. Can be used in cards-carousel component.
+ * @param { ReactNode } props.children - The content to be displayed in the cards body.
+ * @param { string } props.title - Optional. Title of the card.
+ * @param { string } props.subtitle - Optional. Subtitle of the card.
+ * @param { string } props.location - Optional. Location to be displayed with a location icon.
+ * @param { string } props.time - Optional. Time to be displayed with a calendar icon.
+ * @param { Array<{ name: string, fontAwesomeIcon?: IconProp, imageUrl?: string }> } props.skills - Optional. An array of skill badge props to display skill badges.
+ * @param { string } props.backgroundImageUrl - Optional. Background image URL for the card.
+ */
+export default function Card (
+  {id, children, title, subtitle, location, time, skills, backgroundImageUrl}:
+  {
+    id?: string,
+    children: ReactNode,
+    title?: string,
+    subtitle?: string,
+    location?: string,
+    time?: string,
+    skills?: React.ComponentProps<typeof SkillBadge>[],
+    backgroundImageUrl?: string,
+  }
+) {
+
+  return (
+    <div
+    className={`${styles.cardWrapper}`}
+    id={id}
+    >
+      <Suspense fallback={(
+        <div className={`${styles.card}`}>
+          <div className={`${styles.title} animateLoadingElement`}> </div>
+          <div className={`${styles.childrenWrapper} animateLoadingElement`}> </div>
+        </div>
+      )} >
+
+        <div
+        className={styles.card}
+        >
+          <div className={styles.cardBackground}
+          style={backgroundImageUrl ?
+            {
+              background: `linear-gradient(rgba(225, 225, 235, 0.65) 0%, rgba(255, 255, 255, 0.85) 30%, rgba(255, 255, 255, 0.95) 100%), url(${encodeURI(backgroundImageUrl)})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+            } : {
+              background: `linear-gradient(rgba(235, 235, 240, 1), rgba(255, 255, 255, 1))`,
+            }
+          } ></div>
+          <div className={styles.cardContent}>
+            <div className={styles.cardHeader}>
+              <h3 className={styles.title}>{title}</h3>
+              {subtitle &&
+                <h4 className={styles.subtitle}>{subtitle}</h4>
+              }
+              {location &&
+                <p className={styles.location}>
+                  <FontAwesomeIcon icon={faLocationDot} />
+                  {location}
+                  </p>
+              }
+              {time &&
+                <p className={styles.time}>
+                  <FontAwesomeIcon icon={faCalendar} />
+                  {time}
+                </p>
+              }
+              {skills && (
+                <div className={styles.skills}>
+                  {skills.map((props, index) => (
+                    <span key={index} className={styles.skill}>
+                      <SkillBadge {...props} />
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div
+            className={`${styles.childrenWrapper}`}
+            >
+              {children}
+            </div>
+          </div>
+        </div>
+      </Suspense>
+    </div>
+  );
+}

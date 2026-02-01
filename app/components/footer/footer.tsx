@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import styles from './footer.module.css';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Footer() {
   return (
@@ -10,6 +12,7 @@ export default function Footer() {
       target='_blank'
       rel='noopener noreferrer'
       >
+        <FontAwesomeIcon icon={faLinkedin} />
         LinkedIn
       </Link>
       
@@ -18,6 +21,7 @@ export default function Footer() {
       target='_blank'
       rel='noopener noreferrer'
       >
+        <FontAwesomeIcon icon={faGithub} />
         GitHub
       </Link>
       

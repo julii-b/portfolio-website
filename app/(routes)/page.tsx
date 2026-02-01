@@ -1,19 +1,16 @@
-import Image from "next/image";
-import Projects from "@/app/components/sections/projects";
-import Education from "@/app/components/sections/education";
 import Header from "@/app/components/header/header";
-import WorkExperience from "@/app/components/sections/work-experience";
-import Languages from "@/app/components/sections/languages";
+import SectionWithCards from "@/app/components/section-with-cards/section-with-cards";
 import ContactMe from "@/app/components/contact-me/contact-me";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <Projects />
-      <Education />
-      <WorkExperience />
-      <Languages />
+
+      <SectionWithCards sectionId="projects" showScrollUpButton showScrollDownButton />
+      <SectionWithCards sectionId="education" showScrollUpButton showScrollDownButton />
+      <SectionWithCards sectionId="work-experience" showScrollUpButton showScrollDownButton />
+      <SectionWithCards sectionId="languages" showScrollUpButton showScrollDownButton />
       <ContactMe />
     </>
   );

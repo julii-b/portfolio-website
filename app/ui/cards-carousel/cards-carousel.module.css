@@ -1,0 +1,71 @@
+.carouselWrapper {
+  position: relative;
+  width: calc(100% + 4em);
+  min-height: 40%;
+  max-height: 80%;
+  margin: 0 -2em;
+  overflow: visible;
+}
+@media (max-width: 600px), (max-height: 600px) {
+  .carouselWrapper {
+    max-height: 100%;
+  }
+}
+
+.cardsCarousel {
+  display: flex;
+  padding: 2px 2em 12px 2em;
+  /* margin-top: -10px; */
+  gap: 16px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  width: 100%;
+  height: calc(100% + 12px);
+  z-index: 1;
+}
+/* Hide scrollbar */
+.cardsCarousel::-webkit-scrollbar { 
+  display: none; 
+}
+.cardsCarousel {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+.cardWrapper {
+  display: flex;
+  scroll-snap-align: center;
+  flex-direction: row;
+  flex-shrink: 0;
+  width: calc(100% - 2.5em);
+}
+
+.leftButtonWrapper {
+  position: absolute;
+  left: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.leftButton {
+  height: 7em;
+  width: 3em;
+}
+
+.rightButtonWrapper {
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.rightButton {
+  height: 7em;
+  width: 3em;
+}
+

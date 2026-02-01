@@ -1,13 +1,194 @@
 .section {
+  position: relative;
   height: 100%;
+  max-height: 100%;
+  min-height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2em;
 }
 
 .section > h2 {
   align-self: flex-start;
   font-size: 3em;
+  padding-bottom: 0.5em;
+}
+
+.successInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60%;
+  width: 100%;
+  padding: 1em 2em;
+  font-size: 1.6em;
+  border-radius: 2em;
+  background-color: beige;
+}
+
+.successIconWrapper {
+  font-size: 4em;
+  color: green;
+  background-color: white;
+  padding: 0;
+  aspect-ratio: 1;
+  display: flex;
+  border-radius: 50%;
+  margin-bottom: 0.3em;
+  animation: successIconAnimation 0.8s ease-in-out;
+}
+@keyframes successIconAnimation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.successInfo p {
+  text-align: center;
+  margin: 0.8em 0;
+  line-height: 1.2;
+}
+.successInfo p:nth-child(2) {
+  font-weight: 600;
+}
+.successInfo p:nth-child(3) {
+  font-size: 0.7em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.3em;
+  padding: 0 2px 3px 2px; /* to prevent overflow when submit button is :hover and input is :focus-visible */
+  overflow-y: auto;
+}
+@media (max-height: 600px) {
+  .form {
+    gap: 0.6em;
+  }
+}
+
+.nameWrapper, .emailWrapper {
+  width: 600px;
+  max-width: 100%;
+}
+
+.messageWrapper {
+  width: 900px;
+  max-width: 100%;
+}
+
+.nameWrapper > label, .emailWrapper > label, .messageWrapper > label {
+  font-size: 1.2em;
+  padding-bottom: 0.4em;
+  padding-left: 0.8em;
+}
+
+.messageWrapper textarea {
+  height: 9em;
+  resize: none;
+  margin-bottom: -0.4em;
+}
+@media (max-height: 600px) {
+  .messageWrapper textarea {
+    height: 6em;
+  }
+}
+@media (max-height: 400px) {
+  .messageWrapper textarea {
+    height: 4em;
+  }
+}
+
+.captchaAndSubmitWrapper {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  flex-direction: column;
+  gap: 1em;
+  align-items: flex-start;
+}
+@media (max-height: 600px) {
+  .captchaAndSubmitWrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.captchaWrapper {
+  width: 300px;
+  max-width: 100%;
+}
+@media (max-width: 500px) {
+  .captchaWrapper {
+    width: 100%;
+  }
+}
+
+.submitButton {
+  width: 300px;
+  max-width: 100%;
+}
+@media (max-width: 500px) {
+  .submitButton {
+    width: 100%;
+  }
+}
+
+.mainErrorMessage {
+  color: red;
+  font-size: 1em;
+  line-height: 1.2;
+  min-height: 1.5em;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.9em;
+  line-height: 1.2;
+  padding-left: 0.8em;
+  min-height: 1.5em;
+}
+
+.metroStationWrapper {
+  margin-left: -4em; /* compensate for padding-left */
+  transform: translateY(-4em); /* move up to be next to title */
+  width: 100%;
+  height: 0;
+}
+
+.scrollUpButtonWrapper {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 4em;
+  margin: 0 auto;
+}
+.scrollUpButton {
+  width: 100%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-width: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0 0 0.5em 0;
+}
+.scrollUpButton:hover {
+  transform: none !important;
+  box-shadow: none !important;
 }

@@ -1,0 +1,127 @@
+.chatButtonContiner {
+  position: fixed;
+  bottom: 1em;
+  left: 1em;
+  z-index: 5;
+}
+.openChatButton, .closeChatButton {
+  display: none !important;
+}
+@media (max-width: 600px) {
+  .openChatButton, .closeChatButton {
+    border-radius: 50%;
+    width: 3.5em;
+    height: 3.5em;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .openChatButton {
+    background-image: linear-gradient(to bottom, #ffffff 0%, #cddbe3 70%, #acc7e3 100%);
+  }
+}
+
+.scrollableContainer {
+  height: 100dvh;
+  overflow-y: auto;
+  background-image: linear-gradient(to bottom, #ffffff 0%, #cddbe3 100%);
+}
+@media (max-width: 600px) {
+  .scrollableContainer {
+    position: fixed;
+    bottom: 2.2em;
+    left: 1vw;
+    width: 98vw;
+    height: auto;
+    max-height: 90dvh;
+    border: 3px solid #424242;
+    border-radius: 3em;
+  }
+  .scrollableContainer.notVisibleOnMobile {
+    display: none;
+  }
+}
+
+.nav {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 0.8em;
+  align-items: center;
+  justify-content: end;
+  padding: 2em 2em 1.3em 2em;
+}
+@media (max-width: 600px) {
+  .nav {
+    padding: 2.5em 2em 2em 2em;
+  }
+}
+
+.speechBubbleAndIconContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.spacerTop {
+  height: 0;
+  flex-grow: 2.5;
+}
+
+.spacerBottom {
+  height: 0;
+  flex-grow: 1;
+}
+
+.robotIconContainer {
+  width: 100%;
+  padding: 0 0.5em;
+}
+
+.suggestions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.7em;
+  margin: 0.5em 0;
+}
+.suggestions p {
+  width: 100%;
+  margin-bottom: -0.2em;
+}
+.suggestions Button {
+  flex-grow: 1;
+  font-size: 0.9em;
+  padding: 0.2em;
+}
+
+.form {
+  margin: 0.5em 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.form Input {
+  flex-grow: 1;
+}
+.form Button .icon {
+  /* Transform icon to make it horizontal: */
+  transform: rotate(45deg) scale(1.05) translate(-0.1em, 0.1em);
+}
+
+.disclaimer {
+  font-size: 0.8em;
+  color: #555555;
+  margin-top: -0.5em;
+  line-height: 1.4;
+  text-align: center;
+}
+.disclaimer a {
+  color: #4b5e85;
+}

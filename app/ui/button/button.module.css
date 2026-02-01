@@ -1,0 +1,89 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+
+  margin: 0;
+  padding: 0.6em 1.2em;
+  box-sizing: border-box;
+  color:black;
+  border-radius: 2em;
+  border: 3px solid black;
+  background-color: white;
+  box-shadow:
+  0.5px 0.5px 0 darkred, -0.5px -0.5px 0 green,
+  0 2px 0 dimgray;
+
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+  transition: box-shadow 0.05s ease-in-out;
+}
+
+.button:hover:not([disabled]) {
+  transform: translateY(0.1em);
+  box-shadow:
+  0.5px 0.5px 0 green, -0.5px -0.5px 0 darkred,
+  0 1.5px 0 dimgray;
+}
+
+.button:focus-visible {
+  box-shadow:
+  0.5px 0.5px 0 green, -0.5px -0.5px 0 darkred,
+  0 2px 0 dimgray,
+  0 0.5px 0 2px white,
+  0 0.5px 0 3px black;
+  outline: none;
+}
+
+.button:disabled, .button.disabled {
+  cursor: not-allowed;
+  color: rgb(94, 94, 94);
+  border-color: gray;
+  box-shadow: 0 2px 0 gray;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.loadingDots {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  gap: 0.4em;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingDot1, .loadingDot2, .loadingDot3 {
+  width: 0.6em;
+  height: 0.6em;
+  background-color: black;
+  border-radius: 50%;
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+.loadingDot1 {
+  animation-delay: -0.4s;
+}
+.loadingDot2 {
+  animation-delay: -0.2s;
+}
+.loadingDot3 {
+  animation-delay: 0s;
+}
+
+@keyframes bounce {
+  0% { transform: scale(0); }
+  10% { transform: scale(0); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1); }
+  90% { transform: scale(0); }
+  100% { transform: scale(0); }
+}

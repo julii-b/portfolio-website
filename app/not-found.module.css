@@ -1,0 +1,13 @@
+.notFoundSection {
+  flex-grow: 1;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+}
+
+.notFoundSection .button {
+  margin-top: 2em;
+}
