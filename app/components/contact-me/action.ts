@@ -73,9 +73,10 @@ export default async function action (
   const clientIp = await getClientIpInServerAction();
   try {
     await rateLimiterIndividual.consume(clientIp);
-    await rateLimiterGlobal.consume(clientIp);
+    await rateLimiterGlobal.consume('global');
 
   } catch (error) {
+    console.error("Error occurred while applying rate limits:", error);
     if (error instanceof RateLimiterRes) {
       const secondsBeforeNext = Math.floor(error.msBeforeNext / 1000);
       const minutesBeforeNext = Math.floor(secondsBeforeNext / 60);
