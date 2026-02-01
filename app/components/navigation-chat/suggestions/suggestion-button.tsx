@@ -46,8 +46,10 @@ export default function SuggestionButton (
           type: "user", message: suggestionText
         },
         {
+          type: "model", message: {
+          answer: pregeneratedAnswer,
           ...(destinationSectionId && {function_name: "scroll_to_section", parameters: {section_name: destinationSectionId}}),
-          type: "model", message: {answer: pregeneratedAnswer}
+        }
         }
       ]);
       setModelAnswer(pregeneratedAnswer);
