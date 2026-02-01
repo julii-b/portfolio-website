@@ -1,8 +1,7 @@
 import { Button } from "@/app/ui/button/button";
-import styles from "./header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons/faAngleRight";
 import useRedirect from "@/app/hooks/use-redirect";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons/faAngleDown";
 
 export function ContinueButton() {
 
@@ -14,7 +13,7 @@ export function ContinueButton() {
       redirect.scrollTo("projects")
     }}
     >
-      <FontAwesomeIcon icon={faAngleRight} />
+      <FontAwesomeIcon icon={faAngleDown} />
     </Button>
   );
 }
@@ -22,7 +21,7 @@ export function ContinueButton() {
 export function ContinueButtonFallback() {
   return (
     <Button disabled>
-      <FontAwesomeIcon icon={faAngleRight} />
+      <FontAwesomeIcon icon={faAngleDown} />
     </Button>
   );
 }
