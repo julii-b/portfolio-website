@@ -10,7 +10,7 @@ export default function SpeechBubble(
   }) {
   return (
     <div className={styles.speechBubble}>
-      <div className={styles.chatOutput}>
+      <div className={styles.chatOutput} role="status" aria-live="polite">
         {loadingState === "idle" ? (
           <>
             {errorMessages ? (
@@ -20,7 +20,7 @@ export default function SpeechBubble(
             )}
           </>
         ) : (
-          <div className={styles.loadingAnimationWrapper}>
+          <div className={styles.loadingAnimationWrapper} aria-label="loading">
             <div className={styles.loadingDot1}></div>
             <div className={styles.loadingDot2}></div>
             <div className={styles.loadingDot3}></div>

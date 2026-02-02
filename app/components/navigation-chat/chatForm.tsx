@@ -88,6 +88,7 @@ export function ChatForm(
       >
         <Input
         placeholder="Type your own question..."
+        aria-label="user question"
         id="userInput"
         name="userInput"
         value={userInput}
@@ -97,6 +98,8 @@ export function ChatForm(
 
         <Button
         type="submit"
+        aria-label="send question"
+        title="send question"
         disabled={loadingState === "loading"}
         >
           <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>
@@ -118,10 +121,13 @@ export function ChatFormSkeleton () {
       <form className={styles.form}>
         <Input
         placeholder="Type your own question..."
+        aria-label="user question"
         disabled
         />
 
         <Button
+        aria-label="send question"
+        title="send question"
         disabled
         >
           <FontAwesomeIcon icon={faPaperPlane} className={styles.icon}/>

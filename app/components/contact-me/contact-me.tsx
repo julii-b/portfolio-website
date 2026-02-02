@@ -88,30 +88,30 @@ export default function ContactMe() {
         onSubmit={() => setIsLoading(true)}
         className={styles.form}
         >
-          <div className={styles.mainErrorMessage}>
+          <div className={styles.mainErrorMessage} aria-live="polite" aria-atomic="true">
             {formState.errorMessage}
           </div>
 
           <div className={styles.nameWrapper}>
             <label htmlFor="name">Name</label>
-            <Input id="name" name="name" />
-            <div className={styles.errorMessage}>
+            <Input id="name" name="name" aria-describedby="name-error"/>
+            <div className={styles.errorMessage} id="name-error">
               {formState.fieldErrors?.name && formState.fieldErrors.name.join(", ")}
             </div>
           </div>
 
           <div className={styles.emailWrapper}>
             <label htmlFor="email">Email</label>
-            <Input id="email" type="email" name="email" />
-            <div className={styles.errorMessage}>
+            <Input id="email" type="email" name="email" aria-describedby="email-error"/>
+            <div className={styles.errorMessage} id="email-error">
               {formState.fieldErrors?.email && formState.fieldErrors.email.join(", ")}
             </div>
           </div>
 
           <div className={styles.messageWrapper}>
             <label htmlFor="message">Message</label>
-            <TextArea id="message" name="message" />
-            <div className={styles.errorMessage}>
+            <TextArea id="message" name="message" aria-describedby="message-error"/>
+            <div className={styles.errorMessage} id="message-error">
               {formState.fieldErrors?.message && formState.fieldErrors.message.join(", ")}
             </div>
           </div>

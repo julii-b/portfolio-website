@@ -9,6 +9,7 @@ export function ContinueButton() {
 
   return (
     <Button
+    aria-label="Scroll to next section"
     onClick={ ()=> {
       redirect.scrollTo("projects")
     }}

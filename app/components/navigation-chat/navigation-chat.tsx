@@ -45,6 +45,9 @@ export default function NavigationChat() {
         className={
           `${isNavVisible ? styles.closeChatButton : styles.openChatButton}`
         }
+        aria-label={isNavVisible ? "Close chat navigation" : "Open chat navigation"}
+        aria-expanded={isNavVisible}
+        aria-controls="chat-navigation"
         onClick={() => {
           setIsNavVisible(!isNavVisible);
         }}
@@ -68,7 +71,11 @@ export default function NavigationChat() {
       transition={{ type: "tween", duration: 0.2 }}
       >
 
-        <nav className={styles.nav}>
+        <nav
+        className={styles.nav}
+         id="chat-navigation" 
+         aria-label="navigate the site using a chat bot"
+        >
 
           {/** Chat output in speech bubble with robot avatar: */}
           <div className={styles.speechBubbleAndIconContainer}>
