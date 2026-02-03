@@ -19,7 +19,12 @@ import { motion } from "motion/react";
  * @returns The rendered Contact Me section.
  */
 export default function ContactMe({className}: {className?: string}) {
-  
+
+  // Form states:
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   // Initialize formState with chat history. formAction will update formState:
   const [formState, formAction] = useActionState(action, {});
@@ -98,7 +103,7 @@ export default function ContactMe({className}: {className?: string}) {
 
           <div className={styles.nameWrapper}>
             <label htmlFor="name">Name</label>
-            <Input id="name" name="name" aria-describedby="name-error"/>
+            <Input id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} aria-describedby="name-error"/>
             <div className={styles.errorMessage} id="name-error">
               {formState.fieldErrors?.name && formState.fieldErrors.name.join(", ")}
             </div>
@@ -106,7 +111,7 @@ export default function ContactMe({className}: {className?: string}) {
 
           <div className={styles.emailWrapper}>
             <label htmlFor="email">Email</label>
-            <Input id="email" type="email" name="email" aria-describedby="email-error"/>
+            <Input id="email" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-describedby="email-error"/>
             <div className={styles.errorMessage} id="email-error">
               {formState.fieldErrors?.email && formState.fieldErrors.email.join(", ")}
             </div>
@@ -114,7 +119,7 @@ export default function ContactMe({className}: {className?: string}) {
 
           <div className={styles.messageWrapper}>
             <label htmlFor="message">Message</label>
-            <TextArea id="message" name="message" aria-describedby="message-error"/>
+            <TextArea id="message" name="message" value={message} onChange={(e) => setMessage(e.target.value)} aria-describedby="message-error"/>
             <div className={styles.errorMessage} id="message-error">
               {formState.fieldErrors?.message && formState.fieldErrors.message.join(", ")}
             </div>
