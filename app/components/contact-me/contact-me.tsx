@@ -18,7 +18,7 @@ import { motion } from "motion/react";
  * Contact Me section component - to be implemented.
  * @returns The rendered Contact Me section.
  */
-export default function ContactMe() {
+export default function ContactMe({className}: {className?: string}) {
   
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   // Initialize formState with chat history. formAction will update formState:
@@ -43,7 +43,11 @@ export default function ContactMe() {
   }, [formState]);
 
   return (
-    <section className={styles.section} id="contact-form" key="contact-form">
+    <section
+    className={className? `${styles.section} ${className}` : styles.section}
+    id="contact-form"
+    key="contact-form"
+    >
 
       <motion.div
       className={styles.scrollUpButtonWrapper}
@@ -125,14 +129,11 @@ export default function ContactMe() {
               responseFieldName="cf-turnstile-response"
               theme="light"
               size="flexible"
-              appearance="always"
+              appearance="interaction-only"
               onSuccess={setTurnstileToken}
               onError={() => console.error("Turnstile error")}
               onExpire={() => setTurnstileToken(null)}
               />
-              <div className={styles.errorMessage}>
-              {/*formState.fieldErrors?.token && formState.fieldErrors.token.join(", ")*/}
-            </div>
             </div>
             
 

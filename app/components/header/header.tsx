@@ -9,7 +9,7 @@ import { Suspense, useEffect, useState } from "react";
 import { ContinueButton, ContinueButtonFallback } from "./continueButton";
 
 
-export default function Header() {
+export default function Header({className}: {className?: string}) {
 
   // Job titles to cycle through, placeholders for now:
   const jobTitles = [
@@ -62,7 +62,7 @@ export default function Header() {
 
   return (
 
-    <header className={styles.header} key="header">
+    <header className={`${styles.header} ${className}`} key="header">
 
       <h1 className={styles.myName}>Julius Busch</h1>
 

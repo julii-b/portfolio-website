@@ -18,16 +18,23 @@ import { motion } from "motion/react";
  * @param props.showScrollButton Whether to show a scroll button at the bottom of the section.
  * @returns The rendered section.
  */
-export default function SectionWithCards ({sectionId, showScrollUpButton, showScrollDownButton}: {sectionId: string, showScrollUpButton?: boolean, showScrollDownButton?: boolean}) {
+export default function SectionWithCards (
+  {sectionId, showScrollUpButton, showScrollDownButton, className, ...props} :
+  {
+    sectionId: string,
+    showScrollUpButton?: boolean,
+    showScrollDownButton?: boolean,
+    className?: string
+  } & React.HTMLProps<HTMLElement>) {
 
   const sectionContent: SectionContent | undefined = sectionsContent.find(section => section.id === sectionId);
   if (sectionContent && sectionContent.cards) return (
     <Suspense fallback={
-    <section className={styles.section} id={sectionId} key={sectionId}>
+    <section className={className ? `${styles.section} ${className}` : styles.section} id={sectionId} key={sectionId} {...props}>
       <h2 className={styles.title}>{sectionContent?.title}</h2>
     </section>
     }>
-      <section className={styles.section} id={sectionId} key={sectionId}>
+      <section className={className ? `${styles.section} ${className}` : styles.section} id={sectionId} key={sectionId} {...props}>
 
         {showScrollUpButton && (
           <motion.div

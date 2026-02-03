@@ -50,7 +50,7 @@ export default function RevealEmailButton() {
       responseFieldName="cf-turnstile-response"
       theme="light"
       size="flexible"
-      appearance="always"
+      appearance="interaction-only"
       onSuccess={setTurnstileToken}
       onError={() => console.error("Turnstile error")}
       onExpire={() => setTurnstileToken(null)}
