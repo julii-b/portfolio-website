@@ -25,13 +25,23 @@ body {
   }
 }
 
+h1, h2, h3, h4, h5, h6, p, a {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
 h1, h3, h4, h5, h6 {
   font-family: var(--font-sora);
   line-height: 1.1em;
+  max-width: 100%;
 }
 h2{
   font-family: var(--font-montagu-slab);
   line-height: 1.1em;
+  max-width: 100%;
 }
 h1 {
   font-size: 2.7em;

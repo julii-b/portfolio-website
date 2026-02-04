@@ -58,7 +58,7 @@ export function signatureBlock(): string {
                       <td width="10" style="width:10px;">&nbsp;</td>
                       <td colspan="3" style="font-size:13px; color:#333; line-height:18px;">
                         🌍&nbsp;<b>Website:</b>&nbsp;<a href="https://julius-busch.com/" style="color:#012060; text-decoration:underline;">julius-busch.com</a>&nbsp;| 
-                        📇&nbsp;<b>LinkedIn:</b>&nbsp;<a href="https://linkedin.com/buschjulius" style="color:#012060; text-decoration:underline;">linkedin.com/buschjulius</a>
+                        📇&nbsp;<b>LinkedIn:</b>&nbsp;<a href="https://linkedin.com/in/buschjulius" style="color:#012060; text-decoration:underline;">linkedin.com/in/buschjulius</a>
                       </td>
                     </tr>
 

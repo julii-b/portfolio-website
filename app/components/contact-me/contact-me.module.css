@@ -116,14 +116,14 @@
 .captchaAndSubmitWrapper {
   display: flex;
   width: 100%;
-  max-width: 900px;
+  max-width: min(900px, 100%);
   flex-direction: column;
-  gap: 1em;
+  gap: 0.8em;
   align-items: flex-start;
 }
 @media (max-height: 600px) {
   .captchaAndSubmitWrapper {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
   }
@@ -132,10 +132,12 @@
 .captchaWrapper {
   width: 300px;
   max-width: 100%;
+  line-height: 0;
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .captchaWrapper {
     width: 100%;
+    overflow: auto;
   }
 }
 
@@ -143,7 +145,7 @@
   width: 300px;
   max-width: 100%;
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .submitButton {
     width: 100%;
   }

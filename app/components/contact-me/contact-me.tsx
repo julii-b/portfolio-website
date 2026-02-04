@@ -18,8 +18,13 @@ import { motion } from "motion/react";
  * Contact Me section component - to be implemented.
  * @returns The rendered Contact Me section.
  */
-export default function ContactMe() {
-  
+export default function ContactMe({className}: {className?: string}) {
+
+  // Form states:
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   // Initialize formState with chat history. formAction will update formState:
   const [formState, formAction] = useActionState(action, {});
@@ -43,7 +48,11 @@ export default function ContactMe() {
   }, [formState]);
 
   return (
-    <section className={styles.section} id="contact-form" key="contact-form">
+    <section
+    className={className? `${styles.section} ${className}` : styles.section}
+    id="contact-form"
+    key="contact-form"
+    >
 
       <motion.div
       className={styles.scrollUpButtonWrapper}
@@ -88,30 +97,30 @@ export default function ContactMe() {
         onSubmit={() => setIsLoading(true)}
         className={styles.form}
         >
-          <div className={styles.mainErrorMessage}>
+          <div className={styles.mainErrorMessage} aria-live="polite" aria-atomic="true">
             {formState.errorMessage}
           </div>
 
           <div className={styles.nameWrapper}>
             <label htmlFor="name">Name</label>
-            <Input id="name" name="name" />
-            <div className={styles.errorMessage}>
+            <Input id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} aria-describedby="name-error"/>
+            <div className={styles.errorMessage} id="name-error">
               {formState.fieldErrors?.name && formState.fieldErrors.name.join(", ")}
             </div>
           </div>
 
           <div className={styles.emailWrapper}>
             <label htmlFor="email">Email</label>
-            <Input id="email" type="email" name="email" />
-            <div className={styles.errorMessage}>
+            <Input id="email" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-describedby="email-error"/>
+            <div className={styles.errorMessage} id="email-error">
               {formState.fieldErrors?.email && formState.fieldErrors.email.join(", ")}
             </div>
           </div>
 
           <div className={styles.messageWrapper}>
             <label htmlFor="message">Message</label>
-            <TextArea id="message" name="message" />
-            <div className={styles.errorMessage}>
+            <TextArea id="message" name="message" value={message} onChange={(e) => setMessage(e.target.value)} aria-describedby="message-error"/>
+            <div className={styles.errorMessage} id="message-error">
               {formState.fieldErrors?.message && formState.fieldErrors.message.join(", ")}
             </div>
           </div>
@@ -125,14 +134,11 @@ export default function ContactMe() {
               responseFieldName="cf-turnstile-response"
               theme="light"
               size="flexible"
-              appearance="always"
+              appearance="interaction-only"
               onSuccess={setTurnstileToken}
               onError={() => console.error("Turnstile error")}
               onExpire={() => setTurnstileToken(null)}
               />
-              <div className={styles.errorMessage}>
-              {/*formState.fieldErrors?.token && formState.fieldErrors.token.join(", ")*/}
-            </div>
             </div>
             
 

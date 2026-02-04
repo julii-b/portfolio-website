@@ -46,6 +46,7 @@ export default function CardsCarousel (
         <div className={styles.leftButtonWrapper}>
           <Button
             className={styles.leftButton}
+            aria-label="scroll left"
             onClick={() => { scrollToCard(Math.max(currentCardIndex - 1, 0)) }}
           >
             <FontAwesomeIcon icon={faAngleLeft} />
@@ -91,6 +92,7 @@ export default function CardsCarousel (
         <div className={styles.rightButtonWrapper}>
           <Button
             className={styles.rightButton}
+            aria-label="scroll right"
             onClick={() => { scrollToCard(Math.min(currentCardIndex + 1, cards.length - 1)) }}
           >
             <FontAwesomeIcon icon={faAngleRight} />

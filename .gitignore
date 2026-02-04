@@ -43,6 +43,7 @@ next-env.d.ts
 
 # added by aaPanel
 /.well-known/acme-challenge
+.htaccess
 
-#redi data
+# redis data
 /redis/data

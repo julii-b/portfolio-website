@@ -4,6 +4,7 @@
 
 .buttonAndTitle {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   gap: 1em;
   margin: 0.5em 0;
@@ -11,6 +12,7 @@
 .buttonAndTitle > .backButton {
   display: block;
   margin-top: -0.1em;
+  height: 3em;
 }
 .buttonAndTitle > h1 {
   display: block;
