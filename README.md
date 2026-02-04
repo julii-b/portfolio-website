@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is the GitHub repository of my personal website, which you can find here: [julius-busch.com](https://julius-busch.com)
 
-## Getting Started
+## 🛠️ Tech Stack
+- Language: TypeScript
+- Framework: Next.js, React
+- Key-Value Database: Redis
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🧩 Project Structure
+
+```yaml
+app/
+    (routes)/
+    components/ # components used in the routes
+    content/ # contains the text used in the sections on the home page
+    hooks/ # custom hooks
+    lib/ # other reusable logic
+    ui/ # custom UI components like <Button>, or <TextArea>
+public/ # public files
+redis/ # Redis configuration .env and docker-compose
+    .env
+    docker-compose.yml
+.env
+package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Prerequisites
 
-## Learn More
+- Node.js (recommended: 24)
+- Docker
 
-To learn more about Next.js, take a look at the following resources:
+Clone the repository:
+```
+git clone https://github.com/julii-b/portfolio-website.git
+cd portfolio-website
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Copy the environment file
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+On Linux:
+```bash
+cp .env.example .env
+```
+On Windows:
+```
+copy .env.example .env
+```
 
-## Deploy on Vercel
+Then open `.env` and set your own values for all variables with the comment `#change this`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Copy the Redis environment file
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+On Linux:
+```bash
+cd redis
+cp .env.example .env
+```
+On Windows:
+```
+cd redis
+copy .env.example .env
+```
+
+Then open `redis/.env` and set your own values for all variables with the comment `#change this`
+
+### 4. Start Redis
+
+```
+docker compose up -d
+```
+
+Wait until Redis is ready.
+
+### 5. Install dependencies and start server
+
+```
+cd ..
+npm install
+npm run dev
+```
+
+Now you can access it at [localhost:3001](http://localhost:3001) or at [julius-busch.com](https://julius-busch.com) 
