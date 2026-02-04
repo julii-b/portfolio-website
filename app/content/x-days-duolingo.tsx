@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 import getDuolingoStreak from "../lib/duolingo";
 
 
-export default function DuolingoSentence() {
+export default function XDaysDuolingo() {
 
-  const [sentence, setSentence] = useState<string>("I started learning with Duolingo ");
+  const [sentence, setSentence] = useState<string>(" over 1500 days ");
 
   useEffect(() => {
     const fetchStreak = async () => {
       try {
         const streak = await getDuolingoStreak("julius.bu");
-        setSentence(`I started learning with Duolingo, where I currently proudly have a streak of ${streak} days `);
+        setSentence(` ${streak} days `);
       } catch (error) {
-        setSentence("I started learning with Duolingo ");
+        setSentence(" over 1500 days ");
         console.error("Error fetching Duolingo streak:", error);
       }
     };
