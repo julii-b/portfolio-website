@@ -8,7 +8,8 @@
  */
 async function getDuolingoStreak(username: string): Promise<number> {
   const res = await fetch(
-    `https://www.duolingo.com/2017-06-30/users?username=${username}&fields=streak,streakData%7BcurrentStreak,previousStreak%7D%7D`
+    `https://www.duolingo.com/2017-06-30/users?username=${username}&fields=streak,streakData%7BcurrentStreak,previousStreak%7D%7D`,
+    { next: { revalidate: 60 * 60 * 24 } } // cache result for 1 day
   );
   const data = await res.json();
   const userData = data.users[0];

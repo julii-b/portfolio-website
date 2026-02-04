@@ -1,7 +1,7 @@
 import Card from "@/app/ui/card/card";
-import { faAngular, faLaravel, faVuejs } from "@fortawesome/free-brands-svg-icons";
-import { faReact } from "@fortawesome/free-brands-svg-icons/faReact";
-import DuolingoSentence from "./duolingo-sentence";
+import XDaysDuolingo from "./x-days-duolingo";
+import { faBook, faCode, faDatabase, faEnvelope, faFlaskVial, faHexagonNodes, faLayerGroup, faPaintBrush, faServer, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export type SectionContent = {
   id: string;
@@ -21,37 +21,56 @@ const sectionsContent: SectionContent[] = [
         title: "Portfolio Website",
         time: "2026",
         skills: [
-          {name: "Next.js"},
-          {name: "React", fontAwesomeIcon: faReact},
-          {name: "TypeScript"},
+          {name: "Next.js", fontAwesomeIcon: faLayerGroup},
+          {name: "React", fontAwesomeIcon: faLayerGroup},
+          {name: "Redis", fontAwesomeIcon: faDatabase},
+          { name: "Email Delivery", fontAwesomeIcon: faEnvelope },
+          { name: "AI Integration", fontAwesomeIcon: faHexagonNodes },
         ],
+        backgroundImageUrl: "/background-images/portfolio-background.webp",
         children: (
           <>
-            <p>My personal portfolio website showcasing my projects, skills, and experience. Built with Next.js and React.</p>
-            <p>Once the project is finished, I will have to complete this description.</p>
+            <p>
+              <b>GitHub Repository:</b> <a href="https://github.com/julii-b/portfolio-website" target="_blank" rel="noopener noreferrer"> github.com/julii-b/portfolio-website </a>
+            </p>
+            <p>
+              My most recent project is this personal website you are looking at right now.<br />
+              I built it to present my skills, projects, and experiences, using Next.js and React.
+            </p>
+            <p>
+              It includes a chatbot to answer questions about me, and help users navigate the website.
+              For this, I implemented function calling, so the chatbot can interact with the website. <br />
+              The chatbot uses Google's Gemini API, but could also be adapted to work with other APIs.
+            </p>
+            <p>
+              I implemented a contact form that sends email notifications via SMTP2GO, following common security best practices (e.g. header sanitization). <br />
+              To prevent spam, I use server-side rate limiting with Redis.
+            </p>
+            <p>
+              Feel free to play around with the chatbot and explore my website!<br />
+              You can also find the code on GitHub using the link above.
+            </p>
           </>
         ),
-        contentSummary: ""
+        contentSummary: "Personal portfolio website (Next.js/React). Includes a navigation chatbot using Google Gemini API with function calling. Contact form sends email via SMTP2GO; server-side rate limiting via Redis. User is currently viewing this site. Code: github.com/julii-b/portfolio-website."
       },
       {
         id: "project-simple-polls",
         title: "SimplePolls",
         time: "2025",
         skills: [
-          {name: "Express"},
-          {name: "Prisma (PostgreSQL)"},
-          {name: "REST API"},
-          {name: "OpenAPI (Swagger)"},
-          {name: "Supertest & Vitest"},
-          {name: "React", fontAwesomeIcon: faReact},
-          {name: "React Router"},
-          {name: "TypeScript"},
+          {name: "Express", fontAwesomeIcon: faLayerGroup},
+          {name: "React", fontAwesomeIcon: faLayerGroup},
+          {name: "Prisma (PostgreSQL)", fontAwesomeIcon: faDatabase},
+          {name: "REST API", fontAwesomeIcon: faServer},
+          {name: "OpenAPI (Swagger)", fontAwesomeIcon: faBook},
+          {name: "Supertest & Vitest", fontAwesomeIcon: faFlaskVial},
         ],
-        backgroundImageUrl: "/background-images/simplepolls-background.png",
+        backgroundImageUrl: "/background-images/simplepolls-background.webp",
         children: (
           <>
             <p>
-              <b>Frontend:</b> <a href="https://simplepolls.julius-busch.com" target="_blank" rel="noopener noreferrer"> simplepolls.julius-busch.com </a>
+              <b>Frontend Demo:</b> <a href="https://simplepolls.julius-busch.com" target="_blank" rel="noopener noreferrer"> simplepolls.julius-busch.com </a>
             </p>
             <p>
               <b>Backend API Documentation:</b> <a href="https://apisimplepolls.julius-busch.com/docs" target="_blank" rel="noopener noreferrer"> apisimplepolls.julius-busch.com/docs </a>
@@ -86,22 +105,21 @@ const sectionsContent: SectionContent[] = [
               Also, I implemented internationalization using i18next, making the frontend available in English, German and French.
             </p>
             <p>
-              If you want, please use the links above to check out the project and its code!
+              Please use the links above to check out the project and its code!
             </p>
           </>
         ),
-        contentSummary: "Full-stack poll application. Frontend: React with React Router, internationalized with i18next. Backend: Express REST API with Prisma and PostgreSQL, documented with OpenAPI(Swagger UI), implemented rate limiting and authentication, tested with Supertest and Vitest. Code on GitHub."
+        contentSummary: "Full-stack poll app. Frontend: React + React Router (data routers), i18next (EN/DE/FR). Backend: Express REST API with Prisma + PostgreSQL, documented with OpenAPI (Swagger UI), includes rate limiting + auth for write operations, tested with Supertest + Vitest. Demo: simplepolls.julius-busch.com. Code: github.com/julii-b/SimplePolls."
       },
       {
         id: "project-guess-the-flag",
         title: "GuessTheFlag",
         time: "2025",
         skills: [
-          {name: "React", fontAwesomeIcon: faReact},
-          {name: "TypeScript"},
-          {name: "3rd Party APIs"},
+          {name: "React", fontAwesomeIcon: faLayerGroup},
+          {name: "3rd Party APIs", fontAwesomeIcon: faServer},
         ],
-        backgroundImageUrl: "/background-images/guesstheflag-background.png",
+        backgroundImageUrl: "/background-images/guesstheflag-background.webp",
         children: (
           <>
             <p>
@@ -123,7 +141,7 @@ const sectionsContent: SectionContent[] = [
             </p>
           </>
         ),
-        contentSummary: "React-based quiz game to guess country flags. Uses REST Countries API for country names in 26 languages and Flags API & CDN for flag images. Code on GitHub."
+        contentSummary: "React quiz game for guessing country flags. Uses REST Countries API for localized country names and Flagpedia/flagcdn.com for flag images. Demo: guesstheflag.julius-busch.com. Code: github.com/julii-b/guesstheflag."
       },
     ],
   },
@@ -144,32 +162,55 @@ const sectionsContent: SectionContent[] = [
           {name: "Object-Oriented Programming"},
           {name: "Software Engineering"},
           {name: "Web Development"},
-          {name: "C++"},
-          {name: "Java"},
-          {name: "JavaScript"},
-          {name: "PHP"},
-          {name: "Python"},
-          {name: "SQL"},
-          {name: "Angular", fontAwesomeIcon: faAngular},
-          {name: "Laravel", fontAwesomeIcon: faLaravel},
-          {name: "Vue.js", fontAwesomeIcon: faVuejs},
+          {name: "C++", fontAwesomeIcon: faCode},
+          {name: "Java", fontAwesomeIcon: faCode},
+          {name: "JavaScript", fontAwesomeIcon: faCode},
+          {name: "PHP", fontAwesomeIcon: faCode},
+          {name: "Python", fontAwesomeIcon: faCode},
+          {name: "SQL", fontAwesomeIcon: faDatabase},
+          {name: "Angular", fontAwesomeIcon: faLayerGroup},
+          {name: "Laravel", fontAwesomeIcon: faLayerGroup},
+          {name: "Vue.js", fontAwesomeIcon: faLayerGroup},
         ],
-        backgroundImageUrl: "https://cdn.pixabay.com/photo/2014/10/30/15/40/dom-509389_1280.jpg",
+        backgroundImageUrl: "/background-images/aachen.webp",
         children: (
           <>
-            <p>🌟 Grade: 1.3 (ECTS: A) with distinction - top 5% of graduates</p>
-            <p>Thesis: Prototype Implementation for Retrieval Augmented Generation and Evaluation of Major LLMs</p>
+            <p><b>Grade:</b> <FontAwesomeIcon icon={faStar} color="orange"/> 1.3 (ECTS: A), graduated with distinction (top 5% of graduates)</p>
+            <p><b>Thesis:</b> Prototype Implementation for Retrieval Augmented Generation and Evaluation of Major LLMs</p>
 
-            <ul>
-              <li>Object-oriented programming (Java, C++, Python)</li>
-              <li>Model-based systems engineering</li>
-              <li>Data analysis and visualization</li>
-              <li>Web development and databases (PHP, JavaScript/TypeScript, SQL, HTML, Laravel, Vue.js, Angular)</li>
-              <li>Artificial intelligence (traditional problem-solving algorithms, large language models)</li>
-            </ul>
+            <p>
+              I studied Computer Science at the FH Aachen University of Applied Sciences from 2020 to 2024.<br />
+              The program covered different aspects of computer science:
+            </p>
+            <p>
+              I had courses in higher mathematics, algorithms, data structures and computer architecture, which helped me build
+              an understanding of the theoretical foundations of computer science.
+            </p>
+            <p>
+              I also became confident in multiple programming languages, including object-oriented programming with Java, C++ and Python.<br />
+              Web development remained a very important topic to me, as I deepened my knowledge in frontend and backend development using the
+              languages PHP, JavaScript/TypeScript, and SQL, together with frameworks like Laravel, Vue.js and Angular.
+            </p>
+            <p>
+              I enjoyed learning core software engineering skills, like UML, design patterns, testing and project management.
+            </p>
+            <p>
+              For my thesis with the title "Prototype Implementation for Retrieval Augmented Generation and Evaluation of Major LLMs",
+              building on previous courses in artificial intelligence, I implemented a prototype for Retrieval Augmented Generation (RAG).<br />
+              RAG is a technique to enhance the capabilities of large language models (LLMs) by integrating external knowledge sources.<br />
+              Using this prototype, I evaluated multiple LLMs to determine their performance in RAG, by feeding them with the content of the
+              German-language Wikipedia, and asking questions on the provided text.<br />
+              The evaluated models included versions of OpenAI's GPT models via the OpenAI API, as well as versions of locally executed models like
+              Llama, Gemma, Mistral, and Mixtral.<br />
+              The thesis was part of the AKzentE4.0 project of FH Aachen, which aims to make AI technologies accessible for small and medium-sized enterprises.
+            </p>
+            <p>
+              My thesis was graded with 1.0, the best possible grade. Overall I graduated with a grade of 1.3 and distinction,
+              being among the top 5% of graduates in my program.
+            </p>
           </>
         ),
-        contentSummary: "B.Sc. in Computer Science, graduated with distinction (top 5%). Skills: OOP (Java, C++, Python), model-based systems engineering, data analysis, web development (PHP, JavaScript/TypeScript, SQL, HTML, Laravel, Vue.js, Angular), AI (traditional algorithms, LLMs). Thesis on Retrieval Augmented Generation and LLM evaluation."
+        contentSummary: "B.Sc. Computer Science (FH Aachen), graduated with distinction (overall grade 1.3 - top 5% of graduates). Focus: OOP (Java/C++/Python), software engineering, web development (PHP/TypeScript/SQL; Laravel/Vue/Angular), AI/LLMs. Thesis: Retrieval-Augmented Generation prototype and evaluation of major LLMs."
       },
       {
         id: "education-mcd",
@@ -181,23 +222,36 @@ const sectionsContent: SectionContent[] = [
           {name: "Graphic Design"},
           {name: "User Oriented Design"},
           {name: "Web Design"},
-          {name: "CSS"},
-          {name: "HTML"},
-          {name: "JavaScript"},
-          {name: "Adobe Creative Suite"},
+          {name: "CSS", fontAwesomeIcon: faCode},
+          {name: "HTML", fontAwesomeIcon: faCode},
+          {name: "JavaScript", fontAwesomeIcon: faCode},
+          {name: "Adobe Creative Suite", fontAwesomeIcon: faPaintBrush},
         ],
-        backgroundImageUrl: "https://cdn.pixabay.com/photo/2022/09/05/16/32/johannisburg-castle-7434574_1280.jpg",
+        backgroundImageUrl: "/background-images/aschaffenburg.webp",
         children: (
           <>
-            <ul>
-              <li>Focus on user-oriented design</li>
-              <li>Multimedia tools (Adobe Creative Suite)</li>
-              <li>Creation of user manuals and other documentation</li>
-              <li>First familiarity with web technologies (HTML, CSS, JavaScript)</li>
-            </ul>
+            <p>
+              I began my studies with a Bachelor's program in Multimedia Communication and Documentation
+              at the TH Aschaffenburg University of Applied Sciences.<br />
+              The program focused on user-oriented design and communication.
+            </p>
+            <p>
+              While studying in Aschaffenburg, I worked with many different multimedia tools, including the
+              Adobe Creative Suite and first experience with web design and technologies like HTML, CSS and JavaScript.<br />
+              I developed an eye for usability, clarity and the need to meet users where they are.<br />
+            </p>
+            <p>
+              I realized that, while the focus on user experience and design was very interesting to me,
+              I started reaching the limits of how I could apply this knowledge in practice and was more and
+              more interested in the technical side of things.<br />
+              I spent more time learning programming on the side, and eventually decided to
+              switch to a Computer Science degree to build a stronger technical knowledge. The skills I
+              acquired still influence how I approach software development today.
+            </p>
           </>
       ),
-        contentSummary: "Focus on user-oriented design, multimedia tools (Adobe Creative Suite), documentation creation, and web technologies (HTML, CSS, JavaScript). Ended studies early to pursue Computer Science degree."
+        contentSummary: "Studies in user-oriented design, communication/documentation, multimedia tools (e.g. Adobe Creative Suite) plus early web development (HTML/CSS/JavaScript). Switched to Computer Science to focus on the technical side; usability and clarity still influence my work."
+
       }
     ],
   },
@@ -212,22 +266,26 @@ const sectionsContent: SectionContent[] = [
         subtitle: "International German School of Brussels (iDSB)",
         location: "Wezembeek-Oppem, Belgium",
         time: "2025 - Present",
-        backgroundImageUrl: "/background-images/wezembeek-oppem.jpg",
+        backgroundImageUrl: "/background-images/wezembeek-oppem.webp",
         children: (
           <>
-            <ul>
-              <li>IT support and troubleshooting for staff, students and parents in a school environment</li>
-              <li>User account management, device setup and system administration (laptops, access rights, school systems)</li>
-              <li>Preparation and configuration of devices and software for new staff members</li>
-              <li>Hardware troubleshooting and basic laptop repairs, including coordination of external repairs</li>
-              <li>Frontend development of internal Power Apps for document and process digitalization</li>
-              <li>Design and iteration of application frontends based on existing documents and user feedback</li>
-              <li>Development of small scripts and internal tools</li>
-              <li>Occasional research, procurement and setup of IT equipment for specific use cases</li>
-            </ul>
+            <p>
+              I started working at the International German School of Brussels in February 2025 in an IT support role.<br />
+              My main responsibility is to provide support to staff, students and parents for any kind of IT-related issues.
+            </p>
+            <p>
+              This includes managing user accounts, setting up new devices and other system administration tasks,
+              as well as troubleshooting hardware and software issues and coordinating external repairs when necessary.
+            </p>
+            <p>
+              Over time, I have increasingly taken on additional responsibilities: I work on internal applications using Microsoft Power Apps
+              to help digitalize documents and processes within the school.<br />
+              I design and iterate on the frontends of these applications based on user feedback.<br />
+              Additionally, I develop small tools, e.g. using React, to make the day-to-day tasks easier.
+            </p>
           </>
         ),
-        contentSummary: "Responsibilities include user support, account management, device setup, hardware troubleshooting, and development of internal Power Apps for document and process digitalization and small tools and scripts."
+        contentSummary: "User support for staff/students/parents, account management, device setup, troubleshooting, and coordinating external repairs. Also develops internal apps with Microsoft Power Apps and small tools (incl. React) to digitalize school processes."
       },
       {
         id: "work-outlier",
@@ -237,14 +295,31 @@ const sectionsContent: SectionContent[] = [
         time: "2024",
         children: (
           <>
-            <ul>
-              <li>Designing complex coding problems to test the boundaries of current AIs</li>
-              <li>Creating detailed solutions and explanations for coding challenges</li>
-              <li>Contributed to AI training by solving coding challenges that current AIs cannot solve</li>
-            </ul>
+            <p>
+              In 2024 I worked on the Outlier platform as a Coding and Problem-Solving Specialist,
+              contributing to the training and evaluation of large language models.
+            </p>
+            <p>
+              I mainly focused on solving complex coding and reasoning tasks, designed to identify
+              weaknesses of current AI models. These tasks required me to carefully analyze the problem and
+              come up with a solution that correctly handled all kinds of edge cases.
+            </p>
+            <p>
+              Additionally, I reviewed and improved solutions created by others, and wrote new coding tasks
+              that were designed to be challenging for AI models.
+            </p>
+            <p>
+              For most tasks, I worked with Python to create solutions, which I documented in detail,
+              so they could be easily reviewed by others.
+            </p>
+            <p>
+              My contributions were used to improve the performance of large language models on coding 
+              and reasoning tasks.
+            </p>
           </>
         ),
-        contentSummary: "Designed complex coding problems which AIs struggled with, created detailed solutions to these problems, therefore contributing to AI training."
+        contentSummary: "Contributed to AI model training/evaluation by designing, solving and reviewing difficult coding + reasoning tasks. Documented solutions and created/iterated on challenge tasks, mainly in Python."
+
       },
       {
         id: "work-vacuubrand",
@@ -255,14 +330,24 @@ const sectionsContent: SectionContent[] = [
         skills: [
           {name: "Web Design"},
           {name: "UI Design"},
-          {name: "CSS"},
-          {name: "HTML"},
+          {name: "CSS", fontAwesomeIcon: faCode},
+          {name: "HTML", fontAwesomeIcon: faCode},
         ],
-        backgroundImageUrl: "https://cdn.pixabay.com/photo/2017/05/24/06/56/wertheim-2339708_1280.jpg",
+        backgroundImageUrl: "/background-images/wertheim.webp",
         children: (
-          <p>Designing a landing page for a new product</p>
+          <>
+            <p>
+              In 2019, while studying Multimedia Communication and Documentation, I worked at
+              VacuuBrand as a working student.
+            </p>
+            <p>
+              My task was to design and implement a landing page for Vacuu-LAN. <br />
+              I implemented it within VacuuBrand's CMS using HTML and CSS, applying my knowledge in web design.<br />
+              The landing page works on both mobile and desktop devices.
+            </p>
+          </>
         ),
-        contentSummary: "Designed a landing page for a new product."
+        contentSummary: "Designed a landing page for a product in the company's CMS using HTML and CSS."
       }
     ],
   },
@@ -275,15 +360,15 @@ const sectionsContent: SectionContent[] = [
         id: "language-german",
         title: "German",
         subtitle: "Native Speaker",
+        backgroundImageUrl: "/background-images/julius-1.webp",
         children: (
           <>
             <p>
-              I was born and grew up in a small town in southern Germany.
-              <br />
-              German is my native language and the main teaching language I used throughout my education.
+              I was born and grew up in a small town in southern Germany, so German is my native language.<br />
+              It was the main language throughout my education.
             </p>
             <p>
-              It is also one of the two main languages I use at work.
+              Today, it is also one of the two main languages I use at work.
             </p>
           </>
         ),
@@ -293,6 +378,7 @@ const sectionsContent: SectionContent[] = [
         id: "language-english",
         title: "English",
         subtitle: "C1 Level (Advanced)",
+        backgroundImageUrl: "/background-images/julius-2.webp",
         children: (
           <>
             <p>
@@ -300,12 +386,13 @@ const sectionsContent: SectionContent[] = [
               In high school, English was one of the subjects I chose for advanced courses.
             </p>
             <p>
-              During my university studies, I had several courses taught in English and participated in group projects with international students where English was the common language.
+              During my university studies, I had several courses taught in English and participated in
+              group projects with international students.
               <br />
               My thesis was also written in English.
             </p>
             <p>
-              Currently, English is one of the two main languages I use at work to communicate with colleagues.
+              Today, English is one of the two main languages I use at work to communicate with colleagues.
             </p>
           </>
         ),
@@ -315,18 +402,23 @@ const sectionsContent: SectionContent[] = [
         id: "language-french",
         title: "French",
         subtitle: "B1 Level (Intermediate)",
+        backgroundImageUrl: "/background-images/julius-3.webp",
         children: (
           <>
             <p>
-              Ever since I knew that I would eventually move to Brussels because my partner already lived here, I started learning French.
+              Ever since I knew that I would eventually move to Brussels because my partner
+              already lived here, I started learning French.
             </p>
             <p>
-              <DuolingoSentence />- <a href="https://www.duolingo.com/profile/julius.bu" target="_blank" rel="noopener noreferrer">follow me on Duolingo</a> if you want to :).
+              I began with Duolingo, where I currently proudly hold a streak of <XDaysDuolingo />
+              - <a href="https://www.duolingo.com/profile/julius.bu" target="_blank" rel="noopener noreferrer">follow
+              me on Duolingo</a> if you want to :).
               <br />
-              Since moving to Brussels, I'm also taking classes in French.
+              Since moving to Brussels, I'm also taking French classes.
             </p>
             <p>
-              I am making progress every day and am proud of every successful everyday conversation I have in French.
+              I keep making progress every day and am proud of every everyday conversation
+              that works a little better than the last one.
             </p>
           </>
         ),
