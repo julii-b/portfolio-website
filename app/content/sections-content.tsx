@@ -262,7 +262,7 @@ const sectionsContent: SectionContent[] = [
     cards: [
       {
         id: "work-idsb",
-        title: "IT Support & Administration with Application Development",
+        title: "IT Support & Software Development",
         subtitle: "International German School of Brussels (iDSB)",
         location: "Wezembeek-Oppem, Belgium",
         time: "2025 - Present",
@@ -270,22 +270,28 @@ const sectionsContent: SectionContent[] = [
         children: (
           <>
             <p>
-              I started working at the International German School of Brussels in February 2025 in an IT support role.<br />
-              My main responsibility is to provide support to staff, students and parents for any kind of IT-related issues.
-            </p>
-            <p>
+              I started working at the International German School of Brussels in February 2025, initially doing IT support only.<br />
+              My responsibility is to provide support to over 700 users, including staff, students and parents, for any kind of
+              IT-related issues.<br />
+
               This includes managing user accounts, setting up new devices and other system administration tasks,
               as well as troubleshooting hardware and software issues and coordinating external repairs when necessary.
             </p>
             <p>
-              Over time, I have increasingly taken on additional responsibilities: I work on internal applications using Microsoft Power Apps
-              to help digitalize documents and processes within the school.<br />
-              I design and iterate on the frontends of these applications based on user feedback.<br />
-              Additionally, I develop small tools, e.g. using React, to make the day-to-day tasks easier.
+              Over time, my role increasingly developed towards software development. Today, I spend the majority of my time building internal
+              applications and tools that help digitize documents and processes within the school.
+            </p>
+            <p>
+              My main development project is an internal system built with React and Next.js. It includes Microsoft 365 authentication, email
+              notifications, and workflow and approval tracking. I design and iterate on this application based on user feedback, with the
+              goal of making internal processes easier and more transparent for the people using them.
+            </p>
+            <p>
+              In addition to this larger project, I build smaller internal tools with React to improve day-to-day workflows.
             </p>
           </>
         ),
-        contentSummary: "User support for staff/students/parents, account management, device setup, troubleshooting, and coordinating external repairs. Also develops internal apps with Microsoft Power Apps and small tools (incl. React) to digitalize school processes."
+        contentSummary: "User support for staff/students/parents, account management, device setup, troubleshooting, and coordinating external repairs. Also develops internal apps with Next.js - e.g. a system for approval and workflow management - and small tools to digitalize school processes."
       },
       {
         id: "work-outlier",
