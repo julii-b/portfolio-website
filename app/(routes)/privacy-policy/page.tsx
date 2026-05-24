@@ -59,7 +59,7 @@ export default function PrivacyPolicy() {
       <p>Contact messages are stored in my email inbox until they are no longer needed and are then deleted.<br />
       Email service providers involved in delivery and storage apply their own retention policies as described in their respective privacy policies.</p>
 
-      <h3>b. Chatbot (Gemma via Gemini API)</h3>
+      <h3>b. Chatbot (Gemini API)</h3>
 
       <h4>Purpose</h4>
       <p>To provide automated responses to questions about my profile and experience.</p>

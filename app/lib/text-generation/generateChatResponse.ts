@@ -24,7 +24,7 @@ export default generateChatResponse;
 
 async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], recursionCounter: number = 0): Promise<ChatResponse> {
 
-  const ai = new GoogleGenAI({apiKey: env.GEMMA_API_KEY});
+  const ai = new GoogleGenAI({apiKey: env.GEMMINI_API_KEY});
 
   // Limit chat history to last 9 entries to avoid exceeding token limit:
   if (chatHistory.length > 9) {
@@ -32,7 +32,9 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
   }
   //Always append an initial greeting message at the beginning of the chat history, to set the tone:
   const initialMessage: ChatResponse = { answer: "Hello! :) I'm here to help you learn more about Julius. I can provide information about his projects, education, work experience, skills, and languages. Feel free to ask me anything, or I can direct you to a specific section of the website." };
-  chatHistory = [{type: "model", message: initialMessage}, ...chatHistory];
+  if ((chatHistory[0]?.message as any)?.answer !== initialMessage.answer) {
+    chatHistory = [{type: "model", message: initialMessage}, ...chatHistory];
+  }
 
   // Build the the prompt from the system prompt, the chat history, and the start/end tokens:
   const prompt = startTokenUser + await buildSystemPrompt() + endTokenUser + chatHistory.map(entry => {
@@ -47,13 +49,11 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
   // Try to generate the response:
   try {
 
-    // use 27b model on try 1 & 2, 12b on try 3 & 4, 4b on try 5 & 6
-    let model = "gemma-3-27b-it";
+    // use "gemini-2.5-flash-lite" on try 1 & 2, "gemini-2.5-flash" on try 3 & 4
+    let model = "gemini-2.5-flash-lite";
     switch (recursionCounter) {
       case 2:
-      case 3: model = "gemma-3-12b-it"; break;
-      case 4:
-      case 5: model = "gemma-3-4b-it"; break;
+      case 3: model = "gemini-2.5-flash"; break;
     };
     const response = await ai.models.generateContent({
       model: model,
@@ -70,7 +70,7 @@ async function generateChatResponseRecursive(chatHistory: ChatHistoryEntry[], re
 
   } catch (e) { // Catch errors that occur during the API call and parsing of the response:
     console.error(e);
-    if (recursionCounter < 5) { // Retry up to 6 times (2 times per model)
+    if (recursionCounter < 3) { // Retry up to 4 times (2 times per model)
       console.error("Error occurred while generating chat response. Retrying.", e);
       await new Promise(resolve => setTimeout(resolve, 1000));
       return generateChatResponseRecursive(chatHistory, recursionCounter + 1);

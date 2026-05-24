@@ -43,11 +43,12 @@ export default async function action (
   const { userInput } = parsed.data;
 
   // Rate limiting:
-  const rateLimiter = useRateLimiter("ch-b", 60, 10); // 10 messages per minute per user
+  const rateLimiter = useRateLimiter("ch-b", 60, 5); // 5 messages per minute per user
   const clientIp = await getClientIpInServerAction();
   try {
     await rateLimiter.consume(clientIp);
   } catch (error) {
+    console.log(error);
     if (error instanceof RateLimiterRes) {
       const secondsBeforeNext = Math.floor(error.msBeforeNext / 1000);
       return {errorMessage: `I'm currently experiencing a high volume of requests. Please try again in ${secondsBeforeNext} seconds. :)`};
