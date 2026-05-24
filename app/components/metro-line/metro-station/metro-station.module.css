@@ -10,6 +10,7 @@
   background-color: white;
   border-radius: 12px;
   border: solid 5px #3f3f3f;
+  outline: 1px solid #7b7b7be0;
   z-index: 1;
   margin: 0;
 }
